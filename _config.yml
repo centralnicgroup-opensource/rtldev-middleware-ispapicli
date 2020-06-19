@@ -1,1 +1,4 @@
 theme: jekyll-theme-minimal
+title: Ispapicli
+description: Command line interface tool
+show_downloads: true
