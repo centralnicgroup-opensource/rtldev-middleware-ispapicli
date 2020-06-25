@@ -2,8 +2,14 @@
 layout: default
 ---
 
+---
+My front matter
+---
+
+**Contents**
 * TOC
 {:toc}
+My first paragraph.
 
 # Tool documentation
 
