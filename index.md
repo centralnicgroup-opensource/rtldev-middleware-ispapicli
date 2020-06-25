@@ -23,7 +23,7 @@ This tool enable you to connect to our back-end API and manage your account thro
 
 This section provides you with a quick introduction to all the features included in this tool.
 
-## Login/logout and session management
+## Login/logout and Session Management
 
 *   Login/logout management instead of sending your login credentials everytime you requrest a command
 *   Each login session is valid for 60 minutes
@@ -33,13 +33,26 @@ This section provides you with a quick introduction to all the features included
 
 The graphical user interface has many features:
 
+### Save the Command to a File
+
+This feature enables you to save the command and the results into a text file.
+
+### Command auto-complete
+
+Once you start typing the command, a dropdown list will be displayed to show all possible matches.
+
+### Minimum Parameters
+
+Some commands requires a minimum number of parameters, this tool display all min parameters once you have typed a command. 
+
+
 # How to use it?
 
 Basically this tool can be used in two ways: The GUI and Shell
 
 ## Run it via Shell
 
-Once you have the tool, you may run the following command:
+Once you have the tool, you may run the following command from your Shell:
 
 ```
 (python) ispapi --help
@@ -81,7 +94,7 @@ There three options for donwload here:
 
 *  Executable file, must be installed via the wizzard
 
-*  Download it from pypi
+*  Download it from pypi using pip
     * You must have python ^3.8 
     * It is recommended that you create virtual environment and run the tool in it
 
