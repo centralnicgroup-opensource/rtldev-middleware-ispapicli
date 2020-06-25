@@ -2,26 +2,19 @@
 layout: default
 ---
 
----
-My front matter
----
-
-**Contents**
-* TOC
-{:toc}
-My first paragraph.
-
-# Tool documentation
+**Tool documentation**
 
 This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely windows, mac, and ubuntu. 
 
 In general, this tool consist of two major parts: Graphical User Interface (GUI) and Shell (or so-called command line interpreter)
 
-## What does this tool offer?
+**What does this tool offer?**
 
 This tool enable you to connect to our back-end API and manage your account through GUI or Command Line
 
-
+**Contents**
+* TOC
+{:toc}
 
 ### Header 3
 
