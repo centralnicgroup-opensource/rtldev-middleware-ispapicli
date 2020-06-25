@@ -39,7 +39,15 @@ Basically this tool can be used in two ways: The GUI and Shell
 
 ## Run it via Shell
 
-Once you 
+Once you have the tool, you may run the following command:
+
+```
+python ispapi --help
+```
+
+This will show the following:
+
+![Octocat](/assets/doc_img/help.png)
 
 ## Run it via GUI
 
