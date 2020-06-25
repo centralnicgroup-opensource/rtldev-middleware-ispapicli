@@ -1,4 +1,4 @@
-theme: jekyll-theme-minimal
+theme: minimal-mistakes-jekyll
 title: Ispapicli
 description: Command line interface tool
 logo: /assets/img/x-logo.jpg
