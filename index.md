@@ -52,9 +52,9 @@ This will show the following:
 From this point on, you can follow the notes and run your desired command.
 However, here are few important notes for you:
 
--   Note that you can either use the equal sign '=' e.g. --command = querydomainlist, or
+-   Note that you can either use the equal sign '=' e.g. - -command = querydomainlist, or
 -   You can use spaces as a separator e.g. --command querydomainlist 
--   You may also use shortcuts, e.g. -c instead of --command, refer to the tool help command for more information about other commands
+-   You may also use shortcuts, e.g. -c instead of - -command, refer to the tool help command for more information about other commands
 -   You must login first in order to requrest a command, you can login by running the command:
 
 ```
@@ -63,7 +63,28 @@ However, here are few important notes for you:
 
 ## Run it via GUI
 
+There two ways to start the GUI:
+
+1.  From the Shell, then run the command:
+
+```
+    (python) ispapi -g OR ispapi --gui
+```
+
+2.  From the executable file by simply double clicking on it
+
 # Download and Installation
+
+There three options for donwload here:
+
+*  Portable file
+
+*  Executable file, must be installed via the wizzard
+
+*  Download it from pypi
+    * You must have python ^3.8 
+    * It is recommended that you create virtual environment and run the tool in it
+
 
 ## Windows
 
