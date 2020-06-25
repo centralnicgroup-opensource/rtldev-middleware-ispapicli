@@ -2,6 +2,9 @@
 layout: default
 ---
 
+* TOC
+{:toc}
+
 # Tool documentation
 
 This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely windows, mac, and ubuntu. 
