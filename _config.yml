@@ -1,5 +1,7 @@
 theme: jekyll-theme-minimal
 title: Ispapicli
 description: Command line interface tool
-logo: /assets/img/x-logo.png
+logo: /assets/img/x-logo.jpg
 show_downloads: false
+toc: true
+toc_label: "Table of Contents"

@@ -6,11 +6,13 @@ layout: default
 
 This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely windows, mac, and ubuntu. 
 
-## Header 2
+In general, this tool consist of two major parts: Graphical User Interface (GUI) and Shell (or so-called command line interpreter)
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+## What does this tool offer?
+
+This tool enable you to connect to our back-end API and manage your account through GUI or Command Line
+
+
 
 ### Header 3
 
