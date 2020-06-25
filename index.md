@@ -14,7 +14,7 @@ This site provide documentation for the ispapicli tool. Here you will find docum
 
 In general, this tool consist of two major parts: Graphical User Interface (GUI) and Shell (or so-called command line interpreter).
 
-# What does this tool offer?
+# What Does This Tool Offer?
 
 This tool enable you to connect to our back-end API and manage your account through GUI or Command Line Interface.
 
@@ -39,10 +39,22 @@ Basically this tool can be used in two ways: The GUI and Shell
 
 ## Run it via Shell
 
-# Downloads
+Once you 
+
+## Run it via GUI
+
+# Download and Installation
 
 ## Windows
 
 ## Mac OS
 
 ## Ubuntu
+
+```mermaid
+graph LR
+A[Square Rect] -- Link text --> B((Circle))
+A --> C(Round Rect)
+B --> D{Rhombus}
+C --> D
+```
