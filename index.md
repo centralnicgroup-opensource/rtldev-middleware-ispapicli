@@ -42,12 +42,24 @@ Basically this tool can be used in two ways: The GUI and Shell
 Once you have the tool, you may run the following command:
 
 ```
-python ispapi --help
+(python) ispapi --help
 ```
 
 This will show the following:
 
 ![Octocat](/assets/doc_img/help.png)
+
+From this point on, you can follow the notes and run your desired command.
+However, here are few important notes for you:
+
+-   Note that you can either use the equal sign '=' e.g. --command = querydomainlist, or
+-   You can use spaces as a separator e.g. --command querydomainlist 
+-   You may also use shortcuts, e.g. -c instead of --command, refer to the tool help command for more information about other commands
+-   You must login first in order to requrest a command, you can login by running the command:
+
+```
+    -u = <your user id> -p = <your password> -e = {ote,live}
+```
 
 ## Run it via GUI
 
@@ -58,11 +70,3 @@ This will show the following:
 ## Mac OS
 
 ## Ubuntu
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
