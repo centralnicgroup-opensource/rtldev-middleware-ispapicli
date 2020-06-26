@@ -82,6 +82,8 @@ This section provides you with a quick introduction to all the features included
 * Each login session is valid for 60 minutes
 * Accessible from GUI and Shell
 
+![Octocat](/assets/doc_img/login.png)
+
 ## Graphical User Interface
 
 The graphical user interface has many features:
@@ -94,13 +96,17 @@ This feature enables you to save the command and the results into a text file.
 
 Once you start typing the command, a dropdown list will be displayed to show all possible matches.
 
+![Octocat](/assets/doc_img/autocomplete.png)
+
 ### Minimum parameters
 
 Some commands requires a minimum number of parameters, this tool display all min parameters once you have typed a command. 
 
+![Octocat](/assets/doc_img/minparams.png)
+
 ### Copy the Results
 
-You can copy the command and the results using the shortcut ctr+c, or use the copy button in the GUI
+You can copy the command and the results using the shortcut ctr+c, or use the copy button in the toolbar
 
 
 # Download and Installation
