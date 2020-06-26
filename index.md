@@ -123,8 +123,12 @@ There three options for donwload here:
 
 ## Windows
 
-- Portable file: [a relative link](/corss_os/win/ispapi_portable.exe)
+- Check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
 
 ## Mac OS
 
+- Check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+
 ## Ubuntu
+
+- Check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
