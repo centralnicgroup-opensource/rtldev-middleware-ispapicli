@@ -24,9 +24,9 @@ Basically this tool can be used in two ways: The GUI and Shell
 
 ## Run it via Shell
 
-Once you have the tool, you can run it from your Shell.
+Once you have downloaded the tool, you can run it from your Shell.
 
-First, you may run the following command from your Shell:
+First, you may start by runnig the following command from your Shell:
 
 ```
 ispapi --help
@@ -58,11 +58,11 @@ There two ways to start the GUI:
     ispapi -g OR ispapi --gui
 ```
 
-*  From the executable/portable file by simply openning it
+*  From the executable/portable file by simply openning it, it will immediately start the GUI
 
 # Tool Features
 
-This section provides you with a quick introduction to all the features included in this tool.
+This section provides you with a quick introduction to almost all the features included in this tool.
 
 ## Manage Your Account Remotely
 
