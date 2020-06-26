@@ -16,6 +16,8 @@ This tool enable you to connect to our back-end API and manage your account thro
 
 In general, this tool consist of two major parts: Graphical User Interface (GUI) and Shell (or so-called command line interpreter).
 
+![Octocat](/assets/doc_img/gui.png)
+
 # Tool Features
 
 This section provides you with a quick introduction to all the features included in this tool.
@@ -26,9 +28,13 @@ This section provides you with a quick introduction to all the features included
 
 * Tip: for quick view of the command use the command: - -list
 
+![Octocat](/assets/doc_img/list.png)
+
 * To view how to use a specific command, run the command: - -help querydomainlist
 
-## Login/logout and Session Management
+![Octocat](/assets/doc_img/helpc.png)
+
+## Login/Logout and Session Management
 
 * Login/logout management instead of sending your login credentials everytime you requrest a command
 * Each login session is valid for 60 minutes
