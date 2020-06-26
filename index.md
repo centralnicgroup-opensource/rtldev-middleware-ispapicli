@@ -123,12 +123,18 @@ There three options for donwload here:
 
 ## Windows
 
-- Check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+- For executeable files, check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+
+- To install from pypi (coming soon)
 
 ## Mac OS
 
-- Check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+- For executeable files, check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+
+- To install from pypi (coming soon)
 
 ## Ubuntu
 
-- Check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+- For executeable files, check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
+
+- To install from pypi (coming soon)
