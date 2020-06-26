@@ -113,14 +113,13 @@ You can copy the command and the results using the shortcut ctr+c, or use the co
 
 There three options for donwload here:
 
-*  Portable file
+* Portable file
 
-*  Executable file, must be installed via the wizzard
+* Executable file, must be installed via the wizzard
 
-*  Download it from pypi using pip
-    * You must have python ^3.8 
-    * It is recommended that you create virtual environment and run the tool in it
-
+* Download it from pypi using pip
+  * You must have python ^3.8 
+  * It is recommended that you create virtual environment and run the tool in it
 
 ## Windows
 
