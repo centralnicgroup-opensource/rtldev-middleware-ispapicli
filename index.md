@@ -123,6 +123,8 @@ There three options for donwload here:
 
 ## Windows
 
+- Portable file: [a relative link](/corss_os/win/ispapi_portable.exe)
+
 ## Mac OS
 
 ## Ubuntu
