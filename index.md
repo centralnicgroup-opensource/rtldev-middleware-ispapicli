@@ -10,7 +10,9 @@ layout: default
 
 # Introduction
 
-This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely windows, mac, and ubuntu. 
+This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely Windows, Mac, and Ubuntu. 
+
+What is this too about?
 
 This tool enable you to connect to our back-end API and manage your account through GUI or Command Line Interface.
 
@@ -18,7 +20,7 @@ In general, this tool consist of two major parts: Graphical User Interface (GUI)
 
 ![Octocat](/assets/doc_img/gui.png)
 
-# How to use it?
+# How to use this tool?
 
 Basically this tool can be used in two ways: The GUI and Shell
 
@@ -60,7 +62,7 @@ There two ways to start the GUI:
 
 *  From the executable/portable file by simply openning it, it will immediately start the GUI
 
-* Tip: **You can run exactly the same commands from the GUI and Shell** 
+* Tip: **You can run exactly the same commands from the GUI and Shell**
 
 # Tool Features
 
@@ -70,7 +72,7 @@ This section provides you with a quick introduction to almost all the features i
 
 * You can execute any command of the back-end API, for more info see: [API Documentation](https://github.com/hexonet/hexonet-api-documentation)
 
-* Tip: for quick view of the command use the command: - -list
+* Tip: for quick view of all the API commands use the command: - -list
 
 ![Octocat](/assets/doc_img/list.png)
 
@@ -114,7 +116,7 @@ Some commands requires a minimum number of parameters, this tool display all min
 
 * You can copy the command and the results using the copy button located on tool bar or the from the meun bar
 
-* Tipshortcut "**CTL+c**", or use the copy button in the toolbar
+* Tip: You can also use the shortcut "**CTL+c**" copy the results to the clipboard
 
 
 # Download and Installation
