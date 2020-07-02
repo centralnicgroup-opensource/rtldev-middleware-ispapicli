@@ -5,22 +5,23 @@ layout: default
 **ISPAPI CLI Tool Documentation**
 
 **Contents**
+
 * TOC
 {:toc}
 
 # Introduction
 
-This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely Windows, Mac, and Ubuntu. 
+This site provide documentation for the ispapicli tool. Here you will find documentation for installing on several operation systems, namely Windows, macOS / OS X, and Debian derivates like Ubuntu.
 
 What is this too about?
 
-This tool enable you to connect to our back-end API and manage your account through GUI or Command Line Interface.
+This tool enables you to connect to our backend system API and to manage your account through GUI or Command Line Interface.
 
-In general, this tool consist of two major parts: Graphical User Interface (GUI) and Shell (or so-called command line interpreter).
+In general, this tool consists of two major parts: Graphical User Interface (GUI) and Shell (or so-called command line interpreter).
 
-![Octocat](/assets/doc_img/gui.png)
+![GUI](/assets/doc_img/gui.png)
 
-# How to use this tool?
+# How to use this tool
 
 Basically this tool can be used in two ways: The GUI and Shell
 
@@ -28,25 +29,25 @@ Basically this tool can be used in two ways: The GUI and Shell
 
 Once you have downloaded the tool, you can run it from your Shell.
 
-First, you may start by runnig the following command from your Shell:
+First, you may start by runnig the following command there:
 
-```
+```bash
 ispapi --help
 ```
 
 This will show you how to use the tool:
 
-![Octocat](/assets/doc_img/help.png)
+![CLI Help](/assets/doc_img/help.png)
 
 From this point on, you can follow the notes and run your desired command.
 However, here are few important notes for you:
 
--   Note that you can either use the equal sign "=" e.g. "- -command = querydomainlist", or
--   You can use spaces as a separator e.g. "- -command querydomainlist"
--   You may also use shortcuts, e.g. "-c" instead of "- -command", refer to the tool help command for more information about other commands
--   You must login first in order to requrest a command, you can login by running the command:
+* Note that you can either use the equal sign "=" e.g. "- -command = querydomainlist", or
+* You can use spaces as a separator e.g. "- -command querydomainlist"
+* You may also use shortcuts, e.g. "-c" instead of "- -command", refer to the tool help command for more information about other commands
+* You must login first in order to requrest a command, you can login by running the command:
 
-```
+```bash
     -u = <your user id> -p = <your password> -e = {ote,live}
 ```
 
@@ -54,13 +55,13 @@ However, here are few important notes for you:
 
 There two ways to start the GUI:
 
-*  From the Shell, then run the command:
+* From the Shell, then run the command:
 
-```
+```bash
     ispapi -g OR ispapi --gui
 ```
 
-*  From the executable/portable file by simply openning it, it will immediately start the GUI
+* From the executable/portable file by simply openning it, it will immediately start the GUI
 
 * Tip: **You can run exactly the same commands from the GUI and Shell**
 
@@ -70,15 +71,14 @@ This section provides you with a quick introduction to almost all the features i
 
 ## Manage Your Account Remotely
 
-* You can execute any command of the back-end API, for more info see: [API Documentation](https://github.com/hexonet/hexonet-api-documentation)
+* You can execute any command of our backend system API, for more information read our [API documentation](https://github.com/hexonet/hexonet-api-documentation).
+* Tip: for quick view of the command use the command: `--list`
 
-* Tip: for quick view of all the API commands use the command: - -list
+![Command List](/assets/doc_img/list.png)
 
-![Octocat](/assets/doc_img/list.png)
+* To view how to use a specific command, run the command: `--help \<command name>`. E.g. `-- help = querydomainlist`, the results as shown below:
 
-* To view how to use a specific command, run the command: - -help \<command name>. E.g. - - help = querydomainlist, the results as shown below:
-
-![Octocat](/assets/doc_img/helpc.png)
+![Command Help](/assets/doc_img/helpc.png)
 
 * Tip: You can also run this command in the GUI
 
@@ -88,7 +88,7 @@ This section provides you with a quick introduction to almost all the features i
 * Each login session is valid for 60 minutes
 * Accessible from GUI and Shell
 
-![Octocat](/assets/doc_img/login.png)
+![Login](/assets/doc_img/login.png)
 
 ## Graphical User Interface
 
@@ -104,25 +104,23 @@ The graphical user interface has many features:
 
 Once you start typing the command, a dropdown list will be displayed to show all possible matches.
 
-![Octocat](/assets/doc_img/autocomplete.png)
+![GUI Autocompletion](/assets/doc_img/autocomplete.png)
 
 ### Minimum parameters
 
-Some commands requires a minimum number of parameters, this tool display all min parameters once you have typed a command. 
+Some commands require a minimum number of parameters. This tool displays all required parameters once you have typed a command.
 
-![Octocat](/assets/doc_img/minparams.png)
+![GUI Command Minimum Parameters](/assets/doc_img/minparams.png)
 
 ### Copy the Results
 
-* You can copy the command and the results using the copy button located on tool bar or the from the meun bar
-
-* Tip: You can also use the shortcut "**CTL+c**" copy the results to the clipboard
-
+* You can copy the command and the results using the copy button located on the toolbar or the one from the menu bar.
+* Tip: You can also use the shortcut "**CTRL+C**" copy the results to the clipboard.
 
 # Download and Installation
 
-This tool is avaiable on three OS: Windows, Mac OS, and Ubuntu.
+This tool is avaiable for several operating systems: Windows, macOS / OS X, and Debian derivates like Ubuntu.
 
-* To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases). The tool is available as portable executable version. 
+* To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases). The tool is available as portable executable version.
 
-* Other option to download it from PyPi (Coming Soon)
+* Also installable from PyPi (Coming Soon).
