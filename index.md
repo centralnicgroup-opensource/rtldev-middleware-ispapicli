@@ -111,30 +111,10 @@ You can copy the command and the results using the shortcut ctr+c, or use the co
 
 # Download and Installation
 
-There three options for donwload here:
+This tool is avaiable on three OS: Windows, Mac OS, and Ubuntu.
 
-* Portable file
+To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases).
 
-* Executable file, must be installed via the wizzard
+The tool is available as portable executable version. 
 
-* Download it from pypi using pip
-  * You must have python ^3.8 
-  * It is recommended that you create virtual environment and run the tool in it
-
-## Windows
-
-- For executeable files, check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
-
-- To install from pypi (coming soon)
-
-## Mac OS
-
-- For executeable files, check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
-
-- To install from pypi (coming soon)
-
-## Ubuntu
-
-- For executeable files, check our relases here: [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases)
-
-- To install from pypi (coming soon)
+Other option to download if from PyPi
