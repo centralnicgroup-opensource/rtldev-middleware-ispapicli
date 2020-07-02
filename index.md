@@ -2,7 +2,7 @@
 layout: default
 ---
 
-**ISPAPI Tool Documentation**
+**ISPAPI CLI Tool Documentation**
 
 **Contents**
 * TOC
@@ -60,6 +60,8 @@ There two ways to start the GUI:
 
 *  From the executable/portable file by simply openning it, it will immediately start the GUI
 
+* Tip: **You can run exactly the same commands from the GUI and Shell** 
+
 # Tool Features
 
 This section provides you with a quick introduction to almost all the features included in this tool.
@@ -72,7 +74,8 @@ This section provides you with a quick introduction to almost all the features i
 
 ![Octocat](/assets/doc_img/list.png)
 
-* To view how to use a specific command, run the command: - -help querydomainlist
+* To view how to use a specific command, run the command: - -help \<command name>. E.g. - - help = querydomainlist, the results as shown below:
+* Tip: you also use this command in the GUI
 
 ![Octocat](/assets/doc_img/helpc.png)
 
@@ -90,7 +93,9 @@ The graphical user interface has many features:
 
 ### Save the Command to a File
 
-This feature enables you to save the command and the results into a text file.
+* This feature enables you to save the command and the results into a text file. Use the button in the tool bar to save
+
+* Tip: Use shortcut "**CTL + s**" to quickly save the command to a file.  
 
 ### Command auto-complete
 
@@ -106,7 +111,9 @@ Some commands requires a minimum number of parameters, this tool display all min
 
 ### Copy the Results
 
-You can copy the command and the results using the shortcut ctr+c, or use the copy button in the toolbar
+* You can copy the command and the results using the copy button located on tool bar or the from the meun bar
+
+* Tipshortcut "**CTL+c**", or use the copy button in the toolbar
 
 
 # Download and Installation
