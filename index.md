@@ -12,7 +12,7 @@ layout: default
 
 This site provide documentation for the ispapicli tool. Here you will find documentation for installing on different operation systems, namely Windows, Mac, and Ubuntu. 
 
-What is this too about?
+What is this tool about?
 
 This tool enable you to connect to our back-end API and manage your account through GUI or Command Line Interface.
 
