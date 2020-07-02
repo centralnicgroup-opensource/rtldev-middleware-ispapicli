@@ -113,8 +113,6 @@ You can copy the command and the results using the shortcut ctr+c, or use the co
 
 This tool is avaiable on three OS: Windows, Mac OS, and Ubuntu.
 
-To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases).
+* To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases). The tool is available as portable executable version. 
 
-The tool is available as portable executable version. 
-
-Other option to download if from PyPi
+* Other option to download it from PyPi (Coming Soon)
