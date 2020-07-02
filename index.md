@@ -76,7 +76,7 @@ This section provides you with a quick introduction to almost all the features i
 
 ![Command List](/assets/doc_img/list.png)
 
-* To view how to use a specific command, run the command: `--help \<command name>`. E.g. `-- help = querydomainlist`, the results as shown below:
+* To view how to use a specific command, run the command: `--help \<command name>`. E.g. `--help = querydomainlist`, the results as shown below:
 
 ![Command Help](/assets/doc_img/helpc.png)
 
