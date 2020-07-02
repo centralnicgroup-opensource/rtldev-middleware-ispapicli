@@ -75,9 +75,10 @@ This section provides you with a quick introduction to almost all the features i
 ![Octocat](/assets/doc_img/list.png)
 
 * To view how to use a specific command, run the command: - -help \<command name>. E.g. - - help = querydomainlist, the results as shown below:
-* Tip: you also use this command in the GUI
 
 ![Octocat](/assets/doc_img/helpc.png)
+
+* Tip: You can also run this command in the GUI
 
 ## Login/Logout and Session Management
 
