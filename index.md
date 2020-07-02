@@ -68,7 +68,7 @@ This section provides you with a quick introduction to almost all the features i
 
 ## Manage Your Account Remotely
 
-* You can execute any command of the back-end API, for more info see: https://github.com/hexonet/hexonet-api-documentation
+* You can execute any command of the back-end API, for more info see: [API Documentation](https://github.com/hexonet/hexonet-api-documentation)
 
 * Tip: for quick view of the command use the command: - -list
 
