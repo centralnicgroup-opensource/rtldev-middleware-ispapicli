@@ -145,7 +145,7 @@ Procedure:
 * fork our project and create a new branch
 * clone it and check this branch out
 * apply your desired changes / extensions
-* commit and push it to remote. Please follow [these format rules](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).  We suggest to use [commitizen](https://github.com/commitizen/cz-cli/blob/master/README.md).
+* commit and push it to remote. Please follow [these format rules](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).  We suggest to use [commitizen](https://github.com/commitizen/cz-cli/blob/master/README.md) (in case you use nodejs).
 * squash your commits as far as it makes sense
 * open a pull request (PR) - check results of Travis CI. There are possibly Code issues you can correct.
 
