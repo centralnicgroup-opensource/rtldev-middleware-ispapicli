@@ -124,3 +124,29 @@ This tool is avaiable for several operating systems: Windows, macOS / OS X, and 
 * To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases). The tool is available as portable executable version.
 
 * Also installable from PyPi (Coming Soon).
+
+# Contributing
+
+Please read our [Contributing guide lines](https://github.com/hexonet/ispapicli/blob/master/CONTRIBUTING.md) first.
+
+## Requirements
+
+* Installed requirements.txt
+
+We suggest to use [Visual Studio Code](https://code.visualstudio.com/), but if you prefer any other IDE / Editor, it is fine.
+We also suggest using a [Virtual Environment](https://docs.python.org/3/tutorial/venv.html) to start working on the tool.
+
+## Pull Request (PR) Procedure
+Mark your PR as `Work in Progress` if you're still working on things.
+This can be achieved by prefixing your PR title with `WIP`.
+
+Procedure:
+
+* fork our project and create a new branch
+* clone it and check this branch out
+* apply your desired changes / extensions
+* commit and push it to remote. Please follow [these format rules](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).  We suggest to use [commitizen](https://github.com/commitizen/cz-cli/blob/master/README.md).
+* squash your commits as far as it makes sense
+* open a pull request (PR) - check results of Travis CI. There are possibly Code issues you can correct.
+
+**We care then about the rest.** - no need to worry about things like building current release and versioning.
