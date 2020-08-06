@@ -121,9 +121,31 @@ Some commands require a minimum number of parameters. This tool displays all req
 
 This tool is avaiable for several operating systems: Windows, macOS / OS X, and Debian derivates like Ubuntu.
 
-* To download this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases). The tool is available as portable executable version.
+## PyPi version
 
-* Also installable from PyPi (Coming Soon).
+* To start using this tool, you can clone it from GitHub and run it immediately, or
+
+* You can also install it from PyPi (Coming Soon).
+
+## Executable version
+
+* To download a portable and executable version of this tool, check out our releases at [ISPAPI-Downloads](https://github.com/hexonet/ispapicli/releases). **This option only available for Linux distributions**
+
+* To create a portable/executable file on **Windows or macOS**, do the following steps:
+
+1. Install "pyinstaller":
+
+    ```bash
+        pip install pyinstaller
+    ```
+
+2. Go to your cloned folder and navigate to "hexonet/ispapicli" directory, then run the following command:
+
+    ```bash
+        pyinstaller --onefile ispapi.py
+    ```
+
+3. A folder called "Dist" will be created in which the excutable file is located.
 
 # Contributing
 
