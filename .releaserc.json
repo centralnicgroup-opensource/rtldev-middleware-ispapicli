@@ -11,8 +11,7 @@
         [
             "@semantic-release/exec",
             {
-                "prepareCmd": "./updateVersion.sh ${nextRelease.version} && ./scripts/createdistribution.sh",
-                "publishCmd": "./scripts/uploaddistribution_test.sh && ./scripts/uploaddistribution_test.sh"
+                "prepareCmd": "./updateVersion.sh ${nextRelease.version} && ./scripts/createdistribution.sh"
             }
         ],
         [
