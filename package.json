@@ -15,7 +15,8 @@
   "homepage": "https://github.com/hexonet/ispapicli",
   "repository": "https://github.com/hexonet/ispapicli.git",
   "bugs": "https://github.com/hexonet/ispapicli/issues",
-  "maintainers": [{
+  "maintainers": [
+    {
       "name": "Rashad Jamara",
       "email": "rjamara@hexonet.net"
     },
