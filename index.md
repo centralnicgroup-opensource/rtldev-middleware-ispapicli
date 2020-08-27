@@ -139,13 +139,19 @@ This tool is avaiable for several operating systems: Windows, macOS / OS X, and 
         pip install pyinstaller
     ```
 
-2. Go to your cloned folder and navigate to "hexonet/ispapicli" directory, then run the following command:
+2. Go to your cloned folder and install the requirements:
+
+    ```bash
+        pip install -r requirements.txt
+    ```
+
+3. Go to your cloned folder and navigate to "hexonet/ispapicli" directory, then run the following command:
 
     ```bash
         pyinstaller --onefile ispapi.py
     ```
 
-3. A folder called "Dist" will be created in which the excutable file is located.
+4. A folder called "dist" will be created in which the excutable file is located.
 
 # Contributing
 
