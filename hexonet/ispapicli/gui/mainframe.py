@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from modules.core import Core
-from modules.scrap import Scrap
 from gui.login import LoginWindow
 import textwrap
 import sys
@@ -222,7 +221,7 @@ class MainFrame(QWidget):
             elif result == 'update':
                 # create scrap object
                 # scrap = Scrap()
-                msg = "Please run this command in the terminal"
+                msg = "Please run this command in the terminal, use: ispapicli --update"
                 self.plainResponse.setText(msg)
             else:
                 self.plainResponse.setText(data)
@@ -357,12 +356,12 @@ class MainFrame(QWidget):
         executeBtn.setIcon(QIcon(self.getIcon("execute.png")))
         executeBtn.clicked.connect(self.executeCommand)
         executeBtn.setIconSize(QSize(14, 14))
-        executeBtn.setLayoutDirection(Qt.RightToLeft)
+        # executeBtn.setLayoutDirection(Qt.RightToLeft)
 
         clearBtn = QPushButton("Clear")
         clearBtn.setIcon(QIcon(self.getIcon("cross.png")))
         clearBtn.setIconSize(QSize(14, 14))
-        clearBtn.setLayoutDirection(Qt.RightToLeft)
+        # clearBtn.setLayoutDirection(Qt.RightToLeft)
         clearBtn.clicked.connect(self.__clearCMDfield)
 
         self.cmdTxt = QLineEdit()

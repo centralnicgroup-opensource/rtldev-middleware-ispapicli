@@ -5,6 +5,15 @@ import sys
 import argparse
 from hexonet.apiconnector.response import Response
 from pathlib import Path
+
+if sys.platform.startswith("linux"):
+    if getattr(sys, 'frozen', False):
+        file_path = sys.executable
+        sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + '/../usr/share/ispapicli')
+    else:
+        file_path = __file__
+        sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + '/../share/ispapicli')
+
 from modules.core import Core
 from modules.scrap import Scrap
 from gui.mainframe import MainFrame
