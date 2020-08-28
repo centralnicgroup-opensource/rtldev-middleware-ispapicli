@@ -12,7 +12,11 @@
             "@semantic-release/exec",
             {
                 "prepareCmd": "./updateVersion.sh ${nextRelease.version} && ./scripts/createdistribution.sh",
+<<<<<<< HEAD
                 "publishCmd": "./scripts/uploaddistribution_test.sh && ./scripts/uploaddistribution_test.sh"
+=======
+                "publishCmd": "./scripts/uploaddistribution_live.sh"
+>>>>>>> 8f200501d056ad9b0ef2f52482e3ae825c24d0af
             }
         ],
         [
