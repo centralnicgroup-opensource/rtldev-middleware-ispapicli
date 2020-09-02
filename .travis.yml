@@ -31,8 +31,6 @@ jobs:
     - os: linux
     - stage: release
       node_js: lts/*
-      before_install:
-        - export TRAVIS_NODE_VERSION="lts/*"
       install:
         # TODO: install / update python + modules for deployment using twine
         - rm -rf ~/.nvm
