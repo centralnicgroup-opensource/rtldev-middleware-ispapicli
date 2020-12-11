@@ -2,7 +2,7 @@ altgraph==0.*
 autopep8==1.*
 beautifulsoup4==4.*
 certifi==2020.6.*
-chardet==3.*
+chardet==4.*
 hexonet.apiconnector==3.*
 idna==2.*
 numpy==1.*
