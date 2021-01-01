@@ -48,7 +48,7 @@ setup(
         'certifi>=2020,<2021',
         'chardet>=3,<4',
         'hexonet.apiconnector>=3,<4',
-        'idna>=2,<3',
+        'idna>=3,<4',
         'numpy>=1,<2',
         'pep8>=1,<2',
         'Pillow>=8,<9',
