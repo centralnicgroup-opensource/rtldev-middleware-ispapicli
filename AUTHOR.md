@@ -2,3 +2,4 @@
 and thus generally made it that much better, see [GitHub's list of contributors](https://github.com/hexonet/python-sdk/contributors).
 
 * [Rashad Jamara](//github.com/rashad-j) - Main Developer
+* [Kai Schwarz](//github.com/papakai) - Chief Development Officer
