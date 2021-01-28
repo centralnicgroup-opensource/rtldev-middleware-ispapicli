@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/hexonet/ispapicli/compare/v1.0.2...v1.0.3) (2021-01-28)
+
+
+### Bug Fixes
+
+* **release process:** reviewed list of owners to get release process working ([93a1b15](https://github.com/hexonet/ispapicli/commit/93a1b158bade7f1a2721871b04bdb1a84dd5521f))
+
 ## [1.0.2](https://github.com/hexonet/ispapicli/compare/v1.0.1...v1.0.2) (2021-01-28)
 
 
