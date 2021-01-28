@@ -1,0 +1,5 @@
+[run]
+omit = 
+    hexonet/__init__.py,
+    hexonet/ispapicli/__init__.py
+    */tests/*

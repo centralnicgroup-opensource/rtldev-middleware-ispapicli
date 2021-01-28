@@ -41,17 +41,33 @@ setup(
     maintainer='Rashad Jamara',
     maintainer_email='rjamara@hexonet.net',
     url='https://github.com/hexonet/ispapicli/',
-    install_require=[
-        'autopep8',
-        'pycodestyle',
-        'twine'
+    install_requires=[
+        'altgraph>=0,<1',
+        'autopep8>=1,<2',
+        'beautifulsoup4>=4,<5',
+        'certifi>=2020,<2021',
+        'chardet>=3,<4',
+        'hexonet.apiconnector>=3,<4',
+        'idna>=2,<3',
+        'numpy>=1,<2',
+        'pep8>=1,<2',
+        'Pillow>=7,<8',
+        'pycodestyle>=2,<3',
+        'PyQt5>=5,<6',
+        'PyQt5-sip>=12,<13',
+        'requests>=2,<3',
+        'soupsieve>=2,<3',
+        'tabulate>=0,<1'
+        'urllib3>=1,<2'
+        'twine>=3,<4'
     ],
     setup_requires=[
-        'autopep8',
-        'pycodestyle',
-        'twine'
+        'pytest-runner'
     ],
-    tests_require=[],
+    tests_require=[
+        'pytest',
+        'pytest-cov'
+    ],
     license="MIT",
     scripts=[],
     zip_safe=True,
