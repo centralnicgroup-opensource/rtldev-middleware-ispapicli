@@ -7,8 +7,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hexonet/ispapicli/blob/master/CONTRIBUTING.md)
 
-IN DEVELOPMENT: subscribe to the releases to get informed about the 1st stable version. Thanks for your patience.
-
 ## About
 
 This tool enables you to connect to our backend system API and to manage your account through GUI or Command Line Interface.
