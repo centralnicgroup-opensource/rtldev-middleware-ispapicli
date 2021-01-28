@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/hexonet/ispapicli/compare/v1.0.1...v1.0.2) (2021-01-28)
+
+
+### Bug Fixes
+
+* **ci:** migration to github actions (prior Travis CI) ([d8aafa6](https://github.com/hexonet/ispapicli/commit/d8aafa6990df3d116163425a87e819d2416414b6))
+
 ## [1.0.1](https://github.com/hexonet/ispapicli/compare/v1.0.0...v1.0.1) (2020-09-01)
 
 
