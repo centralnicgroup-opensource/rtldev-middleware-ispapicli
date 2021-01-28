@@ -142,7 +142,7 @@ This tool is avaiable for several operating systems: Windows, macOS / OS X, and 
 2. Go to your cloned folder and install the requirements:
 
     ```bash
-        pip install -r requirements.txt
+        pip install --upgrade -e .
     ```
 
 3. Go to your cloned folder and navigate to "hexonet/ispapicli" directory, then run the following command:
