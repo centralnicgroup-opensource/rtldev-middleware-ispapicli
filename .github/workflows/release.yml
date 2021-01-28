@@ -23,7 +23,6 @@ jobs:
         run: |
           pip install --upgrade pip
           pip -V
-          pip install --upgrade -r requirements.txt
           pip install --upgrade -e .
       - name: Validate & Coverage Report
         run: |
@@ -49,7 +48,6 @@ jobs:
         run: |
           pip install --upgrade pip testresources setuptools wheel
           pip -V
-          pip install --upgrade -r requirements.txt
           pip install --upgrade -e .
       - name: Setup NodeJS LTS
         uses: actions/setup-node@v2
