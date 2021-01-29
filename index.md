@@ -136,7 +136,7 @@ This tool is avaiable for several operating systems: Windows, macOS / OS X, and 
 1. Install "pyinstaller":
 
     ```bash
-        pip install pyinstaller
+        pip install --upgrade pyinstaller
     ```
 
 2. Go to your cloned folder and install the requirements:
@@ -165,6 +165,7 @@ We suggest to use [Visual Studio Code](https://code.visualstudio.com/), but if y
 We also suggest using a [Virtual Environment](https://docs.python.org/3/tutorial/venv.html) to start working on the tool.
 
 ## Pull Request (PR) Procedure
+
 Mark your PR as `Work in Progress` if you're still working on things.
 This can be achieved by prefixing your PR title with `WIP`.
 
