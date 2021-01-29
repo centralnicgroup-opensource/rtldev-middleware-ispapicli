@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/hexonet/ispapicli/compare/v1.0.3...v1.0.4) (2021-01-29)
+
+
+### Bug Fixes
+
+* **versioning:** get hardcoded version numbers replaced ([995666f](https://github.com/hexonet/ispapicli/commit/995666f0332765fa17b2322dadec4152909e5bc8))
+* **versioning:** reuse __version__ in setUserAgent call ([003b23b](https://github.com/hexonet/ispapicli/commit/003b23beb52a4287e4c55c6dcc7be6c1cff38637))
+
 ## [1.0.3](https://github.com/hexonet/ispapicli/compare/v1.0.2...v1.0.3) (2021-01-28)
 
 
