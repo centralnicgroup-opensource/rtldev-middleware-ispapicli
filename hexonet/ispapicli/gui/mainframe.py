@@ -11,6 +11,8 @@ import re
 import subprocess
 import os
 
+__version__ = "1.0.3"
+
 
 class MainFrame(QWidget):
     def __init__(self, parent=None):
@@ -618,7 +620,7 @@ class MainFrame(QWidget):
         box = QMessageBox(self)
         msg = """<p align='center'>
         <b style='font-size:20px'>ISPAPI Tool</b>. <br><br><br>
-        Version: 2.0.1 <br><br>
+        Version: %s <br><br>
         A simple command line interface to connect you to your account on Hexonet
         <br><br>
         Technical Support:
@@ -631,10 +633,11 @@ class MainFrame(QWidget):
         <br><br>
         </p>
         """
+
         box.setStandardButtons(QMessageBox.Ok)
         # box.setIcon(QMessageBox.Information)
         box.setWindowTitle("About")
-        box.setText(msg)
+        box.setText(msg % __version__)
         box.show()
 
     def eventFilter(self, source, event):

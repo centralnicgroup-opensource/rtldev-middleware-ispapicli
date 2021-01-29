@@ -12,7 +12,7 @@ import os
 from tabulate import tabulate
 from textwrap import TextWrapper
 
-__version__ = '2.0.0'
+__version__ = "1.0.3"
 
 
 class Core:
@@ -125,10 +125,11 @@ class Core:
                             metavar='<>',
                             help="Update local command list")
         # version: show the tool version
+
         parser.add_argument('--version',
                             '-v',
                             action='version',
-                            version='%(prog)s 2.0')
+                            version='%(prog)s %(__version__)s')
 
         return parser
 
