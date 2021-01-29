@@ -51,7 +51,7 @@ setup(
         'idna>=2,<3',
         'numpy>=1,<2',
         'pep8>=1,<2',
-        'Pillow>=8,<=9',
+        'Pillow>=8,<9',
         'pycodestyle>=2,<3',
         'PyQt5>=5,<6',
         'PyQt5-sip>=12,<13',
