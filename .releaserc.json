@@ -28,15 +28,7 @@
             }
         ],
         [
-            "@semantic-release/github",
-            {
-                "assets": [
-                    {
-                        "label": "hexonet.ispapicli (tar.gz)",
-                        "path": "dist/hexonet.ispapicli-${nextRelease.version}.tar.gz"
-                    }
-                ]
-            }
+            "@semantic-release/github"
         ]
     ]
 }
