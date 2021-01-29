@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/hexonet/ispapicli/compare/v1.0.4...v1.0.5) (2021-01-29)
+
+
+### Bug Fixes
+
+* **semantic-release:** include core.py as git asset in version commit ([5f6dd10](https://github.com/hexonet/ispapicli/commit/5f6dd10c95371c7a2d205e174f6462134479ad12))
+
 ## [1.0.4](https://github.com/hexonet/ispapicli/compare/v1.0.3...v1.0.4) (2021-01-29)
 
 
