@@ -19,8 +19,8 @@ class Core:
     def __init__(self):
         # create API client
         self.cl = AC()
-        # Send statistics - revision is set to 1
-        self.cl.setUserAgent("ISPAPICLI", "1")
+        # Send statistics
+        self.cl.setUserAgent("ISPAPICLI", __version__)
         # init cross OS path reader
         self.initAppDirectories()
 
