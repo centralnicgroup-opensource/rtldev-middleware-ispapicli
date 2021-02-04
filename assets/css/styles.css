@@ -8,13 +8,26 @@
  * Website: http://themes.3rdwavemedia.com/
 */
 /* ======= Base ======= */
+
+@font-face {
+  font-family: 'NotoFont';
+  src: url('NotoSans-Bold.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'noto_sansregular';
+  src: url('notosans-regular-webfont.woff2') format('woff2'),
+    url('notosans-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  font: 14px/1.5 "Noto Sans",
-    "Helvetica Neue",
-    Helvetica,
+  font-family: 'noto_sansregular',
     Arial,
     sans-serif;
   color: #727272;
+  line-height: 1.5;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
