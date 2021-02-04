@@ -14,7 +14,7 @@ body {
     Helvetica,
     Arial,
     sans-serif;
-  color: #494d55;
+  color: #727272;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -169,8 +169,8 @@ a.btn-green.hover {
 
 .btn-blue,
 a.btn-blue {
-  background: #58bbee;
-  border: 1px solid #58bbee;
+  background: #267CB9;
+  border: 1px solid #267CB9;
   color: #fff !important;
 }
 
@@ -377,7 +377,7 @@ select {
 }
 
 .body-blue .branding .text-highlight {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .body-orange .branding .text-highlight {
@@ -411,7 +411,7 @@ select {
 }
 
 .body-blue .branding .icon {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .body-orange .branding .icon {
@@ -548,7 +548,7 @@ select {
 }
 
 .body-blue .doc-header .doc-title {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .body-orange .doc-header .doc-title {
@@ -592,31 +592,37 @@ select {
 .doc-section h1 {
   font-size: 24px;
   font-weight: bold;
+  color: #222;
 }
 
 .doc-section h2 {
   font-size: 22px;
   font-weight: bold;
+  color: #222;
 }
 
 .doc-section h3 {
   font-size: 20px;
   font-weight: bold;
+  color: #222;
 }
 
 .doc-section h4 {
   font-size: 18px;
   font-weight: bold;
+  color: #222;
 }
 
 .doc-section h5 {
   font-size: 16px;
   font-weight: bold;
+  color: #222;
 }
 
 .doc-section h6 {
   font-size: 14px;
   font-weight: bold;
+  color: #222;
 }
 
 .section-block {
@@ -728,7 +734,7 @@ select {
 }
 
 .callout-info {
-  background: #58bbee;
+  background: #267CB9;
   color: #fff;
 }
 
@@ -929,11 +935,11 @@ select {
 }
 
 .body-blue .header {
-  border-color: #58bbee;
+  border-color: #267CB9;
 }
 
 .body-blue a {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .body-blue a:hover {
@@ -1014,12 +1020,12 @@ select {
   margin-bottom: 5px;
   display: block;
   padding: 5px 15px;
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .doc-menu .nav-link:hover,
 .doc-menu .nav-link:focus {
-  color: #58bbee;
+  color: #267CB9;
   text-decoration: none;
   background: none;
   font-weight: bold;
@@ -1038,8 +1044,8 @@ select {
 }
 
 .body-blue .doc-menu .nav-link.active {
-  color: #58bbee;
-  border-color: #58bbee;
+  color: #267CB9;
+  border-color: #267CB9;
 }
 
 .body-orange .doc-menu .nav-link.active {
@@ -1071,7 +1077,7 @@ select {
   margin-bottom: 10px;
   font-size: 14px;
   display: block;
-  color: #58bbee;
+  color: #267CB9;
   padding: 0;
   padding-left: 34px;
   background: none;
@@ -1082,7 +1088,7 @@ select {
 }
 
 .doc-sub-menu .nav-link:hover {
-  color: #58bbee;
+  color: #267CB9;
   text-decoration: none;
   background: none;
   font-weight: bold;
@@ -1094,16 +1100,16 @@ select {
 
 .doc-sub-menu .nav-link.active {
   background: none;
-  color: #58bbee;
+  color: #267CB9;
   font-weight: bold;
 }
 
 .body-green .doc-sub-menu .nav-link.active {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .body-blue .doc-sub-menu .nav-link.active {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .body-orange .doc-sub-menu .nav-link.active {
@@ -1482,7 +1488,7 @@ select {
 }
 
 .cards-section .item-blue .item-inner {
-  border-top: 3px solid #58bbee;
+  border-top: 3px solid #267CB9;
 }
 
 .cards-section .item-blue .item-inner:hover .title {
@@ -1490,7 +1496,7 @@ select {
 }
 
 .cards-section .item-blue .icon {
-  color: #58bbee;
+  color: #267CB9;
 }
 
 .cards-section .item-orange .item-inner {
