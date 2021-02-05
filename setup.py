@@ -43,7 +43,7 @@ setup(
     url='https://github.com/hexonet/ispapicli/',
     install_requires=[
         'altgraph==0.17',
-        'autopep8==1.5.4',
+        'autopep8==1.5.5',
         'beautifulsoup4==4.9.3',
         'certifi==2020.12.5',
         'chardet==4.0.0',
