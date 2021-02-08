@@ -1,8 +1,8 @@
 module.exports = function (grunt) {
-    "use strict";
+  'use strict'
 
-    grunt.initConfig({
-        banner:
+  grunt.initConfig({
+    banner:
             '/*!\n' +
             ' * Lightbox for Bootstrap by @ashleydw\n' +
             ' * https://github.com/ashleydw/lightbox\n' +
@@ -24,20 +24,20 @@ module.exports = function (grunt) {
 		    },
 		    dist: {
 			    files: {
-				    'dist/ekko-lightbox.js': 'ekko-lightbox.js',
+				    'dist/ekko-lightbox.js': 'ekko-lightbox.js'
 			    }
 		    }
 	    },
-        uglify: {
+    uglify: {
 	        options: {
-		        sourceMap: true,
+		        sourceMap: true
 	        },
-            js: {
-                files: {
-                    'dist/ekko-lightbox.min.js': 'dist/ekko-lightbox.js'
-                }
-            }
-        },
+      js: {
+        files: {
+          'dist/ekko-lightbox.min.js': 'dist/ekko-lightbox.js'
+        }
+      }
+    },
 	    postcss: {
 		    options: {
 			    map: true,
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
 				    require('autoprefixer')({
 					    browsers: ['last 2 versions']
 				    }),
-					require('cssnano')()
+          require('cssnano')()
 			    ]
 		    },
 		    dist: {
@@ -63,23 +63,23 @@ module.exports = function (grunt) {
 			    }
 		    }
 	    },
-        watch: {
-            babel: {
-                files: ['ekko-lightbox.js', 'ekko-lightbox.less'],
-                tasks: ['dev']
-            }
-        }
-    });
+    watch: {
+      babel: {
+        files: ['ekko-lightbox.js', 'ekko-lightbox.less'],
+        tasks: ['dev']
+      }
+    }
+  })
 
-	grunt.loadNpmTasks('grunt-stamp');
-    grunt.loadNpmTasks('grunt-babel');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-stamp')
+  grunt.loadNpmTasks('grunt-babel')
+  grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.loadNpmTasks('grunt-contrib-cssmin')
+  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-less')
+  grunt.loadNpmTasks('grunt-postcss')
 
-    grunt.registerTask('dev', ['babel', 'less']);
-    grunt.registerTask('dist', ['babel', 'less', 'stamp', 'postcss:dist', 'uglify']);
-    grunt.registerTask('default', ['dist']);
-};
+  grunt.registerTask('dev', ['babel', 'less'])
+  grunt.registerTask('dist', ['babel', 'less', 'stamp', 'postcss:dist', 'uglify'])
+  grunt.registerTask('default', ['dist'])
+}

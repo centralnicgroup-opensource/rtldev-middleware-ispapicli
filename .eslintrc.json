@@ -1,0 +1,32 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "no-autofix"
+  ],
+  "rules": {
+    "prefer-const": "off",
+    "no-autofix/prefer-const": "error",
+    // we want to force semicolons
+    "semi": [
+      "error",
+      "always"
+    ],
+    // we use tab to indent our code
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "never"
+    ]
+  }
+}

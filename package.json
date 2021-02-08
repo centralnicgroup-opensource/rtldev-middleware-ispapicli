@@ -1,0 +1,57 @@
+{
+    "name": "ispapicli",
+    "description": "ISPAPICLI tool to manage your account remotely",
+    "version": "0.0.0-development",
+    "private": true,
+    "author": "Rashad Jamara <rjamara@hexonet.net>",
+    "license": "MIT",
+    "engines": {
+        "node": ">=10.18.0",
+        "npm": ">=6.13.4"
+    },
+    "homepage": "https://github.com/hexonet/ispapicli",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hexonet/ispapicli.git"
+    },
+    "bugs": {
+        "url": "https://github.com/hexonet/ispapicli/issues"
+    },
+    "maintainers": [
+        "Rashad Jamara <rjamara@hexonet.net>",
+        "Kai Schwarz <kschwarz@hexonet.net>"
+    ],
+    "keywords": [
+        "hexonet",
+        "domain",
+        "api",
+        "connector",
+        "isp",
+        "ispapi",
+        "cli",
+        "ssl",
+        "cert",
+        "dns",
+        "backorder",
+        "premium",
+        "preregistration",
+        "registration",
+        "application",
+        "command",
+        "line",
+        "client"
+    ],
+    "devDependencies": {
+        "eslint": "^7.19.0",
+        "eslint-plugin-no-autofix": "^1.0.2",
+        "gulp": "^4.0.2",
+        "gulp-csslint": "^1.0.1",
+        "gulp-htmlhint": "^4.0.0",
+        "gulp-reporter": "^2.10.0",
+        "gulp-xo": "^0.25.0"
+    },
+    "scripts": {
+        "lint": "gulp validate"
+    },
+    "dependencies": {}
+}
