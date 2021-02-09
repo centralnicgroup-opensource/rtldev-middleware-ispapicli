@@ -23,5 +23,4 @@ jobs:
       - name: validation test
         run: |
           npm prune && npm i
-          npm run build
           gulp validate
