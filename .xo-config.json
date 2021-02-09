@@ -1,7 +1,3 @@
 {
-    "_comment": "'prettier': true <== this property should read the prettier settings from .prettierrc",
-    "trailingComma": "none",
-    "space": 4,
-    "semicolon": false,
-    "singleQuote": true
+	"prettier": true
 }
