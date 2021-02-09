@@ -10,7 +10,7 @@ const htmlhint = require("gulp-htmlhint");
 validate css code
 */
 function css() {
-  return gulp.src('/assets/css/*.css')
+  return gulp.src('assets/css/*.css')
     .pipe(csslint())
     .pipe(csslint.formatter()); // display errors
   //.pipe(csslint.formatter('fail')); // fail on error 
