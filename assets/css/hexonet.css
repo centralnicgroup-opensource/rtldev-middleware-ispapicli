@@ -76,3 +76,11 @@
     font-weight: bold;
     text-decoration: none;
 }
+
+.footer-block a {
+    color: rgb(66, 126, 255);
+}
+
+.footer-block a:hover {
+    color: rgb(66, 126, 255);
+}
