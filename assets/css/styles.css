@@ -2,7 +2,7 @@
   font-family: "noto_sansregular";
   font-style: normal;
   font-weight: normal;
-  src: url('/assets/fonts/notosans-regular-webfont.eot?#iefix') format('embedded-opentype'), url("/assets/fonts/notosans-regular-webfont.woff2") format("woff2"), url("/assets/fonts/notosans-regular-webfont.woff") format("woff");
+  src: url('/ispapicli/assets/fonts/notosans-regular-webfont.eot?#iefix') format('embedded-opentype'), url("/ispapicli/assets/fonts/notosans-regular-webfont.woff2") format("woff2"), url("/ispapicli/assets/fonts/notosans-regular-webfont.woff") format("woff");
 }
 
 body {
