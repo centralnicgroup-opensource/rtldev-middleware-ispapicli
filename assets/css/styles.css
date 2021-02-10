@@ -2,7 +2,7 @@
   font-family: "noto_sansregular";
   font-style: normal;
   font-weight: normal;
-  src: url('notosans-regular-webfont.eot?#iefix') format('embedded-opentype'), url("notosans-regular-webfont.woff2") format("woff2"), url("notosans-regular-webfont.woff") format("woff");
+  src: url('/assets/fonts/notosans-regular-webfont.eot?#iefix') format('embedded-opentype'), url("/assets/fonts/notosans-regular-webfont.woff2") format("woff2"), url("/assets/fonts/notosans-regular-webfont.woff") format("woff");
 }
 
 body {
@@ -188,7 +188,7 @@ code {
 }
 
 .form-control {
-  border-color: #f0f0f0;
+  border-color: #909090;
   box-shadow: none;
   height: 40px;
   moz-box-shadow: none;
@@ -224,11 +224,11 @@ input[type="text"], input[type="email"], input[type="password"], input[type="sub
 }
 
 .header {
-  background: #494d55;
+  border-bottom: 1px solid #40babd;
   border-top: 5px solid #40babd;
   color: black;
   color: rgba(255, 255, 255, 0.85);
-  padding: 30px 0;
+  padding: 10px 0;
 }
 
 .header a {
@@ -323,22 +323,23 @@ input[type="text"], input[type="email"], input[type="password"], input[type="sub
 }
 
 .breadcrumb li {
-  color: black;
-  color: rgba(255, 255, 255, 0.5);
+  color: #267cb9;
+  /* color: rgba(255, 255, 255, 0.5); */
 }
 
 .breadcrumb li.active {
-  color: black;
-  color: rgba(255, 255, 255, 0.5);
+  color: #267cb9;
+  /* color: rgba(255, 255, 255, 0.5); */
 }
 
 .breadcrumb li a {
-  color: black;
-  color: rgba(255, 255, 255, 0.5);
+  color: #267cb9;
+  /* color: rgba(255, 255, 255, 0.5); */
 }
 
 .breadcrumb li a:hover {
-  color: #fff;
+  color: #267cb9;
+  font-weight: bold;
 }
 
 .breadcrumb>li+li:before {

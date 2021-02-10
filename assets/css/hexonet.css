@@ -1,0 +1,78 @@
+.footer-block {
+    background: #000000;
+}
+
+.footer-block p, h4 {
+    color: rgb(239, 238, 255);
+}
+
+.body-blue .branding .text-highlight {
+    color: #002856;
+}
+
+.body-blue .branding .icon {
+    color: #002856;
+}
+
+.body-blue .doc-header .doc-title {
+    color: #002856;
+}
+
+.body-blue .header {
+    border-color: #002856;
+}
+
+.body-blue a {
+    color: #002856;
+}
+
+.body-blue a:hover {
+    color: #00418b;
+}
+
+.body-blue .doc-menu .nav-link.active {
+    border-color: #002856;
+    color: #002856;
+}
+
+.body-blue .doc-sub-menu .nav-link.active {
+    color: #002856;
+}
+
+.body-blue .promo-block {
+    background: #41b2ec;
+}
+
+.breadcrumb li {
+    color: #002856;
+    /* color: rgba(255, 255, 255, 0.5); */
+}
+
+.breadcrumb li.active {
+    color: #002856;
+    /* color: rgba(255, 255, 255, 0.5); */
+}
+
+.breadcrumb li a {
+    color: #002856;
+    /* color: rgba(255, 255, 255, 0.5); */
+}
+
+.breadcrumb li a:hover {
+    color: #002856;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.doc-menu .nav-link {
+    color: #002856;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.doc-menu .nav-link:hover, .doc-menu .nav-link:focus {
+    background: none;
+    color: #002856;
+    font-weight: bold;
+    text-decoration: none;
+}

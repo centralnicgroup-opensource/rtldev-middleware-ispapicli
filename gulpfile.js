@@ -9,36 +9,36 @@ const htmlhint = require('gulp-htmlhint')
 validate css code
 */
 function css() {
-    return gulp
-        .src('assets/css/*.css')
-        .pipe(csslint('csslintrc.json'))
-        .pipe(csslint.formatter()) // display errors
-        .pipe(csslint.formatter('fail')) // fail on error
+	return gulp
+		.src('assets/css/*.css')
+		.pipe(csslint('csslintrc.json'))
+		.pipe(csslint.formatter()) // display errors
+	//.pipe(csslint.formatter('fail')) // fail on error
 }
 
 /*
 validate html
 */
 function html() {
-    return gulp
-        .src('*.html')
-        .pipe(htmlhint()) // check errors
-        .pipe(htmlhint.reporter()) //display errors
-        .pipe(htmlhint.failAfterError()) // fail on error
+	return gulp
+		.src('*.html')
+		.pipe(htmlhint()) // check errors
+		.pipe(htmlhint.reporter()) //display errors
+		.pipe(htmlhint.failAfterError()) // fail on error
 }
 
 /*
 validate javascript with eslint, ignores assetes/plugins
 */
 function eslintXO() {
-    return src(['assets/js/**/*.js'])
-        .pipe(
-            xo({
-                globals: ['jQuery', '$', 'document', 'Stickyfill'] // Stickyfill is a js library
-            })
-        )
-        .pipe(xo.format()) // display errors
-        .pipe(xo.failAfterError()) // fail on errors
+	return src(['assets/js/**/*.js'])
+		.pipe(
+			xo({
+				globals: ['jQuery', '$', 'document', 'Stickyfill'] // Stickyfill is a js library
+			})
+		)
+		.pipe(xo.format()) // display errors
+		.pipe(xo.failAfterError()) // fail on errors
 }
 
 exports.validate = parallel(css, html, eslintXO)
