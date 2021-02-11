@@ -42,19 +42,6 @@ function eslintXO() {
     .pipe(xo.failAfterError()); // fail on errors
 }
 
-/*
-Check our code based on prettier formatter
-*/
-function prettierCheck() {
-  return src([
-    "assets/js/*.js",
-    "assets/css/*.css",
-    ".prettierrc.js",
-    "gulpfile.js",
-    "*.html",
-  ]).pipe(prettier.check());
-}
-
 // can be triggered locally to format your code
 exports.prettier = function () {
   return src([
