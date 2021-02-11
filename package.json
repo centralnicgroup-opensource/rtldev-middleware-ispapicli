@@ -43,10 +43,16 @@
   ],
   "devDependencies": {
     "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
     "gulp": "^4.0.2",
     "gulp-csslint": "^1.0.1",
     "gulp-htmlhint": "^4.0.0",
-    "gulp-xo": "^0.25.0"
+    "gulp-prettier": "^3.0.0",
+    "gulp-stylelint": "^13.0.0",
+    "gulp-xo": "^0.25.0",
+    "stylelint": "^13.10.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-prettier": "^1.1.2"
   },
   "scripts": {
     "lint": "gulp validate"
