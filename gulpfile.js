@@ -24,8 +24,8 @@ validate html
 function html() {
   return src("*.html")
     .pipe(htmlhint()) // check errors
-    .pipe(htmlhint.reporter()) //display errors
-    .pipe(htmlhint.failAfterError()); // fail on error
+    .pipe(htmlhint.reporter()); //display errors
+  //.pipe(htmlhint.failAfterError()); // fail on error
 }
 
 /*
