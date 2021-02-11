@@ -24,8 +24,8 @@ validate html
 function html() {
   return src("*.html")
     .pipe(htmlhint()) // check errors
-    .pipe(htmlhint.reporter()); //display errors
-  //.pipe(htmlhint.failAfterError()); // fail on error
+    .pipe(htmlhint.reporter()) //display errors
+    .pipe(htmlhint.failAfterError()); // fail on error
 }
 
 /*
@@ -68,4 +68,4 @@ exports.prettier = function () {
     .pipe(dest((file) => file.base));
 };
 // automatically triggered upon each push or pull request
-exports.validate = series(prettierCheck, eslintXO, css, html);
+exports.validate = series(eslintXO, css, html);
