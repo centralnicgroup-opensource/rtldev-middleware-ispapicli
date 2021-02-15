@@ -54,6 +54,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm prune && npm i
+          gulp validate
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

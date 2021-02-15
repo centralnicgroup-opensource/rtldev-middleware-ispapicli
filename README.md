@@ -13,13 +13,13 @@ This tool enables you to connect to our backend system API and to manage your ac
 
 ## Resources
 
-* Find usage guide & documentation at [ISPAPI CLI Tool Documentations](https://hexonet.github.io/ispapicli/)
+- Find usage guide & documentation at [ISPAPI CLI Tool Documentations](https://hexonet.github.io/ispapicli/)
 
 ## Features
 
-* Manage your account via Shell or GUI remotely
-* Login/Logout and Session management
-* Save the command to a file for your reference
-* Command auto-complete
-* Minimum parameters feature
-* Copy/paste the command and the results
+- Manage your account via Shell or GUI remotely
+- Login/Logout and Session management
+- Save the command to a file for your reference
+- Command auto-complete
+- Minimum parameters feature
+- Copy/paste the command and the results
