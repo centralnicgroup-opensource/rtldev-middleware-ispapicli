@@ -20,14 +20,21 @@ function formatWithPrettier() {
 
 // lint markdown files
 function lintMarkDown() {
-    return src(["**/*.md", "!HISTORY.md"], { "read": false })
+    return src(["**/*.md", "!HISTORY.md", "!node_modules/**/*.md"], { "read": false })
         .pipe(through2.obj(function obj(file, enc, next) {
             markdownlint(
-                { "files": [file.relative] },
+                {
+                    "files": [file.relative],
+                    "handleRuleFailures": true,
+                    "config": {
+                        "line-length": false
+                    }
+                },
                 function callback(err, result) {
                     const resultString = (result || "").toString();
                     if (resultString) {
                         console.log(resultString);
+                        throw new Error('Linting error, check errors above.')
                     }
                     next(err, file);
                 });
