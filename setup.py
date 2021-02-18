@@ -81,5 +81,8 @@ setup(
     python_requires='>=3.6',
     package_data={
         '': ['*.json', '*.png']
-    }
+    },
+    entry_points=dict(
+        console_scripts=['gui=hexonet.ispapicli.ispapicli:startGUI']
+    )
 )
