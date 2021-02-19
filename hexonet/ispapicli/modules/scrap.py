@@ -1,3 +1,4 @@
+from typing import Container
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -76,15 +77,9 @@ class Scrap:
             # parse HTML content, create bs4 object
             html = BeautifulSoup(src, 'html.parser')
             # get table body
-            tbody = html.table.tbody
-            # get tr
-            rows = tbody.find_all('tr', attrs={'class': 'js-navigation-item'})
+            rows = html.find_all('a', attrs={'class': 'js-navigation-open link-gray-dark'})
             for row in rows:
-                # href = row.a['js-navigation-open']
-                td = row.find('td', attrs={'class': 'content'})
-                href = td.find('a', attrs={'class': 'js-navigation-open'})
-                # add the url to the urls
-                urlLink = 'https://github.com/' + href.get('href')
+                urlLink = 'https://github.com/' + row.get('href')
                 urls.append(urlLink)
             # return urls
             return urls
