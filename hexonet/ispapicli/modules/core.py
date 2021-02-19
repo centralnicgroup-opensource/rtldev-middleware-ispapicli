@@ -37,10 +37,15 @@ class Core:
             self.absolute_dirpath = os.path.dirname(sys.executable)
         elif __file__:
             self.absolute_dirpath = os.path.dirname(__file__)
-
+        # check if commands exist
+        if not os.path.exists(os.path.join(self.absolute_dirpath, '../commands/')):
+            os.makedirs(os.path.join(self.absolute_dirpath, '../commands/'))
+        # check config directory
+        if not os.path.exists(os.path.join(self.absolute_dirpath, '../config/')):
+            os.makedirs(os.path.join(self.absolute_dirpath, '../config/'))
+        # set path variables
         self.command_path = os.path.join(self.absolute_dirpath, '../commands/')
-        self.session_path = os.path.join(self.absolute_dirpath,
-                                         '../config/session.json')
+        self.session_path = os.path.join(self.absolute_dirpath, '../config/session.json')
         return None
 
     def initParser(self, args=None):

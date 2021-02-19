@@ -222,8 +222,10 @@ class Scrap:
         True | Raise exception
         '''
         try:
-            p = os.path.join(self.absolute_dirpath,
-                             '../commands/' + commandName + '.json')
+            # check if directory exist, otherwise create it
+            if not os.path.exists(os.path.join(self.absolute_dirpath, '../commands/')):
+                os.makedirs(os.path.join(self.absolute_dirpath, '../commands/'))
+            p = os.path.join(self.absolute_dirpath, '../commands/' + commandName + '.json')
             f = open(p, "w")
             json.dump(data, f)
             f.close()

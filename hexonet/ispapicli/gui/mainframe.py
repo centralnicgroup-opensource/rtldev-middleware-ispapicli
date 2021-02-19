@@ -223,7 +223,7 @@ class MainFrame(QWidget):
             elif result == 'update':
                 # create scrap object
                 # scrap = Scrap()
-                msg = "Please run this command in the terminal, use: ispapicli --update"
+                msg = "Please run this command in the terminal, use: ./ispapicli --update"
                 self.plainResponse.setText(msg)
             else:
                 self.plainResponse.setText(data)
