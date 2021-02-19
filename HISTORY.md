@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/hexonet/ispapicli/compare/v1.0.6...v1.0.7) (2021-02-19)
+
+
+### Performance Improvements
+
+* **fixed dir:** fixed dir for executable file ([fbcc251](https://github.com/hexonet/ispapicli/commit/fbcc251bd6d7f3d50cf78cfd75daf126855d2918))
+
 ## [1.0.6](https://github.com/hexonet/ispapicli/compare/v1.0.5...v1.0.6) (2021-02-19)
 
 

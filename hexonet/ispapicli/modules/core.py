@@ -12,7 +12,7 @@ import os
 from tabulate import tabulate
 from textwrap import TextWrapper
 
-__version__ = "1.0.6"
+__version__ = "1.0.7"
 
 
 class Core:
