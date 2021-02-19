@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/hexonet/ispapicli/compare/v1.0.5...v1.0.6) (2021-02-19)
+
+
+### Performance Improvements
+
+* **fixed scraper:** github updated pages layout, thus scraper modified accordingly ([432a1bf](https://github.com/hexonet/ispapicli/commit/432a1bf5f455d3693b2a3d3b7202e287f4b1583f))
+
 ## [1.0.5](https://github.com/hexonet/ispapicli/compare/v1.0.4...v1.0.5) (2021-01-29)
 
 ### Bug Fixes
