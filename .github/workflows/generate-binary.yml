@@ -1,0 +1,25 @@
+name: Generate Binaries
+on: [push]
+jobs:
+  generate-linux:
+    name: Generate executable file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout python3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Run Pyinstaller
+        run: |
+          "./scripts/pyinstaller.sh"
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "docs(binary): uploading executable file"

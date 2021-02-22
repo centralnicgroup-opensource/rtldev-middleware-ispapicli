@@ -1,4 +1,16 @@
 #!/bin/bash
 echo "Executing pyinstaller..."
-cd hexonet/isapicli || exit
-pyinstaller --onefile isapicli.py
+pip install pyinstaller
+cd hexonet/ispapicli || exit
+pyinstaller --onefile ispapicli.py
+cd dist
+sudo chmod +x ispapicli
+mkdir bin
+mv ispapicli bin
+cp -r ../commands .
+cp -r ../icons .
+cp -r ../config .
+cd ..
+zip -r linux-binary.zip dist
+mv linux-binary.zip ../../executable_files/linux
+rm -r dist
