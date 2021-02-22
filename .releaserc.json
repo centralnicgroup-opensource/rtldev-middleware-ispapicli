@@ -1,35 +1,44 @@
 {
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        [
-            "@semantic-release/changelog",
-            {
-                "changelogFile": "HISTORY.md"
-            }
-        ],
-        [
-            "@semantic-release/exec",
-            {
-                "prepareCmd": "./updateVersion.sh ${nextRelease.version} && ./scripts/createdistribution.sh",
-                "publishCmd": "./scripts/uploaddistribution_live.sh"
-            }
-        ],
-        [
-            "@semantic-release/git",
-            {
-                "assets": [
-                    "HISTORY.md",
-                    "package.json",
-                    "hexonet/ispapicli/__init__.py",
-                    "hexonet/ispapicli/ispapicli.py",
-                    "hexonet/ispapicli/modules/core.py",
-                    "VERSION"
-                ]
-            }
-        ],
-        [
-            "@semantic-release/github"
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "HISTORY.md"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "./updateVersion.sh ${nextRelease.version} && ./scripts/createdistribution.sh",
+        "publishCmd": "./scripts/uploaddistribution_live.sh"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "HISTORY.md",
+          "package.json",
+          "hexonet/ispapicli/__init__.py",
+          "hexonet/ispapicli/ispapicli.py",
+          "hexonet/ispapicli/modules/core.py",
+          "VERSION",
+          "linux-binary.zip"
         ]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "label": "Linux executable (zip)",
+            "path": "linux-binary.zip"
+          }
+        ]
+      }
     ]
+  ]
 }

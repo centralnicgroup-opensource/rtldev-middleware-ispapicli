@@ -12,5 +12,4 @@ cp -r ../icons .
 cp -r ../config .
 cd ..
 zip -r linux-binary.zip dist
-mv linux-binary.zip ../../executable_files/linux
-rm -r dist
+mv linux-binary.zip ../../

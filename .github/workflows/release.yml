@@ -29,11 +29,38 @@ jobs:
           "./scripts/pep8check.sh"
           "./scripts/coverage.sh"
         # TODO add more lines here to be executed in the test stage e.g. pyinstaller etc.
+  generate-linux:
+    name: Generate executable file
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout python3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Run Pyinstaller
+        run: |
+          "./scripts/pyinstaller.sh"
+        # upload linux-binary to github actions
+      - name: Upload linux-binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-binary
+          path: linux-binary.zip
+          retention-days: 1
   release:
     name: Release Job
     runs-on: ubuntu-latest
     needs:
       - test
+      - generate-linux
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps:
       - name: Checkout
@@ -55,6 +82,11 @@ jobs:
         run: |
           npm prune && npm i
           gulp validate
+      # download our binaries
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: linux-binary
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
