@@ -29,8 +29,8 @@ jobs:
           "./scripts/pep8check.sh"
           "./scripts/coverage.sh"
         # TODO add more lines here to be executed in the test stage e.g. pyinstaller etc.
-  generate-linux:
-    name: Generate executable file
+  generate-linux-bin:
+    name: Generate Linux bin
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -39,7 +39,7 @@ jobs:
       - name: Checkout python3.x
         uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
+          python-version: "3.9"
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -47,20 +47,74 @@ jobs:
           pip install --upgrade -e .
       - name: Run Pyinstaller
         run: |
-          "./scripts/pyinstaller.sh"
-        # upload linux-binary to github actions
+          "./scripts/linux-pyinstaller.sh"
+        # upload linux-binary
       - name: Upload linux-binary
         uses: actions/upload-artifact@v2
         with:
           name: linux-binary
-          path: linux-binary.zip
+          path: linux-binary-latest.zip
+          retention-days: 1
+  generate-macos-bin:
+    name: Generate MacOS bin
+    runs-on: macos-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout python3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Run Pyinstaller
+        run: |
+          "./scripts/macos-pyinstaller.sh"
+        # upload macos-binary 
+      - name: Upload macos-binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-binary
+          path: macos-binary-latest.zip
+          retention-days: 1
+  generate-win-bin:
+    name: Generate Win bin
+    runs-on: windows-latest
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checkout python3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Run Pyinstaller
+        run: |
+          "./scripts/win-pyinstaller.sh"
+        # upload win-binary
+      - name: Upload win-binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: win-binary
+          path: win-binary-latest.zip
           retention-days: 1
   release:
     name: Release Job
     runs-on: ubuntu-latest
     needs:
       - test
-      - generate-linux
+      - generate-linux-bin
+      - generate-macos-bin
+      - generate-win-bin
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps:
       - name: Checkout
@@ -82,11 +136,11 @@ jobs:
         run: |
           npm prune && npm i
           gulp validate
-      # download our binaries
+      # download all our binary files
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: linux-binary
+          path: artifacts
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Executing pyinstaller..."
+echo "Executing Pyinstaller MacOS..."
 pip install pyinstaller
 cd hexonet/ispapicli || exit
 pyinstaller --onefile ispapicli.py
@@ -7,9 +7,7 @@ cd dist
 sudo chmod +x ispapicli
 mkdir bin
 mv ispapicli bin
-cp -r ../commands .
-cp -r ../icons .
-cp -r ../config .
+cp -r ../commands ../icons ../config .
 cd ..
-zip -r linux-binary.zip dist
-mv linux-binary.zip ../../
+zip -r macos-binary-latest.zip dist
+mv macos-binary-latest.zip ../../
