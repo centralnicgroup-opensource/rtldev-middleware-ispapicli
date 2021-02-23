@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/hexonet/ispapicli/compare/v1.2.0...v1.3.0) (2021-02-23)
+
+
+### Bug Fixes
+
+* **fixed shellcode:** ignoring non existing folders ([0e9d6e5](https://github.com/hexonet/ispapicli/commit/0e9d6e51af7c59d08eea770842e3fc394b64eceb))
+
+
+### Features
+
+* **fix win:** fixed script execution on win ([c27b714](https://github.com/hexonet/ispapicli/commit/c27b714f885998e93f144ac4a2db5a83932fe9c0))
+
 # [1.2.0](https://github.com/hexonet/ispapicli/compare/v1.1.0...v1.2.0) (2021-02-23)
 
 
