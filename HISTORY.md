@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/hexonet/ispapicli/compare/v1.0.7...v1.1.0) (2021-02-23)
+
+
+### Features
+
+* **test feature:** feature ([ef2f2bb](https://github.com/hexonet/ispapicli/commit/ef2f2bb4e1f522e2e7877e019b6ec425ac87a5da))
+
 ## [1.0.7](https://github.com/hexonet/ispapicli/compare/v1.0.6...v1.0.7) (2021-02-19)
 
 
