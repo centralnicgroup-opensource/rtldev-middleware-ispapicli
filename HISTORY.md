@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/hexonet/ispapicli/compare/v1.1.0...v1.2.0) (2021-02-23)
+
+
+### Features
+
+* **windows:** adding win bin ([ddb55e4](https://github.com/hexonet/ispapicli/commit/ddb55e4baa3bf19186b643433e8604d365f5c33e))
+
 # [1.1.0](https://github.com/hexonet/ispapicli/compare/v1.0.7...v1.1.0) (2021-02-23)
 
 
