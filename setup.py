@@ -59,7 +59,8 @@ setup(
         'soupsieve==2.2',
         'tabulate==0.8.8',
         'urllib3==1.26.3',
-        'twine==3.3.0'
+        'twine==3.3.0',
+        'tinydb==4.4.0'
     ],
     setup_requires=[
         'pytest-runner'
