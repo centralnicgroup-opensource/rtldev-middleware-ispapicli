@@ -675,9 +675,14 @@ class MainFrame(QWidget):
 
         if getattr(sys, 'frozen', False):
             self.absolute_dirpath = os.path.dirname(sys.executable)
+            try:
+                self.absolute_dirpath = sys._MEIPASS
+            except Exception:
+                self.absolute_dirpath = os.path.abspath(".")
+            path = self.command_path = os.path.join(self.absolute_dirpath,
+                                                    'data/icons/' + iconName)
         elif __file__:
             self.absolute_dirpath = os.path.dirname(__file__)
-
-        path = self.command_path = os.path.join(self.absolute_dirpath,
-                                                '../icons/' + iconName)
+            path = self.command_path = os.path.join(self.absolute_dirpath,
+                                                    '../icons/' + iconName)
         return path

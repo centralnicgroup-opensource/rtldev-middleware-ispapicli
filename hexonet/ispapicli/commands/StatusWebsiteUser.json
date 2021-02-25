@@ -1,1 +1,0 @@
-{"command": "StatusWebsiteUser", "description": " ", "availability": " ", "paramaters": [{"Parameter": "COMMAND", "Min": "1", "Definition": "StatusWebsiteUser", "Type": "COMMAND"}, {"Parameter": "WEBSITEUSERID", "Min": "1", "Definition": "ID from response of CreateWebsiteUser", "Type": "INT"}]}

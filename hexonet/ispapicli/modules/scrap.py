@@ -5,30 +5,15 @@ import json
 from pathlib import Path
 import os
 import sys
+from .db import DB
 
 
 class Scrap:
     def __init__(self, URL=''):
+        # docmentation URL
         self.gitHubURL = 'https://github.com/hexonet/hexonet-api-documentation/tree/master/API'
-        # init app directories
-        self.__initAppDirectories()
-
-    def __initAppDirectories(self):
-        '''
-        Check whether the app is running from the editor or from an executable file
-
-        Returns:
-        --------
-        Null
-        '''
-        if getattr(sys, 'frozen', False):
-            self.absolute_dirpath = os.path.dirname(sys.executable)
-        elif __file__:
-            self.absolute_dirpath = os.path.dirname(__file__)
-
-        self.command_path = os.path.join(self.absolute_dirpath, '../commands/')
-        self.session_path = os.path.join(self.absolute_dirpath,
-                                         '../config/session.json')
+        # init db
+        self.dbObj = DB()
 
     # recursive function
     def __getURLs(self, urls):
@@ -222,14 +207,9 @@ class Scrap:
         True | Raise exception
         '''
         try:
-            # check if directory exist, otherwise create it
-            if not os.path.exists(os.path.join(self.absolute_dirpath, '../commands/')):
-                os.makedirs(os.path.join(self.absolute_dirpath, '../commands/'))
-            p = os.path.join(self.absolute_dirpath, '../commands/' + commandName + '.json')
-            f = open(p, "w")
-            json.dump(data, f)
-            f.close()
-            print('Command file created: ', p)
+            table = self.dbObj.db.table('commands')
+            table.insert(data)
+            print('Command inserted: ', commandName)
             return True
         except Exception:
             raise Exception("Couldn't create a file for the command: " +
@@ -265,7 +245,9 @@ class Scrap:
 
         # get all commands urls, ending with .md
         urls = self.__getURLs([self.gitHubURL])
-
+        # delete all old commands
+        self.dbObj.db.drop_table('commands')
+        # add all new commands
         for url in urls:
             try:
                 article, table = self.__getParsedPage(url)

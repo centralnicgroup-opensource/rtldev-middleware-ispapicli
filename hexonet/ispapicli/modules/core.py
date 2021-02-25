@@ -11,6 +11,7 @@ import time
 import os
 from tabulate import tabulate
 from textwrap import TextWrapper
+from .db import DB
 
 __version__ = "1.2.0"
 
@@ -23,6 +24,8 @@ class Core:
         self.cl.setUserAgent("ISPAPICLI", __version__)
         # init cross OS path reader
         self.initAppDirectories()
+        # init db
+        self.dbObj = DB()
 
     def initAppDirectories(self):
         '''
@@ -35,17 +38,25 @@ class Core:
         '''
         if getattr(sys, 'frozen', False):
             self.absolute_dirpath = os.path.dirname(sys.executable)
+            try:
+                self.absolute_dirpath = sys._MEIPASS
+            except Exception:
+                self.absolute_dirpath = os.path.abspath(".")
+            self.command_path = os.path.join(self.absolute_dirpath, 'data/commands/')
+            self.session_path = os.path.join(self.absolute_dirpath, 'data/config/session.json')
         elif __file__:
             self.absolute_dirpath = os.path.dirname(__file__)
+            self.command_path = os.path.join(self.absolute_dirpath, '../commands/')
+            self.session_path = os.path.join(self.absolute_dirpath, '../config/session.json')
         # check if commands exist
-        if not os.path.exists(os.path.join(self.absolute_dirpath, '../commands/')):
-            os.makedirs(os.path.join(self.absolute_dirpath, '../commands/'))
+        # if not os.path.exists(os.path.join(self.absolute_dirpath, '../commands/')):
+        #    os.makedirs(os.path.join(self.absolute_dirpath, '../commands/'))
         # check config directory
-        if not os.path.exists(os.path.join(self.absolute_dirpath, '../config/')):
-            os.makedirs(os.path.join(self.absolute_dirpath, '../config/'))
+        # if not os.path.exists(os.path.join(self.absolute_dirpath, '../config/')):
+        #    os.makedirs(os.path.join(self.absolute_dirpath, '../config/'))
         # set path variables
-        self.command_path = os.path.join(self.absolute_dirpath, '../commands/')
-        self.session_path = os.path.join(self.absolute_dirpath, '../config/session.json')
+        # self.command_path = os.path.join(self.absolute_dirpath, '../commands/')
+        # self.session_path = os.path.join(self.absolute_dirpath, '../config/session.json')
         return None
 
     def initParser(self, args=None):
@@ -246,29 +257,31 @@ class Core:
         -------
         String: 'valid' | 'init' | 'expired'
         '''
-        data = {}
         # check if there is a session already exist
-        p = self.session_path
         try:
-            f = open(p, 'r')
-            data = json.load(f)
-            f.close()
-            entity = data['entity']
+            # query for login data
+            loginTable = self.dbObj.db.table('login')
+            data = loginTable.all()
+            if not data:
+                raise Exception
+            # get login data
+            entity = data[0]['entity']
+            t_old = data[0]['ts']
+            session = data[0]['session']
             time_format = "%Y-%m-%d %H:%M:%S"
             t_now = datetime.now().strftime(time_format)
             t_now_object = datetime.strptime(t_now, time_format)
-            t_old = data['ts']
             t_old_object = datetime.strptime(t_old, time_format)
             t_new = t_now_object - timedelta(hours=1)
             if t_new < t_old_object:
-                result = self.cl.setSession(data['session'])
+                result = self.cl.setSession(session)
                 if entity == 'ote':
                     self.cl.useOTESystem()
                 return 'valid'
             else:
                 return 'expired'
             # Do something with the session file
-        except IOError:
+        except Exception:
             return 'init'
 
     def logout(self):
@@ -282,14 +295,16 @@ class Core:
         p = self.session_path
         try:
             msg = ''
-            f = open(p, 'r')
-            data = json.load(f)
-            f.close()
-            entity = data['entity']
+            # query for login data
+            loginTable = self.dbObj.db.table('login')
+            data = loginTable.all()
+            # get login data
+            entity = data[0]['entity']
+            session = data[0]['session']
             if entity == 'ote':
                 self.cl.useOTESystem()
             # delete remote session
-            self.cl.setSession(str(data['session']))
+            self.cl.setSession(str(session))
             r = self.cl.logout()
             if r.isSuccess():
                 flag = True
@@ -297,17 +312,14 @@ class Core:
                 flag = False
 
             # delete local session
-            path = self.session_path
-            if os.path.exists(path):
-                os.remove(path)  # delete local session
-                if flag:
-                    msg = 'Successfully logged out!'
-                    return msg
-                else:
-                    msg = "Local session deleted but couldn't delete remote session!"
-                    return msg
+            self.dbObj.db.drop_table('login')
+
+            # return message
+            if flag:
+                msg = 'Successfully logged out!'
+                return msg
             else:
-                msg = 'Session already deleted'
+                msg = "Local session deleted but couldn't delete remote session!"
                 return msg
 
         except Exception as e:
@@ -352,23 +364,16 @@ class Core:
         -------
         String: <>
         '''
-        command_name = command_name.lower()
-        path = self.command_path
-        data = {}
-        files = os.listdir(path)
-        for file in files:
+        table = self.dbObj.db.table('commands')
+        data = table.search(self.dbObj.query.command.matches(command_name, flags=re.IGNORECASE))
+        for item in data:
             try:
-                file_name, ext = file.split('.')
-                file_name_lower_case = file_name.lower()
-                if file_name_lower_case == command_name:
-                    file_path = os.path.join(path, file)
-                    f = open(file_path, 'r')
-                    data = json.load(f)
-                    f.close()
-                    command = data['command']
-                    description = data['description']
-                    availability = data['availability']
-                    paramaters = data['paramaters']
+                command_name_lower_case = (item['command']).lower()
+                if command_name_lower_case == command_name.lower():
+                    command = item['command']
+                    description = item['description']
+                    availability = item['availability']
+                    paramaters = item['paramaters']
                     basic_info = f'''
                                 Command: {command}
                                 Description: {description}
@@ -412,11 +417,11 @@ class Core:
             data['session'] = loginSession
             data['ts'] = ts
             data['entity'] = entity
-            # write session and current time to local file
-            path = self.session_path
-            f = open(path, 'w')
-            json.dump(data, f)
-            f.close()
+            # delete old session
+            self.dbObj.db.drop_table('login')
+            # add new session
+            table = self.dbObj.db.table('login')
+            table.insert(data)
             return True
         except Exception as e:
             return False
@@ -453,14 +458,12 @@ class Core:
         --------
         String: return_list
         '''
-        path = self.command_path
-        data = {}
-        c_names = os.listdir(path)
         return_list = ''
-        for name in sorted(c_names):
+        table = self.dbObj.db.table('commands')
+        data = table.all()
+        for item in data:
             try:
-                file_name, ext = name.split('.')
-                return_list += file_name + '\n'
+                return_list += item['command'] + '\n'
             except Exception:
                 continue
         return return_list
@@ -473,20 +476,14 @@ class Core:
         --------
         List: returnData
         '''
-        command_name = command_name.lower()
-        path = self.command_path
         returnData = []
-        files = os.listdir(path)
-        for file in files:
+        table = self.dbObj.db.table('commands')
+        data = table.search(self.dbObj.query.command.matches(command_name, flags=re.IGNORECASE))
+        for item in data:
             try:
-                file_name, ext = file.split('.')
-                file_name_lower_case = file_name.lower()
-                if file_name_lower_case == command_name:
-                    file_path = os.path.join(path, file)
-                    f = open(file_path, 'r')
-                    data = json.load(f)
-                    f.close()
-                    paramaters = data['paramaters']
+                command_name_lower_case = (item['command']).lower()
+                if command_name_lower_case == command_name.lower():
+                    paramaters = item['paramaters']
                     for row in paramaters:
                         paramater = row['Parameter']
                         minValue = row['Min']
