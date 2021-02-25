@@ -84,7 +84,7 @@ class TestCore():
         core_obj = Core()
         cmd_success = 'QueryDomainList'
         cmd_failure = 'WRONGCOMMAND'
-        txt_failure = "Command 'wrongcommand' not found!"
+        txt_failure = "Command 'WRONGCOMMAND' not found!"
         response_success = core_obj.getCommandHelp(cmd_success)
         reponse_failure = core_obj.getCommandHelp(cmd_failure)
         assert txt_failure == reponse_failure
