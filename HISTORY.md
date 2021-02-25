@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/hexonet/ispapicli/compare/v1.3.0...v1.3.1) (2021-02-25)
+
+
+### Performance Improvements
+
+* **tinydb:** migrating from files to tinydb ([9157a3f](https://github.com/hexonet/ispapicli/commit/9157a3f27cb8468921863b1a8a002841fb43c198))
+
 # [1.3.0](https://github.com/hexonet/ispapicli/compare/v1.2.0...v1.3.0) (2021-02-23)
 
 
