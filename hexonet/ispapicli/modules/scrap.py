@@ -198,7 +198,7 @@ class Scrap:
             headers.append(col.text)
         return headers
 
-    def __dumpCommandToFile(self, commandName, data):
+    def __saveCommandToDB(self, commandName, data, table):
         '''
         Creates a json file for the command: commandName
 
@@ -207,7 +207,6 @@ class Scrap:
         True | Raise exception
         '''
         try:
-            table = self.dbObj.db.table('commands')
             table.insert(data)
             print('Command inserted: ', commandName)
             return True
@@ -245,15 +244,17 @@ class Scrap:
 
         # get all commands urls, ending with .md
         urls = self.__getURLs([self.gitHubURL])
-        # delete all old commands
-        self.dbObj.db.drop_table('commands')
         # add all new commands
         for url in urls:
             try:
                 article, table = self.__getParsedPage(url)
                 commandName = self.__getCommandName(article)
                 data = self.__getCommandData(article, table)
-                self.__dumpCommandToFile(commandName, data)
+                # delete all old commands
+                self.dbObj.db.drop_table('commands')
+                # create new table
+                table = self.dbObj.db.table('commands')
+                self.__saveCommandToDB(commandName, data, table)
             except Exception as e:
                 print(
                     "Couldn't extract command because documentation differs in URL: "

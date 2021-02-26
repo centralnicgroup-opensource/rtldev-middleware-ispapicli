@@ -41,3 +41,12 @@ class DB:
             self.absolute_dirpath = os.path.dirname(__file__)
             self.db_path = os.path.join(self.absolute_dirpath, '../db/')
             self.db_file_path = os.path.join(self.absolute_dirpath, '../db/db.json')
+
+    def getAllCommands(self, table):
+        pass
+
+    def getLoginInfo(self, table):
+        pass
+
+    def getAllData(self, table):
+        pass
