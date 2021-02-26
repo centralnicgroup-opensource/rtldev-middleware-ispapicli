@@ -1,3 +1,11 @@
+## [1.3.3](https://github.com/hexonet/ispapicli/compare/v1.3.2...v1.3.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* **pyinstaller:** pyinstaller have different syntax on windows ([25dca8a](https://github.com/hexonet/ispapicli/commit/25dca8aa7779e7210402ce21439803b9f573c9e5))
+* **spec file:** remove .spec file as the path differ based on the OS ([b5c42b0](https://github.com/hexonet/ispapicli/commit/b5c42b0b981759e208446ec8485b2ed83b375fea))
+
 ## [1.3.2](https://github.com/hexonet/ispapicli/compare/v1.3.1...v1.3.2) (2021-02-26)
 
 
