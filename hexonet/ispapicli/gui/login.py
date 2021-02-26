@@ -79,8 +79,8 @@ class LoginWindow(QDialog):
     def __closeGui(self):
         # disable login button
         self.loginBtn.setDisabled(True)
-        for i in range(3, -1, -1):
-            self.loginMsg.setText("Closing the window in "+str(i)+"s")
+        for i in range(2, -1, -1):
+            self.loginMsg.setText("Closing the window in " + str(i) + "s")
             time.sleep(1)
         else:
             try:

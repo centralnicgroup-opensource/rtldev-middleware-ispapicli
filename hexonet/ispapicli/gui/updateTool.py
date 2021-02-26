@@ -1,14 +1,70 @@
+from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QGridLayout, QTextEdit, QVBoxLayout, QHBoxLayout, QLineEdit, QComboBox, QLabel, QStyleFactory, QGroupBox, QPushButton, QFormLayout, QDesktopWidget
+from modules.db import DB
 import requests
 from bs4 import BeautifulSoup
-from .db import DB
+import time
 
 
-class Scrap:
-    def __init__(self, URL=''):
+class UpdateWindow(QDialog):
+    def __init__(self, parent=None):
+        super(UpdateWindow, self).__init__(parent)
         # docmentation URL
         self.gitHubURL = 'https://github.com/hexonet/hexonet-api-documentation/tree/master/API'
         # init db
         self.dbObj = DB()
+
+        self.originalPalette = QApplication.palette()
+        self.createRightGroupBox()
+
+        mainLayout = QGridLayout()
+        mainLayout.addWidget(self.cotnentGroupBox, 0, 0)
+        self.setLayout(mainLayout)
+        self.setWindowTitle("Login Window")
+        QApplication.setStyle(QStyleFactory.create('Fusion'))
+
+        # call scrap
+        self.startScraper()
+
+    def startScraper(self):
+        for i in range(2, -1, -1):
+            time.sleep(1)
+        else:
+            try:
+                self.scrapCommands()
+            except Exception as e:
+                pass
+
+    def createRightGroupBox(self):
+        self.cotnentGroupBox = QGroupBox("Updating...")
+        self.updatingText = QTextEdit()
+        self.updatingText.setPlaceholderText("Updating")
+        tab2hbox = QHBoxLayout()
+        tab2hbox.setContentsMargins(5, 5, 5, 5)
+        tab2hbox.addWidget(self.updatingText)
+
+        self.cotnentGroupBox.setLayout(tab2hbox)
+
+    def __closeGui(self):
+        try:
+            self.close()
+        except Exception as e:
+            pass
+
+    def startGui(self):
+
+        geo = QDesktopWidget().availableGeometry()
+        screenWidth = geo.width()
+        screenHeight = geo.height()
+        width = int(screenWidth * 0.4)
+        height = int(screenHeight * 0.4)
+        self.resize(width, height)
+
+        frameGeo = self.frameGeometry()
+        cp = geo.center()
+        frameGeo.moveCenter(cp)
+        self.move(frameGeo.topLeft())
+
+        self.show()
 
     # recursive function
     def __getURLs(self, urls):
@@ -26,7 +82,7 @@ class Scrap:
             for url in urls:
                 if (self.__checkUrlType(url) == 'file'):
                     Allurls.append(url)
-                    print('url found: ' + url)
+                    self.updatingText.append('url found: ' + url)
                 else:
                     # it is a directory
                     # get all links in this directory
@@ -170,12 +226,6 @@ class Scrap:
             param = {}
         return params
 
-    def __getCommandExample(self, article):
-        pass
-
-    def __getResponseExample(self, article):
-        pass
-
     def __getTableHeaders(self, table):
         '''
         Extract the headers of the description table
@@ -204,7 +254,7 @@ class Scrap:
         try:
             table = self.dbObj.db.table('commands')
             table.insert(data)
-            print('Command inserted: ', commandName)
+            self.updatingText.append('Command inserted: ' + commandName)
             return True
         except Exception:
             raise Exception("Couldn't create a file for the command: " +
@@ -250,9 +300,9 @@ class Scrap:
                 data = self.__getCommandData(article, table)
                 self.__saveCommandToDB(commandName, data)
             except Exception as e:
-                print(
+                self.updatingText.append(
                     "Couldn't extract command because documentation differs in URL: "
                     + url + " \nReason: " + str(e))
 
-        print('\nCommands count: ' + str(len(urls)))
-        print('Command finished.')
+        self.updatingText.append('\nCommands count: ' + str(len(urls)))
+        self.updatingText.append('Command finished.')

@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from modules.core import Core
 from gui.login import LoginWindow
+from gui.updateTool import UpdateWindow
 import textwrap
 import sys
 from io import StringIO
@@ -297,8 +298,9 @@ class MainFrame(QWidget):
                              "See help documentation", self)
         helpAction.triggered.connect(self.showHelp)
 
-        openAction = QAction(QIcon(self.getIcon("new.png")),
-                             "Open another window", self)
+        updateAction = QAction(QIcon(self.getIcon("refresh.png")),
+                               "Open another window", self)
+        updateAction.triggered.connect(self.openUpdateWindow)
 
         self.sessionTime = QLabel("Checking your session... ")
         spacer = QWidget()
@@ -315,9 +317,12 @@ class MainFrame(QWidget):
         # create a new window -TODO
         # self.toolbar.addAction(openAction)
         self.toolbar.addAction(saveAction)
+        self.toolbar.addAction(seperator)
         self.toolbar.addAction(copyAction)
         self.toolbar.addAction(seperator)
         self.toolbar.addAction(helpAction)
+        self.toolbar.addAction(seperator)
+        self.toolbar.addAction(updateAction)
         self.toolbar.addWidget(spacer)
         self.toolbar.addWidget(self.sessionTime)
         self.toolbar.addWidget(self.loginBtn)
@@ -449,6 +454,13 @@ class MainFrame(QWidget):
         """
         loginGui = LoginWindow(self)
         loginGui.startGui()
+
+    def openUpdateWindow(self):
+        """
+        Start login window
+        """
+        updateWindow = UpdateWindow(self)
+        updateWindow.startGui()
 
     def menuBarActions(self, q):
         action = q.text()
