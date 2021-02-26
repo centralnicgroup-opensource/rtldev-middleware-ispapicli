@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/hexonet/ispapicli/compare/v1.3.1...v1.3.2) (2021-02-26)
+
+
+### Bug Fixes
+
+* **db error:** adding data to db.json to allows tests success ([b5b9bea](https://github.com/hexonet/ispapicli/commit/b5b9bea0b7406220aa8c41bf8ec5c3a4cd1ad4f2))
+
 ## [1.3.1](https://github.com/hexonet/ispapicli/compare/v1.3.0...v1.3.1) (2021-02-25)
 
 
