@@ -2,7 +2,7 @@
 echo "Executing Pyinstaller Ubuntu..."
 pip install pyinstaller
 cd hexonet/ispapicli || exit
-pyinstaller ispapicli.spec
+pyinstaller --onefile ispapicli.py --add-data 'icons:data/icons'
 cd dist
 sudo chmod +x ispapicli
 cd ..
