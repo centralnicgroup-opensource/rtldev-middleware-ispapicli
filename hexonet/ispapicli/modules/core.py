@@ -479,16 +479,17 @@ class Core:
         returnData = []
         table = self.dbObj.db.table('commands')
         data = table.search(self.dbObj.query.command.matches(command_name, flags=re.IGNORECASE))
-        for item in data:
-            try:
-                command_name_lower_case = (item['command']).lower()
-                if command_name_lower_case == command_name.lower():
-                    paramaters = item['paramaters']
-                    for row in paramaters:
-                        paramater = row['Parameter']
-                        minValue = row['Min']
-                        if minValue == '1' and paramater != 'COMMAND':
-                            returnData.append(paramater.lower())
-            except Exception:
-                continue
+        if data:
+            for item in data:
+                try:
+                    command_name_lower_case = (item['command']).lower()
+                    if command_name_lower_case == command_name.lower():
+                        paramaters = item['paramaters']
+                        for row in paramaters:
+                            paramater = row['Parameter']
+                            minValue = row['Min']
+                            if minValue == '1' and paramater != 'COMMAND':
+                                returnData.append(paramater.lower())
+                except Exception:
+                    continue
         return returnData
