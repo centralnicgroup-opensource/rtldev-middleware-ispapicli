@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/hexonet/ispapicli/compare/v1.3.3...v1.3.4) (2021-02-26)
+
+
+### Performance Improvements
+
+* **init update:** initial work on gui update functionality ([2009d2d](https://github.com/hexonet/ispapicli/commit/2009d2d9dc7c1c6003d7a6c39d92640eba37462e))
+
 ## [1.3.3](https://github.com/hexonet/ispapicli/compare/v1.3.2...v1.3.3) (2021-02-26)
 
 
