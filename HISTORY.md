@@ -1,3 +1,16 @@
+## [1.3.5](https://github.com/hexonet/ispapicli/compare/v1.3.4...v1.3.5) (2021-03-08)
+
+
+### Bug Fixes
+
+* **regex:** fixed regex format ([6bdf5bd](https://github.com/hexonet/ispapicli/commit/6bdf5bd035ec1593df90ed1e3c0f521311ffbdb6))
+
+
+### Performance Improvements
+
+* **scrap:** adding git submodule to avoid error in release ([51647e8](https://github.com/hexonet/ispapicli/commit/51647e8b7745433209551da81fecbb5d02dd7e0f))
+* **updating:** updated the scrap code ([39fabff](https://github.com/hexonet/ispapicli/commit/39fabff1fe69fb15a8b01af90750b4229d1aa335))
+
 ## [1.3.4](https://github.com/hexonet/ispapicli/compare/v1.3.3...v1.3.4) (2021-02-26)
 
 
