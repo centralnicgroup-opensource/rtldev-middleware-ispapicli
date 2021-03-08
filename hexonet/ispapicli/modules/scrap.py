@@ -5,6 +5,7 @@ from git import Repo
 import os
 from pathlib import Path
 import re
+import shutil
 
 
 class Scrap:
@@ -17,13 +18,14 @@ class Scrap:
     def __initAppDirectories(self):
         if getattr(sys, 'frozen', False):
             self.absolute_dirpath = os.path.dirname(sys.executable)
-            self.db_path = os.path.join(self.absolute_dirpath, 'repo')
+            self.repo_path = os.path.join(self.absolute_dirpath, 'APIDocsRepo')
         elif __file__:
             self.absolute_dirpath = os.path.dirname(__file__)
-            self.db_path = os.path.join(self.absolute_dirpath, '../repo/')
+            self.repo_path = os.path.join(self.absolute_dirpath, '../APIDocsRepo/')
 
-        if not os.path.exists(self.db_path):
-            os.makedirs(self.db_path)
+        if os.path.exists(self.repo_path):
+            shutil.rmtree(self.repo_path)
+            os.makedirs(self.repo_path)
 
     def __saveCommandToDB(self, commandName, data):
         '''
@@ -62,7 +64,11 @@ class Scrap:
 
     def cloneRepo(self):
         repo = Repo.clone_from('https://github.com/hexonet/hexonet-api-documentation.git',
-                               self.db_path, branch='master')
+                               self.repo_path, branch='master')
+
+    def pullRepo(self):
+        repo = Repo.git.pull_request('https://github.com/hexonet/hexonet-api-documentation.git',
+                                     self.repo_path, branch='master')
 
     def getCommandsParams(self, raw):
         headers = (raw[2].split('|'))
@@ -94,13 +100,16 @@ class Scrap:
         --------
         Null
         '''
+        # clone repo
+        self.cloneRepo()
+        # init database
         self.dbObj.db.drop_table('commands')
         commandName = ''
         description = ''
         availability = ''
         parameters = []
         # get all commands urls, ending with .md
-        mainDir = os.path.join(self.db_path, 'API')
+        mainDir = os.path.join(self.repo_path, 'API')
         result = list(Path(mainDir).glob('**/*.md'))
         # section regex
         secionRegex = r'^#{2}\s\w+$'
