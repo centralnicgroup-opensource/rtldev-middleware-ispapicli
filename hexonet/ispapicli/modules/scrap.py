@@ -1,197 +1,29 @@
-import requests
+import sys
 from bs4 import BeautifulSoup
 from .db import DB
+from git import Repo
+import os
+from pathlib import Path
+import re
 
 
 class Scrap:
     def __init__(self, URL=''):
-        # docmentation URL
-        self.gitHubURL = 'https://github.com/hexonet/hexonet-api-documentation/tree/master/API'
         # init db
         self.dbObj = DB()
+        # init repo dir
+        self.__initAppDirectories()
 
-    # recursive function
-    def __getURLs(self, urls):
-        '''
-        A recursive function that get all documentation page fro GitHub
+    def __initAppDirectories(self):
+        if getattr(sys, 'frozen', False):
+            self.absolute_dirpath = os.path.dirname(sys.executable)
+            self.db_path = os.path.join(self.absolute_dirpath, 'repo')
+        elif __file__:
+            self.absolute_dirpath = os.path.dirname(__file__)
+            self.db_path = os.path.join(self.absolute_dirpath, '../repo/')
 
-        Returns:
-        --------
-        List: Allurls
-        '''
-        # urls to return
-        Allurls = []
-        # parse url
-        try:
-            for url in urls:
-                if (self.__checkUrlType(url) == 'file'):
-                    Allurls.append(url)
-                    print('url found: ' + url)
-                else:
-                    # it is a directory
-                    # get all links in this directory
-                    newLinks = self.__getPageURLs(url)
-                    # for each link, call it by the function itself
-                    for newlink in newLinks:
-                        Allurls.extend(self.__getURLs([newlink]))
-            return Allurls
-        except Exception as e:
-            print("Network erros occured, some commands skipped: " + e)
-
-    def __getPageURLs(self, url):
-        '''
-        Get urls from single page that leads to single documentation each
-
-        Returns:
-        --------
-        List: urls
-
-        '''
-        urls = []
-        page = requests.get(url)
-        # get page download status, 200 is success
-        statusCode = page.status_code
-        if statusCode == 200:
-            # get the page content
-            src = page.content
-            # parse HTML content, create bs4 object
-            html = BeautifulSoup(src, 'html.parser')
-            # get table body
-            rows = html.find_all('a', attrs={'class': 'js-navigation-open link-gray-dark'})
-            for row in rows:
-                urlLink = 'https://github.com/' + row.get('href')
-                urls.append(urlLink)
-            # return urls
-            return urls
-        else:
-            raise Exception("Page couldn't loaded. Status code: " +
-                            str(statusCode))
-
-    def __checkUrlType(self, url):
-        '''
-        Check the type of the url found, either file with documentation or a directory
-
-        Returns:
-        --------
-        String: <>
-        '''
-
-        if url.endswith('.md'):
-            return 'file'
-        else:
-            return 'directory'
-
-    def __getParsedPage(self, url):
-        '''
-        Get HTML elements from a signle page
-
-        Returns:
-        --------
-        Set: article, table
-
-        '''
-        try:
-            page = requests.get(url)
-            # get page download status, 200 is success
-            statusCode = page.status_code
-            # get the page content
-            src = page.content
-            # parse HTML content, create bs4 object
-            html = BeautifulSoup(src, 'html.parser')
-            # get only the command description element
-            article = html.article
-            # table of parametrs
-            table = article.table
-            return article, table
-        except Exception:
-            return "Couldn't parse page: " + url
-
-    def __getCommandName(self, article):
-        '''
-        Return the h1 element in article block which is the command name
-
-        Returns:
-        --------
-        String: commandName
-        '''
-        commandName = article.h1.text
-        return commandName
-
-    # description of the command
-    def __getCommandDescription(self, article):
-        '''
-        Extract the command description
-
-        Returns:
-        --------
-        String: desc | ''
-        '''
-        # adding exception for webely
-        try:
-            desc = article.find_all('p')
-            return desc[0].text
-        except Exception:
-            return ' '
-
-    # get comman avaiablity
-    def __getCommandAvailability(self, article):
-        '''
-        Extract the 2nd p which is the availability
-
-        Returns:
-        --------
-        String: ava | ' '
-        '''
-        try:
-            ava = article.find_all('p')
-            return ava[1].text
-        except Exception:
-            return ' '
-
-    def __getCommandParameters(self, table):
-        '''
-        Extract the params from the command description table
-
-        Returns:
-        --------
-        List: params
-        '''
-        headers = self.__getTableHeaders(table)
-        params = []
-        param = {}
-        tableBody = table.tbody
-        rows = tableBody.find_all('tr')
-        for row in rows:
-            cols = row.find_all('td')
-            for i in range(0, len(cols)):
-                param[headers[i]] = cols[i].text
-            # append params
-            params.append(param)
-            param = {}
-        return params
-
-    def __getCommandExample(self, article):
-        pass
-
-    def __getResponseExample(self, article):
-        pass
-
-    def __getTableHeaders(self, table):
-        '''
-        Extract the headers of the description table
-
-        Returns:
-        --------
-        List: headers
-        '''
-        tableHead = table.thead
-        row = tableHead.tr
-        cols = row.find_all('th')
-        headers = []
-        # get text only
-        for col in cols:
-            headers.append(col.text)
-        return headers
+        if not os.path.exists(self.db_path):
+            os.makedirs(self.db_path)
 
     def __saveCommandToDB(self, commandName, data):
         '''
@@ -210,7 +42,7 @@ class Scrap:
             raise Exception("Couldn't create a file for the command: " +
                             commandName)
 
-    def __getCommandData(self, article, table):
+    def __getCommandData(self, commandName, description, availability, parameters):
         '''
         Gather all command data in a list and return it
 
@@ -220,15 +52,40 @@ class Scrap:
         '''
         try:
             data = {}
-            data['command'] = self.__getCommandName(article)
-            data['description'] = self.__getCommandDescription(article)
-            data['availability'] = self.__getCommandAvailability(article)
-            data['paramaters'] = self.__getCommandParameters(table)
+            data['command'] = commandName
+            data['description'] = description
+            data['availability'] = availability
+            data['paramaters'] = parameters
             return data
         except Exception as e:
             raise e
 
+    def cloneRepo(self):
+        repo = Repo.clone_from('https://github.com/hexonet/hexonet-api-documentation.git',
+                               self.db_path, branch='master')
+
+    def getCommandsParams(self, raw):
+        headers = (raw[2].split('|'))
+        params = []
+        param = {}
+        for i in range(4, len(raw)):
+            if raw[i] != '----':
+                try:
+                    cols = raw[i].split('|')
+                    for j in range(0, len(cols)):
+                        headType = headers[j].strip(' \t\n\r')
+                        headValue = cols[j].strip(' \t\n\r')
+                        param[headType] = headValue
+                    # append params
+                    params.append(param)
+                    param = {}
+                except Exception as e:
+                    return params
+            else:
+                return params
+        return params
     # scrap commands
+
     def scrapCommands(self):
         '''
         Executes the scrap process
@@ -237,22 +94,39 @@ class Scrap:
         --------
         Null
         '''
-
-        # get all commands urls, ending with .md
-        urls = self.__getURLs([self.gitHubURL])
-        # delete all old commands
         self.dbObj.db.drop_table('commands')
-        # add all new commands
-        for url in urls:
-            try:
-                article, table = self.__getParsedPage(url)
-                commandName = self.__getCommandName(article)
-                data = self.__getCommandData(article, table)
-                self.__saveCommandToDB(commandName, data)
-            except Exception as e:
-                print(
-                    "Couldn't extract command because documentation differs in URL: "
-                    + url + " \nReason: " + str(e))
+        commandName = ''
+        description = ''
+        availability = ''
+        parameters = []
+        # get all commands urls, ending with .md
+        mainDir = os.path.join(self.db_path, 'API')
+        result = list(Path(mainDir).glob('**/*.md'))
+        # section regex
+        secionRegex = "^#{2}\s\w+$"
+        for dir in result:
+            # Load the file into file_content
+            file_content = []
+            for line in open(dir).readlines():
+                file_content.append(line.strip(' \t\n\r'))
 
-        print('\nCommands count: ' + str(len(urls)))
+            for i in range(len(file_content)):
+                # first line is the command name
+                if i == 0:
+                    commandName = (file_content[i]).split(" ")[1]
+                # checkSection
+                section = (re.findall(secionRegex, file_content[i]))
+                if len(section) == 1:
+                    sectionName = ((section[0].split(' '))[1])
+                    if sectionName == 'DESCRIPTION':
+                        description = file_content[i + 1]
+                    if sectionName == 'AVAILABILITY':
+                        availability = file_content[i + 1]
+                    if sectionName == 'COMMAND':
+                        parameters = self.getCommandsParams(file_content[i:])
+                        break
+            data = self.__getCommandData(commandName, description, availability, parameters)
+            self.__saveCommandToDB(commandName, data)
+
+        print('\nCommands count: ' + str(len(result)))
         print('Command finished.')

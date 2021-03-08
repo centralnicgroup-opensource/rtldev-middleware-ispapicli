@@ -55,7 +55,6 @@ setup(
         'pycodestyle==2.6.0',
         'PyQt5==5.15.2',
         'PyQt5-sip==12.8.1',
-        'requests==2.25.1',
         'soupsieve==2.2',
         'tabulate==0.8.8',
         'urllib3==1.26.3',

@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from modules.core import Core
+from modules.scrap import Scrap
 from gui.login import LoginWindow
-from gui.updateTool import UpdateWindow
 import textwrap
 import sys
 from io import StringIO
@@ -47,6 +47,9 @@ class MainFrame(QWidget):
 
         # create core login instnace
         self.coreLogic = Core()
+
+        # scrap instance
+        self.scrap = Scrap()
 
         # check user session upon start
         self.checkLogin()
@@ -223,9 +226,9 @@ class MainFrame(QWidget):
             # case update commands
             elif result == 'update':
                 # create scrap object
-                # scrap = Scrap()
-                msg = "Please run this command in the terminal, use: ./ispapicli --update"
-                self.plainResponse.setText(msg)
+                # msg = "Please run this command in the terminal, use: ./ispapicli --update"
+                # self.plainResponse.setText(msg)
+                self.showUpdating()
             else:
                 self.plainResponse.setText(data)
 
@@ -300,7 +303,7 @@ class MainFrame(QWidget):
 
         updateAction = QAction(QIcon(self.getIcon("refresh.png")),
                                "Open another window", self)
-        updateAction.triggered.connect(self.openUpdateWindow)
+        updateAction.triggered.connect(self.showUpdating)
 
         self.sessionTime = QLabel("Checking your session... ")
         spacer = QWidget()
@@ -454,13 +457,6 @@ class MainFrame(QWidget):
         """
         loginGui = LoginWindow(self)
         loginGui.startGui()
-
-    def openUpdateWindow(self):
-        """
-        Start login window
-        """
-        updateWindow = UpdateWindow(self)
-        updateWindow.startGui()
 
     def menuBarActions(self, q):
         action = q.text()
@@ -626,6 +622,18 @@ class MainFrame(QWidget):
         box.setWindowTitle("Help")
         box.setText(msg)
         box.show()
+
+    def showUpdating(self):
+        box = QMessageBox(self)
+        msg = """
+        <p>Updating is done!</p>
+        """
+        box.setStandardButtons(QMessageBox.Ok)
+        box.setIcon(QMessageBox.Information)
+        box.setWindowTitle("Updating...")
+        box.setText(msg)
+        box.show()
+        self.scrap.scrapCommands()
 
     def showAbout(self):
 
