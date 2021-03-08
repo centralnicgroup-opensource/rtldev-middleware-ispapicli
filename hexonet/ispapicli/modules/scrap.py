@@ -103,7 +103,7 @@ class Scrap:
         mainDir = os.path.join(self.db_path, 'API')
         result = list(Path(mainDir).glob('**/*.md'))
         # section regex
-        secionRegex = "^#{2}\s\w+$"
+        secionRegex = r'^#{2}\s\w+$'
         for dir in result:
             # Load the file into file_content
             file_content = []
