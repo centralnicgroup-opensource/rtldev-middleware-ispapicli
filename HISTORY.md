@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/hexonet/ispapicli/compare/v1.3.5...v1.3.6) (2021-03-08)
+
+
+### Performance Improvements
+
+* **requirements:** adding missing requirements ([b08d97b](https://github.com/hexonet/ispapicli/commit/b08d97b062076cb4266c2cf6ee174c3f1e4a946a))
+
 ## [1.3.5](https://github.com/hexonet/ispapicli/compare/v1.3.4...v1.3.5) (2021-03-08)
 
 
