@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/hexonet/ispapicli/compare/v1.3.6...v1.3.7) (2021-03-09)
+
+
+### Performance Improvements
+
+* **md parser:** minor improvement to the parser code ([fed43f9](https://github.com/hexonet/ispapicli/commit/fed43f9b67727a9bfb7aae013fc07f1426db8d3c))
+
 ## [1.3.6](https://github.com/hexonet/ispapicli/compare/v1.3.5...v1.3.6) (2021-03-08)
 
 
