@@ -14,6 +14,7 @@ class Scrap:
         self.dbObj = DB()
         # init repo dir
         self.__initAppDirectories()
+        self.__initCloneAPIDocsDir()
 
     def __initAppDirectories(self):
         if getattr(sys, "frozen", False):
@@ -23,8 +24,10 @@ class Scrap:
             self.absolute_dirpath = os.path.dirname(__file__)
             self.repo_path = os.path.join(self.absolute_dirpath, "../APIDocsRepo/")
 
+    def __initCloneAPIDocsDir(self):
         if os.path.exists(self.repo_path):
             shutil.rmtree(self.repo_path)
+        if not os.path.exists(self.repo_path):
             os.makedirs(self.repo_path)
 
     def __saveCommandToDB(self, commandName, data):
@@ -61,21 +64,22 @@ class Scrap:
         except Exception as e:
             raise e
 
-    def cloneRepo(self):
+    def __cloneRepo(self):
+        self.__initCloneAPIDocsDir()
         repo = Repo.clone_from(
             "https://github.com/hexonet/hexonet-api-documentation.git",
             self.repo_path,
             branch="master",
         )
 
-    def pullRepo(self):
+    def __pullRepo(self):
         repo = Repo.git.pull_request(
             "https://github.com/hexonet/hexonet-api-documentation.git",
             self.repo_path,
             branch="master",
         )
 
-    def getCommandsParams(self, raw):
+    def __getCommandsParams(self, raw):
         headers = raw[2].split("|")
         params = []
         param = {}
@@ -107,7 +111,7 @@ class Scrap:
         Null
         """
         # clone repo
-        self.cloneRepo()
+        self.__cloneRepo()
         # init database
         self.dbObj.db.drop_table("commands")
         commandName = ""
@@ -124,7 +128,7 @@ class Scrap:
             file_content = []
             for line in open(dir).readlines():
                 file_content.append(line.strip(" \t\n\r"))
-
+            # parse the content
             for i in range(len(file_content)):
                 # first line is the command name
                 if i == 0:
@@ -138,7 +142,7 @@ class Scrap:
                     if sectionName == "AVAILABILITY":
                         availability = file_content[i + 1]
                     if sectionName == "COMMAND":
-                        parameters = self.getCommandsParams(file_content[i:])
+                        parameters = self.__getCommandsParams(file_content[i:])
                         break
             data = self.__getCommandData(
                 commandName, description, availability, parameters
