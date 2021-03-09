@@ -7,12 +7,16 @@ from hexonet.apiconnector.response import Response
 from pathlib import Path
 
 if sys.platform.startswith("linux"):
-    if getattr(sys, 'frozen', False):
+    if getattr(sys, "frozen", False):
         file_path = sys.executable
-        sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + '/../usr/share/ispapicli')
+        sys.path.insert(
+            0, os.path.dirname(os.path.abspath(file_path)) + "/../usr/share/ispapicli"
+        )
     else:
         file_path = __file__
-        sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + '/../share/ispapicli')
+        sys.path.insert(
+            0, os.path.dirname(os.path.abspath(file_path)) + "/../share/ispapicli"
+        )
 
 from modules.core import Core
 from modules.scrap import Scrap
@@ -30,7 +34,7 @@ def main(args):
     # overwrite defualt error function of the parser with our local function
     parser.error = errorFunction
     # clean extra spaces, leave only single spaces among commands
-    original_args = ' '.join(args)
+    original_args = " ".join(args)
     # remove extra spaces around the = cases are ' =', '= ', ' = '
     original_args = original_args.replace(" = ", "=")
     original_args = original_args.replace(" =", "=")
@@ -43,19 +47,20 @@ def main(args):
         # get main commands such as "-c checkdomain"
         args = vars(parser.parse_args(splitted_args))
         # get other parameters such as "limit=5"
-        reminderargs = args['args']
+        reminderargs = args["args"]
         # execute the command and show the results
         result, data = core_obj.parseArgs(args)
 
         # case gui requested
-        if result == 'gui':
+        if result == "gui":
             startGUI()
 
         # case show help requested
-        elif result == 'help':
-            print('\n')
+        elif result == "help":
+            print("\n")
             print(
-                textwrap.dedent('''\
+                textwrap.dedent(
+                    """\
                 ISPAPI - Commandline Tool
                 ------------------------------------------------------------
                 The tool can be used in two modes:
@@ -63,11 +68,13 @@ def main(args):
                  - By using spaces e.g. --command QueryDomainList limit 5
                 ------------------------------------------------------------
 
-                '''))
+                """
+                )
+            )
             parser.print_help()
 
         # case command requested
-        elif result == 'cmd':
+        elif result == "cmd":
             # append reminder args with the command
             params_list = core_obj.parseParameters(reminderargs)
             cmd = data
@@ -77,7 +84,7 @@ def main(args):
             result = response.getPlain()
             print(result)
         # update current commands
-        elif result == 'update':
+        elif result == "update":
             scraper = Scrap()
             scraper.scrapCommands()
         # cases for msg
@@ -98,7 +105,7 @@ def startGUI():
 
 
 def errorFunction(message):
-    print('\nAn error occured: ' + message + '\n')
+    print("\nAn error occured: " + message + "\n")
     sys.exit(0)
 
 

@@ -43,7 +43,7 @@ class MainFrame(QWidget):
         self.setWindowTitle("ISPAPI-CLI Tool")
 
         # set app gui style
-        QApplication.setStyle(QStyleFactory.create('Fusion'))
+        QApplication.setStyle(QStyleFactory.create("Fusion"))
 
         # create core login instnace
         self.coreLogic = Core()
@@ -61,32 +61,31 @@ class MainFrame(QWidget):
         self.initialiseCommandCompleter()
 
         # command to execute
-        self.commandToExecute = ''
+        self.commandToExecute = ""
 
         # set app icon
         self.setWindowIcon(QIcon(self.getIcon("logo-bgw.jpg")))
 
     def checkLogin(self):
         result = self.coreLogic.checkSession()
-        if result == 'valid':
+        if result == "valid":
             self.sessionTime.setText("Your session is valid. ")
             self.sessionTime.setStyleSheet("color:green")
             self.loginBtn.setIcon(QIcon(self.getIcon("logout.png")))
-            self.loginBtn.setText('Logout')
+            self.loginBtn.setText("Logout")
             self.loginBtn.clicked.connect(self.logout)
             self.reconnectBtnAction(self.loginBtn.clicked, self.logout)
             # enable gui
-            self.disableEnableGui('enable')
+            self.disableEnableGui("enable")
 
         else:
             self.sessionTime.setText("Session expired! ")
             self.sessionTime.setStyleSheet("color:red")
             self.loginBtn.setIcon(QIcon(self.getIcon("login.png")))
-            self.loginBtn.setText('Login')
-            self.reconnectBtnAction(self.loginBtn.clicked,
-                                    self.openLoginWindow)
+            self.loginBtn.setText("Login")
+            self.reconnectBtnAction(self.loginBtn.clicked, self.openLoginWindow)
             # diable gui
-            self.disableEnableGui('disable')
+            self.disableEnableGui("disable")
 
     def reconnectBtnAction(self, signal, newhandler=None, oldhandler=None):
         """
@@ -116,7 +115,7 @@ class MainFrame(QWidget):
         If session is expired then disable gui
         """
         if status is not None:
-            if status == 'enable':
+            if status == "enable":
                 self.leftGroupBox.setEnabled(True)
                 self.topBox.setEnabled(True)
                 # focus on command input field
@@ -135,7 +134,9 @@ class MainFrame(QWidget):
             self.timer.stop()
             self.progressBar.setValue(0)
 
-    def createProgressBar(self, ):
+    def createProgressBar(
+        self,
+    ):
         self.progressBar = QProgressBar()
         self.progressBar.setRange(0, 100)
         self.progressBar.setValue(0)
@@ -161,11 +162,11 @@ class MainFrame(QWidget):
         self.progressBarSpeed(5)
         # get args from the GUI
         commandToExecute = self.commandText.toPlainText()
-        if commandToExecute.startswith('-', 0, 1):
+        if commandToExecute.startswith("-", 0, 1):
             original_args = commandToExecute.splitlines()
         else:
             original_args = ("--" + commandToExecute).splitlines()
-        original_args = ' '.join(original_args)
+        original_args = " ".join(original_args)
         # remove extra spaces around the = cases are ' =', '= ', ' = '
         original_args = original_args.replace(" = ", "=")
         original_args = original_args.replace(" =", "=")
@@ -179,16 +180,17 @@ class MainFrame(QWidget):
 
         try:
             args = vars(parser.parse_args(splitted_args))
-            reminderargs = args['args']
+            reminderargs = args["args"]
             # parse command args
             result, data = core_obj.parseArgs(args)
             # case gui started
-            if result == 'gui':
+            if result == "gui":
                 self.plainResponse.setText("GUI already started")
             # case of help command
-            elif result == 'help':
-                helpText = ''
-                preHelp = textwrap.dedent('''\
+            elif result == "help":
+                helpText = ""
+                preHelp = textwrap.dedent(
+                    """\
                     ISPAPI - Commandline Tool
                     ------------------------------------------------------------
                     The tool can be used in two modes:
@@ -196,7 +198,8 @@ class MainFrame(QWidget):
                     - By using spaces e.g. --command QueryDomainList limit 5
                     ------------------------------------------------------------
 
-                    ''')
+                    """
+                )
                 # redirect stdout
                 stringio = StringIO()
                 previous_stdout = sys.stdout
@@ -213,7 +216,7 @@ class MainFrame(QWidget):
                 helpText = preHelp + stdoutValue
                 self.plainResponse.setText(helpText)
 
-            elif result == 'cmd':
+            elif result == "cmd":
                 # append reminder args with the command
                 params_list = core_obj.parseParameters(reminderargs)
                 cmd = data
@@ -224,7 +227,7 @@ class MainFrame(QWidget):
                 self.populateResults(self.response)
 
             # case update commands
-            elif result == 'update':
+            elif result == "update":
                 # create scrap object
                 # msg = "Please run this command in the terminal, use: ./ispapicli --update"
                 # self.plainResponse.setText(msg)
@@ -241,21 +244,21 @@ class MainFrame(QWidget):
             self.plainResponse.setText("Command failed due to: " + str(e))
 
     def errorFunction(self, message):
-        self.plainResponse.setText('An error happend: ' + message + '\n')
+        self.plainResponse.setText("An error happend: " + message + "\n")
 
     def updateCommandView(self, e):
         cmdTxt = self.cmdTxt.text()
         # check if the command is related to other actions
-        if cmdTxt.startswith('-', 0, 1):
+        if cmdTxt.startswith("-", 0, 1):
             self.commandText.setText(cmdTxt)
             self.commandToExecute = cmdTxt
             return 0
         else:
-            args = 'command '
+            args = "command "
             args += cmdTxt
             args = args.split()
             # clean extra spaces, leave only single spaces among commands
-            original_args = ' '.join(args)
+            original_args = " ".join(args)
             # remove extra spaces around the = cases are ' =', '= ', ' = '
             original_args = original_args.replace(" = ", "=")
             original_args = original_args.replace(" =", "=")
@@ -269,8 +272,8 @@ class MainFrame(QWidget):
                 if params_len > 1:
                     i = 0
                     while i < params_len:
-                        if '=' in parameters[i]:
-                            key, value = parameters[i].split('=')
+                        if "=" in parameters[i]:
+                            key, value = parameters[i].split("=")
                             params[key] = value
                         else:
                             key = parameters[i]
@@ -281,28 +284,31 @@ class MainFrame(QWidget):
                     self.commandText.setText()
             except Exception as e:
                 pass
-            commandView = "\n".join(
-                ("{}={}".format(*i) for i in params.items()))
+            commandView = "\n".join(("{}={}".format(*i) for i in params.items()))
             self.commandText.setText(commandView)
-            self.commandToExecute = '--' + commandView
+            self.commandToExecute = "--" + commandView
 
     def createToolbar(self):
         self.toolbar = QToolBar("My main toolbar")
         self.toolbar.setIconSize(QSize(20, 20))
-        saveAction = QAction(QIcon(self.getIcon("save.png")),
-                             "Save results to a file", self)
+        saveAction = QAction(
+            QIcon(self.getIcon("save.png")), "Save results to a file", self
+        )
         saveAction.triggered.connect(lambda: self.saveCommandToFile())
 
-        copyAction = QAction(QIcon(self.getIcon("copy.png")),
-                             "Copy the results to clipboard", self)
+        copyAction = QAction(
+            QIcon(self.getIcon("copy.png")), "Copy the results to clipboard", self
+        )
         copyAction.triggered.connect(self.copyToClipboard)
 
-        helpAction = QAction(QIcon(self.getIcon("help.png")),
-                             "See help documentation", self)
+        helpAction = QAction(
+            QIcon(self.getIcon("help.png")), "See help documentation", self
+        )
         helpAction.triggered.connect(self.showHelp)
 
-        updateAction = QAction(QIcon(self.getIcon("refresh.png")),
-                               "Open another window", self)
+        updateAction = QAction(
+            QIcon(self.getIcon("refresh.png")), "Open another window", self
+        )
         updateAction.triggered.connect(self.showUpdating)
 
         self.sessionTime = QLabel("Checking your session... ")
@@ -377,7 +383,7 @@ class MainFrame(QWidget):
         self.cmdTxt = QLineEdit()
         self.cmdTxt.setPlaceholderText("Enter command here...")
         self.cmdTxt.textEdited.connect(self.updateCommandView)
-        #qSpaceEvent = QKeyEvent(QEvent.KeyPress, Qt.Key_Backspace, Qt.NoModifier)
+        # qSpaceEvent = QKeyEvent(QEvent.KeyPress, Qt.Key_Backspace, Qt.NoModifier)
         # self.cmdTxt.keyPressEvent(qSpaceEvent)
         self.cmdTxt.installEventFilter(self)
         self.cmdTxt.returnPressed.connect(self.executeCommand)
@@ -388,7 +394,7 @@ class MainFrame(QWidget):
         self.cmdTxt.setCompleter(self.completer)
 
         self.minParameter = QLabel(self)
-        self.minParameter.setText('Min parameters: ')
+        self.minParameter.setText("Min parameters: ")
         self.minParameter.setStyleSheet("color:gray")
         f = QFont("Arial", 9)
         self.minParameter.setFont(f)
@@ -405,8 +411,7 @@ class MainFrame(QWidget):
     def createLeftGroupBox(self):
         self.leftGroupBox = QGroupBox("Command extracted")
         self.commandText = QTextEdit()
-        self.commandText.setPlaceholderText(
-            "Extracted command will be shown here")
+        self.commandText.setPlaceholderText("Extracted command will be shown here")
 
         tab2hbox = QHBoxLayout()
         tab2hbox.setContentsMargins(5, 5, 5, 5)
@@ -417,8 +422,7 @@ class MainFrame(QWidget):
     def createMiddleTabWidget(self):
         self.middleGroupBox = QGroupBox("Results")
         middleTabWidget = QTabWidget()
-        middleTabWidget.setSizePolicy(QSizePolicy.Preferred,
-                                      QSizePolicy.Ignored)
+        middleTabWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Ignored)
 
         tab1 = QWidget()
         self.plainResponse = QTextEdit()
@@ -429,7 +433,7 @@ class MainFrame(QWidget):
 
         tab2 = QWidget()
         self.tableResponse = QTableWidget(1, 2)
-        self.tableResponse.setHorizontalHeaderLabels(['Property', 'Value'])
+        self.tableResponse.setHorizontalHeaderLabels(["Property", "Value"])
         self.tableResponse.horizontalHeader().setStretchLastSection(True)
         tableLayout = QGridLayout()
         tableLayout.setContentsMargins(5, 5, 5, 5)
@@ -444,7 +448,7 @@ class MainFrame(QWidget):
 
         middleTabWidget.addTab(tab1, "Plain")
         middleTabWidget.addTab(tab2, "Properties")
-        middleTabWidget.addTab(tab3, 'List')
+        middleTabWidget.addTab(tab3, "List")
 
         layout = QGridLayout()
         layout.addWidget(middleTabWidget, 0, 0, 1, 1)
@@ -460,19 +464,19 @@ class MainFrame(QWidget):
 
     def menuBarActions(self, q):
         action = q.text()
-        if action == 'New Window':
+        if action == "New Window":
             pass
-        if action == 'Save to file':
+        if action == "Save to file":
             self.saveCommandToFile()
-        if action == 'Quit':
+        if action == "Quit":
             self.closeApplication()
-        if action == 'Copy':
+        if action == "Copy":
             self.copyToClipboard()
-        if action == 'Help':
+        if action == "Help":
             self.showHelp()
-        if action == 'About ISPAPI tool':
+        if action == "About ISPAPI tool":
             self.showAbout()
-        if action == 'How to start?':
+        if action == "How to start?":
             self.showHelp()
 
     def closeApplication(self):
@@ -522,13 +526,13 @@ class MainFrame(QWidget):
         listResult = response.getListHash()
 
         # delete any previous content of the list
-        self.listResponse.setText('')
+        self.listResponse.setText("")
 
         # set plain results
         self.plainResponse.setText(plainResult)
 
         # set properties and list
-        resultLists = listResult['LIST']
+        resultLists = listResult["LIST"]
         counter = 0
         for row in resultLists:
             for col in row:
@@ -545,7 +549,7 @@ class MainFrame(QWidget):
                 self.tableResponse.setItem(rownumber, 0, keyWidget)
                 self.tableResponse.setItem(rownumber, 1, valueWidget)
                 # update the list
-                if key not in ('TOTAL', 'FIRST', 'LAST', 'LIMIT', 'COUNT'):
+                if key not in ("TOTAL", "FIRST", "LAST", "LIMIT", "COUNT"):
                     self.listResponse.append(value)
                 # incerate rownumber
                 rownumber += 1
@@ -557,18 +561,15 @@ class MainFrame(QWidget):
             textToWrite = self.commandAndResponsePlain()
             options = QFileDialog.Options()
             # options |= QFileDialog.DontUseNativeDialog # Qt's builtin File Dialogue
-            fileName, _ = QFileDialog.getSaveFileName(self,
-                                                      "Open",
-                                                      "report.txt",
-                                                      "All Files (*.*)",
-                                                      options=options)
+            fileName, _ = QFileDialog.getSaveFileName(
+                self, "Open", "report.txt", "All Files (*.*)", options=options
+            )
             if fileName:
                 try:
-                    with open(fileName, 'w') as file:
+                    with open(fileName, "w") as file:
                         file.write(textToWrite)
                     alert = QMessageBox()
-                    alert.setText("'" + fileName +
-                                  "' \n\nFile Saved Successfully!")
+                    alert.setText("'" + fileName + "' \n\nFile Saved Successfully!")
                     alert.setIcon(QMessageBox.Information)
                     alert.exec_()
                 except Exception as e:
@@ -586,7 +587,7 @@ class MainFrame(QWidget):
     def commandAndResponsePlain(self):
         result = self.plainResponse.toPlainText()
         command = self.response.getCommandPlain()
-        textToWrite = command + '\n' + result
+        textToWrite = command + "\n" + result
         return textToWrite
 
     def copyToClipboard(self):
@@ -663,27 +664,27 @@ class MainFrame(QWidget):
     def eventFilter(self, source, event):
 
         # this function to handle autocomplete for command line
-        if (event.type() == QEvent.KeyRelease and source is self.cmdTxt):
+        if event.type() == QEvent.KeyRelease and source is self.cmdTxt:
             if event.key() == Qt.Key_Space:
                 # show min paramters suggestions
                 try:
                     cmd = self.cmdTxt.text()
-                    m = re.match('^(\w+)\s$', cmd)
+                    m = re.match("^(\w+)\s$", cmd)
                     if m:
-                        minParams = self.coreLogic.getMinParameters(
-                            cmd.strip())
+                        minParams = self.coreLogic.getMinParameters(cmd.strip())
                         if len(minParams) > 0:
-                            minParamsLabel = ', '.join(minParams)
-                            minParamsInput = '= '.join(minParams)
-                            cursorPosition = len(
-                                self.cmdTxt.text() +
-                                minParams[0]) + 1  # for the '=' char
-                            self.cmdTxt.setText(cmd + minParamsInput + '=')
-                            self.minParameter.setText('Min parameters: ' +
-                                                      minParamsLabel)
+                            minParamsLabel = ", ".join(minParams)
+                            minParamsInput = "= ".join(minParams)
+                            cursorPosition = (
+                                len(self.cmdTxt.text() + minParams[0]) + 1
+                            )  # for the '=' char
+                            self.cmdTxt.setText(cmd + minParamsInput + "=")
+                            self.minParameter.setText(
+                                "Min parameters: " + minParamsLabel
+                            )
                             self.cmdTxt.setCursorPosition(cursorPosition)
                         else:
-                            self.minParameter.setText('Min parameters:')
+                            self.minParameter.setText("Min parameters:")
                 except Exception as e:
                     print(e)
         # must return bool value
@@ -693,16 +694,18 @@ class MainFrame(QWidget):
         ##
         # This function checks if the app is executable or in development and return the path
 
-        if getattr(sys, 'frozen', False):
+        if getattr(sys, "frozen", False):
             self.absolute_dirpath = os.path.dirname(sys.executable)
             try:
                 self.absolute_dirpath = sys._MEIPASS
             except Exception:
                 self.absolute_dirpath = os.path.abspath(".")
-            path = self.command_path = os.path.join(self.absolute_dirpath,
-                                                    'data/icons/' + iconName)
+            path = self.command_path = os.path.join(
+                self.absolute_dirpath, "data/icons/" + iconName
+            )
         elif __file__:
             self.absolute_dirpath = os.path.dirname(__file__)
-            path = self.command_path = os.path.join(self.absolute_dirpath,
-                                                    '../icons/' + iconName)
+            path = self.command_path = os.path.join(
+                self.absolute_dirpath, "../icons/" + iconName
+            )
         return path

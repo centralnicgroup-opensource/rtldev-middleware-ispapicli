@@ -26,7 +26,7 @@ jobs:
           pip install --upgrade -e .
       - name: Validate & Coverage Report
         run: |
-          "./scripts/pep8check.sh"
+          "./scripts/black.sh"
           "./scripts/coverage.sh"
         # TODO add more lines here to be executed in the test stage e.g. pyinstaller etc.
   generate-linux-bin:

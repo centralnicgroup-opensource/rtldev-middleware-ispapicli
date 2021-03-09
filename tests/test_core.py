@@ -5,7 +5,7 @@ from hexonet.apiconnector.response import Response
 from hexonet.ispapicli.modules.core import Core
 
 
-class TestCore():
+class TestCore:
 
     # Testing methods
 
@@ -33,14 +33,16 @@ class TestCore():
     def test_login(self):
         core_obj = Core()
         # login success case
-        login_args = {'userid': 'test.user', 'password': 'test.passw0rd',
-                      'entity': 'ote'}
+        login_args = {
+            "userid": "test.user",
+            "password": "test.passw0rd",
+            "entity": "ote",
+        }
         result, msg = core_obj.login(login_args)
         assert result is True
 
         # login failure case
-        login_args = {'userid': 'NOUSER', 'password': 'test.passw0rd',
-                      'entity': 'ote'}
+        login_args = {"userid": "NOUSER", "password": "test.passw0rd", "entity": "ote"}
         result, msg = core_obj.login(login_args)
         assert result is False
 
@@ -52,14 +54,14 @@ class TestCore():
         """
         core_obj = Core()
         result = core_obj.checkSession()
-        assert (result in ('valid', 'init', 'expired')) is True
+        assert (result in ("valid", "init", "expired")) is True
 
     # 6 logout
     def test_logout(self):
-        '''
+        """
         The test of this function depends on the local session file which itself time dependent,
         thus here will check the return type only.
-        '''
+        """
         core_obj = Core()
         result = core_obj.logout()
         assert isinstance(result, str) is True
@@ -67,23 +69,23 @@ class TestCore():
     # 7 request
     def test_request(self):
         core_obj = Core()
-        cmd_success = {'command': 'querydomainlist', 'limit': '2'}
+        cmd_success = {"command": "querydomainlist", "limit": "2"}
         response = core_obj.request(cmd_success)
         assert isinstance(response, Response) is True
 
     # 8 getResponse
     def test_getResponse(self):
         core_obj = Core()
-        cmd = {'command': 'querydomainlist', 'limit': '2'}
+        cmd = {"command": "querydomainlist", "limit": "2"}
         response = core_obj.request(cmd)
-        return_response = core_obj.getResponse(response, 'list')
+        return_response = core_obj.getResponse(response, "list")
         assert isinstance(return_response, dict) is True
 
     # 9 getCommandHelp
     def test_getCommandHelp(self):
         core_obj = Core()
-        cmd_success = 'QueryDomainList'
-        cmd_failure = 'WRONGCOMMAND'
+        cmd_success = "QueryDomainList"
+        cmd_failure = "WRONGCOMMAND"
         txt_failure = "Command 'WRONGCOMMAND' not found!"
         response_success = core_obj.getCommandHelp(cmd_success)
         reponse_failure = core_obj.getCommandHelp(cmd_failure)
@@ -94,8 +96,8 @@ class TestCore():
     # 11 parseParameters
     def test_parseParameters(self):
         core_obj = Core()
-        reminderargs = ['limit', '5']
-        reminderargs_with_equal = ['limit=5']
+        reminderargs = ["limit", "5"]
+        reminderargs_with_equal = ["limit=5"]
         params_list = core_obj.parseParameters(reminderargs)
         params_list_with_equal = core_obj.parseParameters(reminderargs_with_equal)
         assert isinstance(params_list, dict) is True
@@ -112,4 +114,4 @@ class TestCore():
         core_obj = Core()
         cmd = "CheckDomain"
         result = core_obj.getMinParameters(cmd)
-        assert 'domain' == result[0]
+        assert "domain" == result[0]

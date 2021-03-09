@@ -1,4 +1,19 @@
-from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QGridLayout, QVBoxLayout, QHBoxLayout, QLineEdit, QComboBox, QLabel, QStyleFactory, QGroupBox, QPushButton, QFormLayout, QDesktopWidget
+from PyQt5.QtWidgets import (
+    QApplication,
+    QMessageBox,
+    QDialog,
+    QGridLayout,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLineEdit,
+    QComboBox,
+    QLabel,
+    QStyleFactory,
+    QGroupBox,
+    QPushButton,
+    QFormLayout,
+    QDesktopWidget,
+)
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon, QMovie
 from modules.core import Core
@@ -19,7 +34,7 @@ class LoginWindow(QDialog):
         mainLayout.addWidget(self.rightGroupBox, 0, 0)
         self.setLayout(mainLayout)
         self.setWindowTitle("Login Window")
-        QApplication.setStyle(QStyleFactory.create('Fusion'))
+        QApplication.setStyle(QStyleFactory.create("Fusion"))
 
     def createRightGroupBox(self):
         self.rightGroupBox = QGroupBox("Login Info:")
@@ -29,7 +44,7 @@ class LoginWindow(QDialog):
         self.passTxt = QLineEdit()
         self.passTxt.setEchoMode(QLineEdit.Password)
         self.sysChoice = QComboBox()
-        self.sysChoice.addItems(['ote', 'live'])
+        self.sysChoice.addItems(["ote", "live"])
         self.loginMsg = QLabel("")
         self.loginMsg.setAlignment(Qt.AlignCenter)
 
@@ -55,21 +70,20 @@ class LoginWindow(QDialog):
 
         coreLogic = Core()
         args = {}
-        args['userid'] = self.userIDTxt.text()
-        args['password'] = self.passTxt.text()
-        args['entity'] = self.sysChoice.currentText()
+        args["userid"] = self.userIDTxt.text()
+        args["password"] = self.passTxt.text()
+        args["entity"] = self.sysChoice.currentText()
 
         result, msg = coreLogic.login(args)
         if result == True:
             alert = QMessageBox()
-            alert.setText('You have successfully logged in!')
+            alert.setText("You have successfully logged in!")
             alert.exec_()
 
             # update parent window = login and session message
             self.parent().checkLogin()
             # close login gui
-            self.closingThread = threading.Thread(
-                target=self.__closeGui).start()
+            self.closingThread = threading.Thread(target=self.__closeGui).start()
 
         else:
             self.loginMsg.setMovie(None)
