@@ -1,2 +1,2 @@
 #!/bin/bash
-black .
+black --check --diff --color .
