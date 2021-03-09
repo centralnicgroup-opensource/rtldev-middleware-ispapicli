@@ -31,7 +31,7 @@ jobs:
         # TODO add more lines here to be executed in the test stage e.g. pyinstaller etc.
   generate-linux-bin:
     name: Generate Linux bin
-    if: contains(github.event.head_commit.message, 'bump') == false
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -58,7 +58,7 @@ jobs:
           retention-days: 1
   generate-macos-bin:
     name: Generate MacOS bin
-    if: contains(github.event.head_commit.message, 'bump') == false
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: macos-latest
     needs: test
     steps:
@@ -85,7 +85,7 @@ jobs:
           retention-days: 1
   generate-win-bin:
     name: Generate Win bin
-    if: contains(github.event.head_commit.message, 'bump') == false
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: windows-latest
     needs: test
     steps:
