@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/hexonet/ispapicli/compare/v1.3.7...v1.3.8) (2021-03-11)
+
+
+### Performance Improvements
+
+* **autocomplete:** init gui autocomplete after updating upon first use ([50bcdf5](https://github.com/hexonet/ispapicli/commit/50bcdf5cac4c096e773e5912c32a14e08df02dc8))
+
 ## [1.3.7](https://github.com/hexonet/ispapicli/compare/v1.3.6...v1.3.7) (2021-03-09)
 
 
