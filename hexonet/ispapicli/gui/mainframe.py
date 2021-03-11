@@ -635,6 +635,8 @@ class MainFrame(QWidget):
         box.setText(msg)
         box.show()
         self.scrap.scrapCommands()
+        # init tool dropdown autocomplete
+        self.initialiseCommandCompleter()
 
     def showAbout(self):
 
