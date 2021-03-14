@@ -44,8 +44,22 @@ class DB:
     def getAllCommands(self, table):
         pass
 
-    def getLoginInfo(self, table):
+    def getLoginInfo(self):
         pass
 
-    def getAllData(self, table):
+    def setLoginInfo(self):
+        pass
+
+    def deleteLoginInfo(self):
+        pass
+
+    def deleteTable(self, table):
+        pass
+
+    def insertCommand(self, table, command):
+        pass
+
+    def checkCommandExist(self, command):
+        # delete old command
+        # insert new command
         pass

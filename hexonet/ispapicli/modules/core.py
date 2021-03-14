@@ -22,46 +22,8 @@ class Core:
         self.cl = AC()
         # Send statistics
         self.cl.setUserAgent("ISPAPICLI", __version__)
-        # init cross OS path reader
-        self.initAppDirectories()
         # init db
         self.dbObj = DB()
-
-    def initAppDirectories(self):
-        """
-        This function checks whether the apps is running in your editor or
-        in an executable file
-        This is important to correctly associate the path
-
-        Returns:
-        None
-        """
-        if getattr(sys, "frozen", False):
-            self.absolute_dirpath = os.path.dirname(sys.executable)
-            try:
-                self.absolute_dirpath = sys._MEIPASS
-            except Exception:
-                self.absolute_dirpath = os.path.abspath(".")
-            self.command_path = os.path.join(self.absolute_dirpath, "data/commands/")
-            self.session_path = os.path.join(
-                self.absolute_dirpath, "data/config/session.json"
-            )
-        elif __file__:
-            self.absolute_dirpath = os.path.dirname(__file__)
-            self.command_path = os.path.join(self.absolute_dirpath, "../commands/")
-            self.session_path = os.path.join(
-                self.absolute_dirpath, "../config/session.json"
-            )
-        # check if commands exist
-        # if not os.path.exists(os.path.join(self.absolute_dirpath, '../commands/')):
-        #    os.makedirs(os.path.join(self.absolute_dirpath, '../commands/'))
-        # check config directory
-        # if not os.path.exists(os.path.join(self.absolute_dirpath, '../config/')):
-        #    os.makedirs(os.path.join(self.absolute_dirpath, '../config/'))
-        # set path variables
-        # self.command_path = os.path.join(self.absolute_dirpath, '../commands/')
-        # self.session_path = os.path.join(self.absolute_dirpath, '../config/session.json')
-        return None
 
     def initParser(self, args=None):
         """
@@ -305,7 +267,6 @@ class Core:
         --------
         String: msg
         """
-        p = self.session_path
         try:
             msg = ""
             # query for login data
