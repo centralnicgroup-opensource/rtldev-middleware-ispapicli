@@ -42,9 +42,7 @@ class Scrap:
         True | Raise exception
         """
         try:
-            table = self.dbObj.db.table("commands")
-            table.insert(data)
-            print("Command saved: ", commandName)
+            self.dbObj.insertCommand(commandName, data)
             return True
         except Exception:
             raise Exception("Couldn't insert the command: " + commandName)
@@ -113,7 +111,7 @@ class Scrap:
         # clone repo
         if self.__cloneRepo():
             # init database | delete old database
-            self.dbObj.db.drop_table("commands")
+            # self.dbObj.db.drop_table("commands")
             commandName = ""
             description = ""
             availability = ""

@@ -235,8 +235,7 @@ class Core:
         # check if there is a session already exist
         try:
             # query for login data
-            loginTable = self.dbObj.db.table("login")
-            data = loginTable.all()
+            data = self.dbObj.getLoginInfo()
             if not data:
                 raise Exception
             # get login data
@@ -270,8 +269,9 @@ class Core:
         try:
             msg = ""
             # query for login data
-            loginTable = self.dbObj.db.table("login")
-            data = loginTable.all()
+            data = self.dbObj.getLoginInfo()
+            if not data:
+                raise Exception
             # get login data
             entity = data[0]["entity"]
             session = data[0]["session"]
@@ -286,7 +286,7 @@ class Core:
                 flag = False
 
             # delete local session
-            self.dbObj.db.drop_table("login")
+            self.dbObj.deleteLoginInfo()
 
             # return message
             if flag:
@@ -338,10 +338,7 @@ class Core:
         -------
         String: <>
         """
-        table = self.dbObj.db.table("commands")
-        data = table.search(
-            self.dbObj.query.command.matches(command_name, flags=re.IGNORECASE)
-        )
+        data = self.dbObj.getCommand(command_name)
         for item in data:
             try:
                 command_name_lower_case = (item["command"]).lower()
@@ -391,13 +388,12 @@ class Core:
             data["session"] = loginSession
             data["ts"] = ts
             data["entity"] = entity
-            # delete old session
-            self.dbObj.db.drop_table("login")
-            # add new session
-            table = self.dbObj.db.table("login")
-            table.insert(data)
-            return True
-        except Exception as e:
+            # insert login
+            if self.dbObj.setLoginInfo(data):
+                return True
+            else:
+                raise Exception
+        except Exception:
             return False
 
     def parseParameters(self, parameters):
@@ -433,8 +429,7 @@ class Core:
         String: return_list
         """
         return_list = ""
-        table = self.dbObj.db.table("commands")
-        data = table.all()
+        data = self.dbObj.getAllCommands()
         for item in data:
             try:
                 return_list += item["command"] + "\n"
@@ -451,10 +446,7 @@ class Core:
         List: returnData
         """
         returnData = []
-        table = self.dbObj.db.table("commands")
-        data = table.search(
-            self.dbObj.query.command.matches(command_name, flags=re.IGNORECASE)
-        )
+        data = self.dbObj.getCommand(command_name)
         if data:
             for item in data:
                 try:
@@ -468,4 +460,4 @@ class Core:
                                 returnData.append(paramater.lower())
                 except Exception:
                     continue
-        return returnData
+        return list(dict.fromkeys(returnData))

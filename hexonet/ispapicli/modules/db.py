@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 import json
 from tinydb import TinyDB, Query
@@ -7,8 +8,9 @@ from tinydb import TinyDB, Query
 class DB:
     def __init__(self) -> None:
         self.__initAppDirectories()
-        print(self.db_file_path)
         self.initDB()
+        self.commandsTable = "commands"
+        self.loginTable = "login"
 
     def initDB(self):
         # check for first use of the tool
@@ -41,25 +43,97 @@ class DB:
             self.db_path = os.path.join(self.absolute_dirpath, "../db/")
             self.db_file_path = os.path.join(self.absolute_dirpath, "../db/db.json")
 
-    def getAllCommands(self, table):
-        pass
+    def getAllCommands(self):
+        """
+        Retrieve all commands from DB
+
+        Returns:
+        --------
+        A list of all commands []
+        """
+        data = []
+        try:
+            table = self.db.table(self.commandsTable)
+            data = table.all()
+            return data
+        except:
+            return data
+
+    def getCommand(self, command_name):
+        """
+        Retrieve a single command from DB
+
+        Returns:
+        --------
+        A single command list []
+        """
+        data = []
+        try:
+            table = self.db.table(self.commandsTable)
+            data = table.search(
+                self.query.command.matches(command_name, flags=re.IGNORECASE)
+            )
+            return data
+        except:
+            return data
 
     def getLoginInfo(self):
-        pass
+        data = []
+        try:
+            loginTable = self.db.table(self.loginTable)
+            data = loginTable.all()
+            return data
+        except:
+            return data
 
-    def setLoginInfo(self):
-        pass
+    def setLoginInfo(self, data):
+        try:
+            # delete old session
+            self.db.drop_table("login")
+            # add new session
+            table = self.db.table(self.loginTable)
+            table.insert(data)
+            return True
+        except:
+            return False
 
     def deleteLoginInfo(self):
-        pass
+        try:
+            self.db.drop_table(self.loginTable)
+            return True
+        except:
+            return False
 
-    def deleteTable(self, table):
-        pass
+    def insertCommand(self, commandName, data):
+        try:
+            table = self.db.table(self.commandsTable)
+            # insert and update where necessary
+            result = table.upsert(data, self.query["command"] == commandName)
+            print("Command saved: ", commandName)
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
-    def insertCommand(self, table, command):
-        pass
+    def checkCommandExist(self, table, command):
+        try:
+            result = table.search(self.query["command"] == command)
+            return result
+        except:
+            return False
 
-    def checkCommandExist(self, command):
-        # delete old command
-        # insert new command
-        pass
+    def __compareCommandData(self, d1, d2):
+        try:
+            for k in d1:
+                if k not in d2:
+                    return False
+                else:
+                    if type(d1[k]) is dict:
+                        self.__compareCommandData(d1[k], d2[k])
+                    else:
+                        if d1[k] != d2[k]:
+                            return False
+        except Exception as e:
+            print(e)
+            return False
+        return True
