@@ -18,6 +18,13 @@ class Scrap:
         self.__initCloneAPIDocsDir()
 
     def __initAppDirectories(self):
+        """
+        Init app directories
+
+        Returns:
+        --------
+        True
+        """
         if getattr(sys, "frozen", False):
             self.absolute_dirpath = os.path.dirname(sys.executable)
             self.repo_path = os.path.join(self.absolute_dirpath, "APIDocsRepo")
@@ -27,7 +34,15 @@ class Scrap:
         return True
 
     def __initCloneAPIDocsDir(self):
+        """
+        Init cloning repo
+
+        Returns:
+        --------
+        True
+        """
         if os.path.exists(self.repo_path):
+            # remove old repo
             shutil.rmtree(self.repo_path)
         if not os.path.exists(self.repo_path):
             os.makedirs(self.repo_path)
@@ -53,7 +68,7 @@ class Scrap:
 
         Returns:
         --------
-        Dictionary: data
+        Dict{}: data
         """
         try:
             data = {}
@@ -66,6 +81,13 @@ class Scrap:
             raise e
 
     def __cloneRepo(self):
+        """
+        Clone remote Docs repo
+
+        Returns:
+        --------
+        True || False
+        """
         if self.__initCloneAPIDocsDir():
             repo = Repo.clone_from(
                 "https://github.com/hexonet/hexonet-api-documentation.git",
@@ -76,6 +98,15 @@ class Scrap:
         return False
 
     def __getCommandsParams(self, raw):
+        print(raw)
+        print("\n")
+        """
+        Parse parameters from raw md data
+
+        Returns:
+        --------
+        List[]: params
+        """
         # split the rows based on | delimiter
         # this will return a list of paramname, min, type, etc.
         headers = raw[2].split("|")
@@ -90,8 +121,9 @@ class Scrap:
                         headType = headers[j].strip(" \t\n\r")
                         headValue = cols[j].strip(" \t\n\r")
                         param[headType] = headValue
-                    # append params
-                    params.append(param)
+                    # append params | add only valid params
+                    if len(param) == 4:
+                        params.append(param)
                     param = {}
                 except Exception as e:
                     return params
@@ -106,46 +138,52 @@ class Scrap:
 
         Returns:
         --------
-        Null
+        True || False
         """
         # clone repo
         if self.__cloneRepo():
-            # init database | delete old database
-            # self.dbObj.db.drop_table("commands")
-            commandName = ""
-            description = ""
-            availability = ""
-            parameters = []
-            # get all commands urls, ending with .md
-            mainDir = os.path.join(self.repo_path, "API")
-            result = list(Path(mainDir).glob("**/*.md"))
-            # section regex
-            secionRegex = r"^#{2}\s\w+$"
-            for dir in result:
-                # Load the file into file_content
-                file_content = []
-                for line in open(dir).readlines():
-                    file_content.append(line.strip(" \t\n\r"))
-                # parse the content
-                for i in range(len(file_content)):
-                    # first line is the command name
-                    if i == 0:
-                        commandName = (file_content[i]).split(" ")[1]
-                    # checkSection
-                    section = re.findall(secionRegex, file_content[i])
-                    if len(section) == 1:
-                        sectionName = (section[0].split(" "))[1]
-                        if sectionName == "DESCRIPTION":
-                            description = file_content[i + 1]
-                        if sectionName == "AVAILABILITY":
-                            availability = file_content[i + 1]
-                        if sectionName == "COMMAND":
-                            parameters = self.__getCommandsParams(file_content[i:])
-                            break
-                data = self.__getCommandData(
-                    commandName, description, availability, parameters
-                )
-                self.__saveCommandToDB(commandName, data)
+            try:
+                # init database | delete old database
+                # self.dbObj.db.drop_table("commands")
+                commandName = ""
+                description = ""
+                availability = ""
+                parameters = []
+                # get all commands urls, ending with .md
+                mainDir = os.path.join(self.repo_path, "API")
+                result = list(Path(mainDir).glob("**/*.md"))
+                # section regex
+                secionRegex = r"^#{2}\s\w+$"
+                for dir in result:
+                    # Load the file into file_content
+                    file_content = []
+                    for line in open(dir).readlines():
+                        file_content.append(line.strip(" \t\n\r"))
+                    # parse the content
+                    for i in range(len(file_content)):
+                        # first line is the command name
+                        if i == 0:
+                            commandName = (file_content[i]).split(" ")[1]
+                        # checkSection
+                        section = re.findall(secionRegex, file_content[i])
+                        if len(section) == 1:
+                            sectionName = (section[0].split(" "))[1]
+                            if sectionName == "DESCRIPTION":
+                                description = file_content[i + 1]
+                            if sectionName == "AVAILABILITY":
+                                availability = file_content[i + 1]
+                            if sectionName == "COMMAND":
+                                parameters = self.__getCommandsParams(file_content[i:])
+                                break
+                    data = self.__getCommandData(
+                        commandName, description, availability, parameters
+                    )
+                    self.__saveCommandToDB(commandName, data)
 
-            print("\nCommands count: " + str(len(result)))
-            print("Command finished.")
+                print("\nCommands count: " + str(len(result)))
+                print("Command finished.")
+                return True
+            except Exception as e:
+                print("scraping failed due to: " + e)
+        else:
+            return False  # failed cloning the repo
