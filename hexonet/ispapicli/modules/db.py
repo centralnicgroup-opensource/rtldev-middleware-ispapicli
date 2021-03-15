@@ -106,7 +106,7 @@ class DB:
 
         Returns:
         --------
-        True || False
+        Bool: True || False
         """
         try:
             # delete old session
