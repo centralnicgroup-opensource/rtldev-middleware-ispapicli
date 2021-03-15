@@ -13,6 +13,13 @@ class DB:
         self.loginTable = "login"
 
     def initDB(self):
+        """
+        Init DB dirs
+
+        Returns:
+        --------
+        Null
+        """
         # check for first use of the tool
         if not os.path.exists(self.db_path):
             os.makedirs(self.db_path)
@@ -24,7 +31,7 @@ class DB:
 
     def __initAppDirectories(self):
         """
-        Check whether the app is running from the editor or from an executable file
+        Checks whether the app is running from the editor or from an executable file
 
         Returns:
         --------
@@ -45,11 +52,11 @@ class DB:
 
     def getAllCommands(self):
         """
-        Retrieve all commands from DB
+        Retrieves all commands from DB
 
         Returns:
         --------
-        A list of all commands []
+        List: data
         """
         data = []
         try:
@@ -61,11 +68,11 @@ class DB:
 
     def getCommand(self, command_name):
         """
-        Retrieve a single command from DB
+        Retrieves a single command from DB
 
         Returns:
         --------
-        A single command list []
+        List: data
         """
         data = []
         try:
@@ -78,6 +85,13 @@ class DB:
             return data
 
     def getLoginInfo(self):
+        """
+        Retrieves login info from DB
+
+        Returns:
+        --------
+        List: data
+        """
         data = []
         try:
             loginTable = self.db.table(self.loginTable)
@@ -87,6 +101,13 @@ class DB:
             return data
 
     def setLoginInfo(self, data):
+        """
+        Saves login info to DB
+
+        Returns:
+        --------
+        True || False
+        """
         try:
             # delete old session
             self.db.drop_table("login")
@@ -98,6 +119,13 @@ class DB:
             return False
 
     def deleteLoginInfo(self):
+        """
+        Deletes login info from DB
+
+        Returns:
+        --------
+        Bool: True || False
+        """
         try:
             self.db.drop_table(self.loginTable)
             return True
@@ -105,6 +133,13 @@ class DB:
             return False
 
     def insertCommand(self, commandName, data):
+        """
+        Inserts or updates a command if exist
+
+        Returns:
+        --------
+        Bool: True || False
+        """
         try:
             table = self.db.table(self.commandsTable)
             # insert and update where necessary
@@ -116,6 +151,13 @@ class DB:
             return False
 
     def checkCommandExist(self, table, command):
+        """
+        Checks a command if exist
+
+        Returns:
+        --------
+        Bool: False || List: result
+        """
         try:
             result = table.search(self.query["command"] == command)
             return result
@@ -123,6 +165,13 @@ class DB:
             return False
 
     def __compareCommandData(self, d1, d2):
+        """
+        Compares two ditcs
+
+        Returns:
+        --------
+        Bool: True | False
+        """
         try:
             for k in d1:
                 if k not in d2:

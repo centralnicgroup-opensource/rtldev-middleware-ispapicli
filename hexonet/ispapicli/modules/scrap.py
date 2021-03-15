@@ -98,8 +98,6 @@ class Scrap:
         return False
 
     def __getCommandsParams(self, raw):
-        print(raw)
-        print("\n")
         """
         Parse parameters from raw md data
 
