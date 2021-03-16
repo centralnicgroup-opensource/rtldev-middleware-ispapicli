@@ -307,7 +307,7 @@ class MainFrame(QWidget):
         helpAction.triggered.connect(self.showHelp)
 
         updateAction = QAction(
-            QIcon(self.getIcon("refresh.png")), "Open another window", self
+            QIcon(self.getIcon("refresh.png")), "Update the tool API's commands", self
         )
         updateAction.triggered.connect(self.showUpdating)
 
