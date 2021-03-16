@@ -1,3 +1,10 @@
+## [1.3.10](https://github.com/hexonet/ispapicli/compare/v1.3.9...v1.3.10) (2021-03-16)
+
+
+### Performance Improvements
+
+* **gui tooltip:** changed the refresh icon tooltip ([52a309b](https://github.com/hexonet/ispapicli/commit/52a309bf78d4f74f5d3bc3a79644343e14af3f30))
+
 ## [1.3.9](https://github.com/hexonet/ispapicli/compare/v1.3.8...v1.3.9) (2021-03-15)
 
 
