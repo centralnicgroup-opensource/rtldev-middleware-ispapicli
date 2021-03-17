@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/hexonet/ispapicli/compare/v1.4.0...v1.4.1) (2021-03-17)
+
+
+### Performance Improvements
+
+* **release:** fixed python version due to failing dependabot PRs ([7cfdf64](https://github.com/hexonet/ispapicli/commit/7cfdf64f347f17d4c11313fbc4679e1deb84e600))
+
 # [1.4.0](https://github.com/hexonet/ispapicli/compare/v1.3.10...v1.4.0) (2021-03-17)
 
 
