@@ -170,6 +170,10 @@ class Core:
                 cmd_struct = {}
                 cmd_struct["command"] = args["command"]
                 return "cmd", cmd_struct
+            if args["COMMAND"] is not None:
+                cmd_struct = {}
+                cmd_struct["command"] = args["COMMAND"]
+                return "cmd", cmd_struct
             # case user trying to log in while his session is valid
             elif None not in (args["userid"], args["password"], args["entity"]):
                 msg = "You are already logged in, your session is valid."
@@ -437,6 +441,23 @@ class Core:
                 continue
         return return_list
 
+    def getSubUserList(self):
+        """
+        Get all subusers from local commands' files
+
+        Returns:
+        --------
+        String: return_list
+        """
+        return_list = ""
+        data = self.dbObj.getAllSubusers()
+        for item in data:
+            try:
+                return_list += item["subuser"] + "\n"
+            except Exception:
+                continue
+        return return_list
+
     def getMinParameters(self, command_name):
         """
         Get minimum required parameters of the command: command_name
@@ -461,3 +482,18 @@ class Core:
                 except Exception:
                     continue
         return list(dict.fromkeys(returnData))
+
+    def getSubUsers(self):
+        cmd = {
+            "command": "finduser",
+            "pattern": "%",
+            "userdepth": "all",
+            "orderby": "userid",
+        }
+        response = self.request(cmd)
+        listResult = response.getListHash()["LIST"]
+        for item in listResult:
+            subusers = {}
+            subusers["subuser"] = item["USER"]
+            self.dbObj.insertSubuser(item["USER"], subusers)
+        pass

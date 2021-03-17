@@ -11,6 +11,7 @@ class DB:
         self.initDB()
         self.commandsTable = "commands"
         self.loginTable = "login"
+        self.subUserTable = "subuser"
 
     def initDB(self):
         """
@@ -149,6 +150,39 @@ class DB:
         except Exception as e:
             print(e)
             return False
+
+    def insertSubuser(self, subuser, data):
+        """
+        Inserts or udpates a subuser if exist
+
+        Returns:
+        --------
+        Bool: True || False
+        """
+        try:
+            table = self.db.table(self.subUserTable)
+            result = table.upsert(data, self.query["subuser"] == subuser)
+            print("subuser save: ", subuser)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    def getAllSubusers(self):
+        """
+        Retrieves all commands from DB
+
+        Returns:
+        --------
+        List: data
+        """
+        data = []
+        try:
+            table = self.db.table(self.subUserTable)
+            data = table.all()
+            return data
+        except:
+            return data
 
     def checkCommandExist(self, table, command):
         """

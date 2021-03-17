@@ -1,3 +1,4 @@
+from typing import Text
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -16,6 +17,23 @@ __version__ = "1.0.3"
 
 
 class MainFrame(QWidget):
+
+    BATCH_COMMANDLINE_ID = 300
+    BATCH_PARAMETER_ID = 400
+    BATCH_LIST_ID = 500
+    BATCH_PARAMS = [
+        "Select",
+        "CONTACT",
+        "DNSZONE",
+        "DOMAIN",
+        "DOMAINAUTH",
+        "HOST",
+        "NAMESERVER",
+        "OBJECTID",
+        "SSLCERTID",
+        "VSERVERID",
+    ]
+
     def __init__(self, parent=None):
         super(MainFrame, self).__init__(parent)
 
@@ -161,7 +179,7 @@ class MainFrame(QWidget):
         # start progressbar
         self.progressBarSpeed(5)
         # get args from the GUI
-        commandToExecute = self.commandText.toPlainText()
+        commandToExecute = self.commandText.toPlainText().lower()
         if commandToExecute.startswith("-", 0, 1):
             original_args = commandToExecute.splitlines()
         else:
@@ -222,9 +240,29 @@ class MainFrame(QWidget):
                 cmd = data
                 # add them to data which is the command list
                 cmd.update(params_list)
-                self.response = core_obj.request(cmd)
-                # set reult values to gui
-                self.populateResults(self.response)
+                # check if subuser
+                subuser = self.subuser.text()
+                if len(subuser) > 1:
+                    core_obj.cl.setUserView(subuser)  # set subuser
+                else:
+                    core_obj.cl.resetUserView()  # remove subuser
+                # check for batches
+                batch_param = self.batchParams.currentText()
+                batch_params_list = self.batchParamsList.toPlainText()
+                if batch_param != "Select" and batch_params_list != "":
+                    lines = batch_params_list.split("\n")
+                    for line in lines:
+                        if line != "":
+                            cmd[batch_param] = line
+                            # request call
+                            self.response = core_obj.request(cmd)
+                            # set reult values to gui
+                            self.populateResults(self.response, "iterative")
+                else:
+                    # request call
+                    self.response = core_obj.request(cmd)
+                    # set reult values to gui
+                    self.populateResults(self.response)
 
             # case update commands
             elif result == "update":
@@ -393,6 +431,17 @@ class MainFrame(QWidget):
         self.completer.setCaseSensitivity(Qt.CaseInsensitive)
         self.cmdTxt.setCompleter(self.completer)
 
+        # subuser
+        self.subuser = QLineEdit()
+        self.subuser.setPlaceholderText("Type a subuser")
+
+        self.subuser.returnPressed.connect(self.executeCommand)
+
+        # set command completer
+        self.subUsercompleter = QCompleter()
+        self.subUsercompleter.setCaseSensitivity(Qt.CaseInsensitive)
+        self.subuser.setCompleter(self.subUsercompleter)
+
         self.minParameter = QLabel(self)
         self.minParameter.setText("Min parameters: ")
         self.minParameter.setStyleSheet("color:gray")
@@ -401,23 +450,62 @@ class MainFrame(QWidget):
 
         gridLayout = QGridLayout()
         gridLayout.addWidget(self.cmdTxt, 0, 1, 1, 1)
-        gridLayout.addWidget(executeBtn, 0, 2, 1, 1)
-        gridLayout.addWidget(clearBtn, 0, 3, 1, 1)
+        gridLayout.addWidget(self.subuser, 0, 2, 1, 1)
+        gridLayout.addWidget(executeBtn, 0, 3, 1, 1)
+        gridLayout.addWidget(clearBtn, 0, 4, 1, 1)
         gridLayout.addWidget(self.minParameter, 1, 1, 1, 1)
+        gridLayout.setColumnStretch(1, 6)
+        gridLayout.setColumnStretch(2, 2)
+        gridLayout.setColumnStretch(3, 1)
+        gridLayout.setColumnStretch(4, 1)
         gridLayout.setContentsMargins(5, 0, 5, 10)
         self.topLayout = gridLayout
         self.topBox.setLayout(gridLayout)
 
     def createLeftGroupBox(self):
-        self.leftGroupBox = QGroupBox("Command extracted")
+        self.leftGroupBox = QGroupBox("Command")
+        leftTabWidget = QTabWidget()
+        leftTabWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Ignored)
+
+        tab1 = QWidget()
         self.commandText = QTextEdit()
         self.commandText.setPlaceholderText("Extracted command will be shown here")
+        tab1hbox = QHBoxLayout()
+        tab1hbox.setContentsMargins(5, 5, 5, 5)
+        tab1hbox.addWidget(self.commandText)
+        tab1.setLayout(tab1hbox)
 
-        tab2hbox = QHBoxLayout()
-        tab2hbox.setContentsMargins(5, 5, 5, 5)
-        tab2hbox.addWidget(self.commandText)
+        tab2 = QWidget()
+        # params label
+        self.batchParamsLabel = QLabel()
+        self.batchParamsLabel.setText("Select parameter:")
+        # params list
+        self.batchParams = QComboBox()
+        self.batchParams.addItems(self.BATCH_PARAMS)
+        # params text label
+        self.batchParamsListLabel = QLabel()
+        self.batchParamsListLabel.setText("Insert the list:")
+        self.batchParamsListLabel.setContentsMargins(0, 10, 0, 0)
 
-        self.leftGroupBox.setLayout(tab2hbox)
+        # params text
+        self.batchParamsList = QTextEdit()
+        self.batchParamsList.setPlaceholderText("Enter each item in new line")
+        self.batchParamsList.setFrameStyle(QFrame.Box)
+        tableLayout = QGridLayout()
+        tableLayout.setContentsMargins(15, 5, 5, 5)
+        tableLayout.addWidget(self.batchParamsLabel, 0, 0)
+        tableLayout.addWidget(self.batchParams, 1, 0)
+        tableLayout.addWidget(self.batchParamsListLabel, 2, 0)
+        tableLayout.addWidget(self.batchParamsList, 3, 0)
+        tab2.setLayout(tableLayout)
+
+        leftTabWidget.addTab(tab1, "Extracted Command")
+        leftTabWidget.addTab(tab2, "Batch")
+
+        layout = QGridLayout()
+        layout.addWidget(leftTabWidget, 0, 0, 1, 1)
+
+        self.leftGroupBox.setLayout(layout)
 
     def createMiddleTabWidget(self):
         self.middleGroupBox = QGroupBox("Results")
@@ -516,20 +604,33 @@ class MainFrame(QWidget):
         # set model to the completer
         self.completer.setModel(model)
 
+    def initialiseSubuserCompleter(self):
+        model = QStringListModel()
+        # get all possible autocomplete strings
+        stringsSuggestion = []
+        stringsSuggestion = (self.coreLogic.getSubUserList()).splitlines()
+        # set suggestion to the model
+        model.setStringList(stringsSuggestion)
+        # set model to the completer
+        self.subUsercompleter.setModel(model)
+
     def __clearCMDfield(self):
         self.cmdTxt.clear()
         self.cmdTxt.setFocus(True)
 
-    def populateResults(self, response):
+    def populateResults(self, response, mode="normal"):
         # get reulsts
         plainResult = response.getPlain()
         listResult = response.getListHash()
 
-        # delete any previous content of the list
-        self.listResponse.setText("")
-
         # set plain results
-        self.plainResponse.setText(plainResult)
+        if mode == "iterative":
+            self.plainResponse.append(plainResult)
+            print("iternative")
+        else:
+            self.plainResponse.setText(plainResult)
+            # delete any previous content of the list
+            self.listResponse.setText("")
 
         # set properties and list
         resultLists = listResult["LIST"]
@@ -637,6 +738,7 @@ class MainFrame(QWidget):
         self.scrap.scrapCommands()
         # init tool dropdown autocomplete
         self.initialiseCommandCompleter()
+        self.initialiseSubuserCompleter()
 
     def showAbout(self):
 

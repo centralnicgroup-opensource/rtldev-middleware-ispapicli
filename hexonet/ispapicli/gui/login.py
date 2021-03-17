@@ -76,12 +76,15 @@ class LoginWindow(QDialog):
 
         result, msg = coreLogic.login(args)
         if result == True:
+            # update the subuser
+            coreLogic.getSubUsers()
+            # update parent window = login and session message
+            self.parent().checkLogin()
+            self.parent().initialiseSubuserCompleter()
+            # show a message
             alert = QMessageBox()
             alert.setText("You have successfully logged in!")
             alert.exec_()
-
-            # update parent window = login and session message
-            self.parent().checkLogin()
             # close login gui
             self.closingThread = threading.Thread(target=self.__closeGui).start()
 
