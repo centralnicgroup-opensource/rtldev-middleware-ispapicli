@@ -1,3 +1,11 @@
+## [1.4.2](https://github.com/hexonet/ispapicli/compare/v1.4.1...v1.4.2) (2021-03-17)
+
+
+### Performance Improvements
+
+* **batch params:** making patch params editable ([6772228](https://github.com/hexonet/ispapicli/commit/6772228c767fe82a58ebff8f148bc489ee0cdf09))
+* **gui update:** making batch parameter editable ([e31a44b](https://github.com/hexonet/ispapicli/commit/e31a44baba98f7c2037fe72a8e9a5a312edb509b))
+
 ## [1.4.1](https://github.com/hexonet/ispapicli/compare/v1.4.0...v1.4.1) (2021-03-17)
 
 
