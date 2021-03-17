@@ -78,6 +78,9 @@ class MainFrame(QWidget):
         # initilaize command line completer
         self.initialiseCommandCompleter()
 
+        # initialize subuser completer
+        self.initialiseSubuserCompleter()
+
         # command to execute
         self.commandToExecute = ""
 
@@ -738,7 +741,6 @@ class MainFrame(QWidget):
         self.scrap.scrapCommands()
         # init tool dropdown autocomplete
         self.initialiseCommandCompleter()
-        self.initialiseSubuserCompleter()
 
     def showAbout(self):
 
