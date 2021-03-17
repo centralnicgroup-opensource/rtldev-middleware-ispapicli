@@ -54,7 +54,7 @@ setup(
         "PyQt5==5.15.2",
         "PyQt5-sip==12.8.1",
         "soupsieve==2.2",
-        "tabulate==0.8.8",
+        "tabulate==0.8.9",
         "urllib3==1.26.3",
         "twine==3.3.0",
         "tinydb==4.4.0",
