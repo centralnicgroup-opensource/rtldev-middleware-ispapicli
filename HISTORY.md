@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/hexonet/ispapicli/compare/v1.3.10...v1.4.0) (2021-03-17)
+
+
+### Features
+
+* **adding subuser:** adding subuser and batch features ([b720b77](https://github.com/hexonet/ispapicli/commit/b720b77a46edc5bc4158dd72cc94a75028874dea))
+
+
+### Performance Improvements
+
+* **black format:** triggering another release because of black reformat ([b727617](https://github.com/hexonet/ispapicli/commit/b72761778aded842b2b0ababc29a037c90712751))
+* **new features:** adding subuser and batch features ([fd2db58](https://github.com/hexonet/ispapicli/commit/fd2db58c8ec39140754e6058399ea759b1b93701))
+
 ## [1.3.10](https://github.com/hexonet/ispapicli/compare/v1.3.9...v1.3.10) (2021-03-16)
 
 
