@@ -24,7 +24,7 @@ jobs:
         env:
             PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
         with:
-          python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          python-version: PYTHON_MIN_VERSION # Version range or exact version of a Python version to use, using SemVer's version range syntax
       - name: Install dependencies
         run: |
           pip install --upgrade pip
