@@ -4,12 +4,12 @@ on:
     branches-ignore:
       - "gh-pages*"
     tags-ignore: 
-      - '**'
+      - "**"
   pull_request:
     branches-ignore:
       - "gh-pages*"
     tags-ignore: 
-      - '**'
+      - "**"
 jobs:
   test:
     name: Test Job
