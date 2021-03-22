@@ -31,7 +31,6 @@ class MainFrame(QWidget):
         "NAMESERVER",
         "OBJECTID",
         "SSLCERTID",
-        "VSERVERID",
     ]
 
     def __init__(self, parent=None):
@@ -77,6 +76,9 @@ class MainFrame(QWidget):
 
         # initilaize command line completer
         self.initialiseCommandCompleter()
+
+        # initialize subuser completer
+        self.initialiseSubuserCompleter()
 
         # command to execute
         self.commandToExecute = ""
@@ -257,7 +259,7 @@ class MainFrame(QWidget):
                             # request call
                             self.response = core_obj.request(cmd)
                             # set reult values to gui
-                            self.populateResults(self.response, "iterative")
+                            self.populateResults(self.response)
                 else:
                     # request call
                     self.response = core_obj.request(cmd)
@@ -482,6 +484,7 @@ class MainFrame(QWidget):
         # params list
         self.batchParams = QComboBox()
         self.batchParams.addItems(self.BATCH_PARAMS)
+        self.batchParams.setEditable(True)
         # params text label
         self.batchParamsListLabel = QLabel()
         self.batchParamsListLabel.setText("Insert the list:")
@@ -738,7 +741,6 @@ class MainFrame(QWidget):
         self.scrap.scrapCommands()
         # init tool dropdown autocomplete
         self.initialiseCommandCompleter()
-        self.initialiseSubuserCompleter()
 
     def showAbout(self):
 

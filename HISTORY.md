@@ -1,3 +1,31 @@
+## [1.4.2](https://github.com/hexonet/ispapicli/compare/v1.4.1...v1.4.2) (2021-03-17)
+
+
+### Performance Improvements
+
+* **batch params:** making patch params editable ([6772228](https://github.com/hexonet/ispapicli/commit/6772228c767fe82a58ebff8f148bc489ee0cdf09))
+* **gui update:** making batch parameter editable ([e31a44b](https://github.com/hexonet/ispapicli/commit/e31a44baba98f7c2037fe72a8e9a5a312edb509b))
+
+## [1.4.1](https://github.com/hexonet/ispapicli/compare/v1.4.0...v1.4.1) (2021-03-17)
+
+
+### Performance Improvements
+
+* **release:** fixed python version due to failing dependabot PRs ([7cfdf64](https://github.com/hexonet/ispapicli/commit/7cfdf64f347f17d4c11313fbc4679e1deb84e600))
+
+# [1.4.0](https://github.com/hexonet/ispapicli/compare/v1.3.10...v1.4.0) (2021-03-17)
+
+
+### Features
+
+* **adding subuser:** adding subuser and batch features ([b720b77](https://github.com/hexonet/ispapicli/commit/b720b77a46edc5bc4158dd72cc94a75028874dea))
+
+
+### Performance Improvements
+
+* **black format:** triggering another release because of black reformat ([b727617](https://github.com/hexonet/ispapicli/commit/b72761778aded842b2b0ababc29a037c90712751))
+* **new features:** adding subuser and batch features ([fd2db58](https://github.com/hexonet/ispapicli/commit/fd2db58c8ec39140754e6058399ea759b1b93701))
+
 ## [1.3.10](https://github.com/hexonet/ispapicli/compare/v1.3.9...v1.3.10) (2021-03-16)
 
 
