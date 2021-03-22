@@ -21,8 +21,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: actions/setup-python@v2
+        env:
+            PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
         with:
-          python-version: 3.9 #${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
       - name: Install dependencies
         run: |
           pip install --upgrade pip
