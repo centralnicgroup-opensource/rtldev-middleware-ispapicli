@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/hexonet/ispapicli/compare/v1.4.2...v1.4.3) (2021-03-25)
+
+
+### Performance Improvements
+
+* **login:** making production option the default option in login ([0f2b7bf](https://github.com/hexonet/ispapicli/commit/0f2b7bf7e7d7af05131e1221559a0a082a07981d))
+
 ## [1.4.2](https://github.com/hexonet/ispapicli/compare/v1.4.1...v1.4.2) (2021-03-17)
 
 
