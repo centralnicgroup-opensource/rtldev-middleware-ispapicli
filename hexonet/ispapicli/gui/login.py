@@ -44,7 +44,7 @@ class LoginWindow(QDialog):
         self.passTxt = QLineEdit()
         self.passTxt.setEchoMode(QLineEdit.Password)
         self.sysChoice = QComboBox()
-        self.sysChoice.addItems(["ote", "live"])
+        self.sysChoice.addItems(["live", "ote"])
         self.loginMsg = QLabel("")
         self.loginMsg.setAlignment(Qt.AlignCenter)
 
