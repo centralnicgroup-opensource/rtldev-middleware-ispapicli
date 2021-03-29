@@ -8,8 +8,13 @@ on:
   pull_request:
     branches-ignore:
       - "gh-pages*"
+      - "dependabot/**"
     tags-ignore: 
       - "**"
+  pull_request_target:
+    branches:
+      - "dependabot/**"
+
 jobs:
   test:
     name: Test Job
