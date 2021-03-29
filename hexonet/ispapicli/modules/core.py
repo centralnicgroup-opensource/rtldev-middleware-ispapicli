@@ -119,9 +119,7 @@ class Core:
         )
         # version: show the tool version
 
-        parser.add_argument(
-            "--version", "-v", action="version", version="%(prog)s %(__version__)s"
-        )
+        parser.add_argument("--version", "-v", action="version", version=__version__)
 
         return parser
 
@@ -497,3 +495,6 @@ class Core:
             subusers["subuser"] = item["USER"]
             self.dbObj.insertSubuser(item["USER"], subusers)
         pass
+
+    def getCurrentVersion(self):
+        return __version__
