@@ -8,10 +8,9 @@ from gui.login import LoginWindow
 import textwrap
 import sys
 from io import StringIO
-from collections import defaultdict
 import re
-import subprocess
 import os
+import requests
 
 __version__ = "1.0.3"
 
@@ -351,6 +350,11 @@ class MainFrame(QWidget):
         )
         updateAction.triggered.connect(self.showUpdating)
 
+        updateToolAction = QAction(
+            QIcon(self.getIcon("direct-download.png")), "Update the tool", self
+        )
+        updateToolAction.triggered.connect(self.checkForUpdate)
+
         self.sessionTime = QLabel("Checking your session... ")
         spacer = QWidget()
         spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -372,6 +376,7 @@ class MainFrame(QWidget):
         self.toolbar.addAction(helpAction)
         self.toolbar.addAction(seperator)
         self.toolbar.addAction(updateAction)
+        self.toolbar.addAction(updateToolAction)
         self.toolbar.addWidget(spacer)
         self.toolbar.addWidget(self.sessionTime)
         self.toolbar.addWidget(self.loginBtn)
@@ -741,6 +746,13 @@ class MainFrame(QWidget):
         self.scrap.scrapCommands()
         # init tool dropdown autocomplete
         self.initialiseCommandCompleter()
+
+    def checkForUpdate(self):
+        currentVersion = self.coreLogic.getCurrentVersion()
+        url = "https://github.com/hexonet/ispapicli/releases/latest"
+        r = requests.get(url)
+        version = r.url.split("/")[-1]
+        print(version, currentVersion)
 
     def showAbout(self):
 

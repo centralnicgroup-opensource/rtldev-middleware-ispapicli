@@ -1,0 +1,17 @@
+#
+# This is a dummy workflow used to trigger release workflow. 
+#
+name: receive PR
+
+on:
+  pull_request:
+    branches-ignore:
+      - "gh-pages*"
+    tags-ignore: 
+      - "**"
+    
+jobs:
+  receivePR:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
