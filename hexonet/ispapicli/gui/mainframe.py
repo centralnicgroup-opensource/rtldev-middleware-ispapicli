@@ -12,7 +12,7 @@ import re
 import os
 import requests
 
-__version__ = "1.4.3"
+__version__ = "1.4.5"
 
 
 class MainFrame(QWidget):
