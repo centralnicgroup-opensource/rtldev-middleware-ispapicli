@@ -11,7 +11,6 @@ from io import StringIO
 import re
 import os
 import requests
-import subprocess
 
 __version__ = "1.4.3"
 

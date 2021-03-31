@@ -1,4 +1,3 @@
-#!/bin/bash
 echo "Executing Pyinstaller Windows..."
 pip install pyinstaller
 cd .\hexonet\ispapicli\

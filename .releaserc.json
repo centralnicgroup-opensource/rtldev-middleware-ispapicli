@@ -24,10 +24,8 @@
           "hexonet/ispapicli/__init__.py",
           "hexonet/ispapicli/ispapicli.py",
           "hexonet/ispapicli/modules/core.py",
-          "VERSION",
-          "artifacts/linux-binary/linux-binary-latest.zip",
-          "artifacts/macos-binary/macos-binary-latest.zip",
-          "artifacts/win-binary/win-binary-latest.zip"
+          "hexonet/ispapicli/gui/mainframe.py",
+          "VERSION"
         ]
       }
     ],
