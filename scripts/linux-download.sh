@@ -9,7 +9,8 @@ then
     if unzip -o $file;
     then
         pkill ispapicli
-        cp -r dist/ispapicli .
+        rm ispapicli
+        cp dist/ispapicli .
         ./ispapicli &
         echo "Cleaning..."
         rm $file

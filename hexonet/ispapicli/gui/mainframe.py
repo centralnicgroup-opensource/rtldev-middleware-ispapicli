@@ -11,6 +11,7 @@ from io import StringIO
 import re
 import os
 import requests
+from packaging import version
 
 __version__ = "1.4.6"
 
@@ -775,7 +776,14 @@ class MainFrame(QWidget):
             preBox.close()
             box = QMessageBox(self)
             # check if there is a new version available
+            # increase the current version by 1 as it was not added in the semantic versioning
+            # the bin generated before modifying the version files
             latestVersion = r.url.split("/")[-1]
+            latestVersion = version.parse(latestVersion[1:])
+            currentVersion = currentVersion.split(".")
+            currentVersion[2] = str(int(currentVersion[2]) + 1)
+            currentVersion = ".".join(currentVersion)
+            currentVersion = version.parse(currentVersion)
             if currentVersion == latestVersion:
                 msgNo = """<p align='center'>
                         You have the latest version installed.
@@ -796,6 +804,8 @@ class MainFrame(QWidget):
                     self.updateTool(latestVersion)
                 else:
                     box.close()
+            else:
+                return
 
     def updateTool(self, latestVersion):
         if sys.platform == "win32":
@@ -803,7 +813,6 @@ class MainFrame(QWidget):
             print(latestVersion, currentVersion)
         elif sys.platform == "linux" or sys.platform == "darwin":
             scriptPath = self.getScriptsPath("linux")
-            print(scriptPath)
             os.system(
                 "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
             )
