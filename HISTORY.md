@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/hexonet/ispapicli/compare/v1.4.6...v1.4.7) (2021-03-31)
+
+
+### Bug Fixes
+
+* **version check:** fixed version check by using standard version lib ([2e2368c](https://github.com/hexonet/ispapicli/commit/2e2368c865db5ebd371471c34f8ae219b366c5a6))
+
 ## [1.4.6](https://github.com/hexonet/ispapicli/compare/v1.4.5...v1.4.6) (2021-03-31)
 
 

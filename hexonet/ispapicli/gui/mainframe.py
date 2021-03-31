@@ -13,7 +13,7 @@ import os
 import requests
 from packaging import version
 
-__version__ = "1.4.6"
+__version__ = "1.4.7"
 
 
 class MainFrame(QWidget):
