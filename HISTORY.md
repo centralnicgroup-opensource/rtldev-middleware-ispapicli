@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/hexonet/ispapicli/compare/v1.4.4...v1.4.5) (2021-03-31)
+
+
+### Bug Fixes
+
+* **semantic release:** including version change in mainframe.py ([af1d945](https://github.com/hexonet/ispapicli/commit/af1d945f3ef6c9df0db7189c8b1387483191d3d1))
+
 ## [1.4.4](https://github.com/hexonet/ispapicli/compare/v1.4.3...v1.4.4) (2021-03-31)
 
 
