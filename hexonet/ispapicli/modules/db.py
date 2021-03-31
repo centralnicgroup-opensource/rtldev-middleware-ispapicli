@@ -40,10 +40,6 @@ class DB:
         """
         if getattr(sys, "frozen", False):
             self.absolute_dirpath = os.path.dirname(sys.executable)
-            # try:
-            #    self.absolute_dirpath = sys._MEIPASS
-            # except Exception:
-            #    self.absolute_dirpath = os.path.abspath(".")
             self.db_path = os.path.join(self.absolute_dirpath, "db")
             self.db_file_path = os.path.join(self.absolute_dirpath, "db/db.json")
         elif __file__:

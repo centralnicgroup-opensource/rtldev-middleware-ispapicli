@@ -11,8 +11,9 @@ from io import StringIO
 import re
 import os
 import requests
+import subprocess
 
-__version__ = "1.0.3"
+__version__ = "1.4.3"
 
 
 class MainFrame(QWidget):
@@ -46,7 +47,7 @@ class MainFrame(QWidget):
 
         # set gui layout
         mainLayout = QGridLayout()
-        mainLayout.setMenuBar(self.menuBar)
+        mainLayout.setMenuBar(self.leftMenuBar)
         mainLayout.addWidget(self.toolbar, 0, 0, 1, 3)
         mainLayout.addWidget(self.topBox, 1, 0, 1, 3)
         mainLayout.addWidget(self.leftGroupBox, 2, 0)
@@ -382,9 +383,11 @@ class MainFrame(QWidget):
         self.toolbar.addWidget(self.loginBtn)
 
     def createMenubar(self):
+        self.rightMenuBar = QMenuBar()
+        self.currentVersion = QLabel(__version__)
 
-        self.menuBar = QMenuBar()
-        file = self.menuBar.addMenu("File")
+        self.leftMenuBar = QMenuBar()
+        file = self.leftMenuBar.addMenu("File")
         new = QAction("New window", self)
         new.setShortcut("Ctrl+n")
         save = QAction("Save to file", self)
@@ -397,19 +400,28 @@ class MainFrame(QWidget):
         file.addAction(save)
         file.addAction(quit)
 
-        edit = self.menuBar.addMenu("Edit")
+        edit = self.leftMenuBar.addMenu("Edit")
         copy = QAction("Copy", self)
         copy.setShortcut("Ctrl+c")
 
         edit.addAction(copy)
 
-        help = self.menuBar.addMenu("Help")
+        help = self.leftMenuBar.addMenu("Help")
         help.addAction("About ISPAPI tool")
         help.addAction("How to start?")
 
         file.triggered[QAction].connect(self.menuBarActions)
         edit.triggered[QAction].connect(self.menuBarActions)
         help.triggered[QAction].connect(self.menuBarActions)
+
+        spacer = QWidget()
+        spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+
+        check = QAction("Current version: " + __version__, self)
+        self.rightMenuBar.addAction(check)
+
+        self.leftMenuBar.setCornerWidget(self.rightMenuBar)
+        self.leftMenuBar.setStyleSheet("padding: 0px 0px 0px 5px")
 
     def createTopGroupBox(self):
         self.topBox = QGroupBox((""))
@@ -748,11 +760,56 @@ class MainFrame(QWidget):
         self.initialiseCommandCompleter()
 
     def checkForUpdate(self):
-        currentVersion = self.coreLogic.getCurrentVersion()
+        preBox = QMessageBox(self)
+        msgNo = """<p align='center'>
+                        Checking for update...
+                    </p>
+                """
+        # preBox.setStandardButtons(QMessageBox.Ok)
+        preBox.setWindowTitle("Updating")
+        preBox.setText(msgNo)
+        preBox.show()
+        currentVersion = __version__
         url = "https://github.com/hexonet/ispapicli/releases/latest"
         r = requests.get(url)
-        version = r.url.split("/")[-1]
-        print(version, currentVersion)
+        if r.ok:
+            preBox.close()
+            box = QMessageBox(self)
+            # check if there is a new version available
+            latestVersion = r.url.split("/")[-1]
+            if currentVersion == latestVersion:
+                msgNo = """<p align='center'>
+                        You have the latest version installed.
+                        </p>
+                        """
+                box.setStandardButtons(QMessageBox.Ok)
+                box.setWindowTitle("Updating")
+                box.setText(msgNo)
+                box.show()
+            elif latestVersion > currentVersion:
+                msgYes = """<p align='center'>
+                    New version available, update now?
+                </p>
+                """
+                ret = box.question(self, "Updating", msgYes, box.No | box.Yes, box.Yes)
+                if ret == box.Yes:
+                    # updating the tool
+                    self.updateTool(latestVersion)
+                else:
+                    box.close()
+
+    def updateTool(self, latestVersion):
+        if sys.platform == "win32":
+            print("win")
+            print(latestVersion, currentVersion)
+        elif sys.platform == "linux" or sys.platform == "darwin":
+            scriptPath = self.getScriptsPath("linux")
+            print(scriptPath)
+            os.system(
+                "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
+            )
+        else:
+            print("unknow sys")
 
     def showAbout(self):
 
@@ -826,4 +883,19 @@ class MainFrame(QWidget):
             path = self.command_path = os.path.join(
                 self.absolute_dirpath, "../icons/" + iconName
             )
+        return path
+
+    def getScriptsPath(self, system):
+        """
+        Return the script path
+        """
+        path = "scripts/"
+        # scripts/linux-download.sh
+        # check which platform
+        if system == "linux":
+            path = path + "linux-download.sh "
+        elif system == "windows":
+            path = path + "win-download.ps1 "
+        else:
+            raise Exception
         return path
