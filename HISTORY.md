@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/hexonet/ispapicli/compare/v1.4.5...v1.4.6) (2021-03-31)
+
+
+### Bug Fixes
+
+* **binary:** fixed bin generation script after adding update script ([aae09ea](https://github.com/hexonet/ispapicli/commit/aae09ea0339f52ef1b48bfc31993a210dcec6a93))
+
 ## [1.4.5](https://github.com/hexonet/ispapicli/compare/v1.4.4...v1.4.5) (2021-03-31)
 
 
