@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/hexonet/ispapicli/compare/v1.4.3...v1.4.4) (2021-03-31)
+
+
+### Performance Improvements
+
+* **updating:** enable automatic tool update ([b3c46f4](https://github.com/hexonet/ispapicli/commit/b3c46f4e3409f5b0d39240a5fb1b75be1ea4742f))
+
 ## [1.4.3](https://github.com/hexonet/ispapicli/compare/v1.4.2...v1.4.3) (2021-03-25)
 
 
