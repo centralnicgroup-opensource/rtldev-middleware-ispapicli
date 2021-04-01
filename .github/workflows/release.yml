@@ -5,15 +5,11 @@ on:
       - "gh-pages*"
     tags-ignore: 
       - "**"
-  pull_request:
+  pull_request_target:
     branches-ignore:
       - "gh-pages*"
-      - "dependabot/**"
     tags-ignore: 
       - "**"
-  pull_request_target:
-    branches:
-      - "dependabot/**"
 
 jobs:
   test:
