@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/hexonet/ispapicli/compare/v1.4.7...v1.4.8) (2021-04-06)
+
+
+### Performance Improvements
+
+* **test ghactions:** new workflows ([20c55e3](https://github.com/hexonet/ispapicli/commit/20c55e3e36c3ef93c310981c8576d37e84287aa1))
+
 ## [1.4.7](https://github.com/hexonet/ispapicli/compare/v1.4.6...v1.4.7) (2021-03-31)
 
 
