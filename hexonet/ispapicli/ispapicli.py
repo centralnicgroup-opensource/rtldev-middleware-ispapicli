@@ -26,7 +26,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 def main(args):
-
+    # test gh-actions with env
     # create core logic object
     core_obj = Core()
     # get the python standard parser initialised
