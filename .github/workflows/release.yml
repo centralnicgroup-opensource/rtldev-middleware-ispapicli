@@ -26,14 +26,12 @@ jobs:
     # Only works for push https://github.com/actions/runner/issues/774
     if: github.event_name == 'pull_request' || (github.event_name == 'push' && contains(toJson(github.event.commits), '[skip ci]') == false)
     runs-on: ubuntu-latest
-    env:
-      PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -48,8 +46,6 @@ jobs:
     name: Generate Linux bin
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    env:
-      PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
     needs: test
     steps:
       - name: Checkout
@@ -57,7 +53,7 @@ jobs:
       - name: Checkout python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -77,8 +73,6 @@ jobs:
     name: Generate MacOS bin
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: macos-latest
-    env:
-      PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
     needs: test
     steps:
       - name: Checkout
@@ -86,7 +80,7 @@ jobs:
       - name: Checkout python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -106,8 +100,6 @@ jobs:
     name: Generate Win bin
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: windows-latest
-    env:
-      PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
     needs: test
     steps:
       - name: Checkout
@@ -115,7 +107,7 @@ jobs:
       - name: Checkout python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -134,8 +126,6 @@ jobs:
   release:
     name: Release Job
     runs-on: ubuntu-latest
-    env:
-      PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
     needs:
       - test
       - generate-linux-bin
@@ -150,7 +140,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip testresources setuptools wheel
