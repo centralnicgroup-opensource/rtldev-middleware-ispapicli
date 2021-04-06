@@ -1,0 +1,12 @@
+name: Receive Push
+on:
+  push:
+    branches-ignore:
+      - "gh-pages*"
+    tags-ignore: 
+      - "**"
+jobs:
+  receivePush:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
