@@ -835,69 +835,68 @@ class MainFrame(QWidget):
             preBox.show()
 
     def updateTool(self, latestVersion):
+        fileName = ""
         if sys.platform == "win32":
-            print("win")
-            print(latestVersion, currentVersion)
+            fileName = "win-binary-latest.zip"
         elif sys.platform == "linux" or sys.platform == "darwin":
             fileName = "linux-binary-latest.zip"
-            url = "https://github.com/hexonet/ispapicli/releases/download/v%s/%s" % (
-                latestVersion,
-                fileName,
+        else:
+            return
+
+        # init download
+        url = "https://github.com/hexonet/ispapicli/releases/download/v%s/%s" % (
+            latestVersion,
+            fileName,
+        )
+        import urllib
+
+        # Copy a network object to a local file
+        try:
+            # dwonload our zipped tool
+            fileDownloaded, response = urllib.request.urlretrieve(
+                url, fileName, self.Handle_Progress
             )
-            import urllib
+            if response and fileDownloaded:
+                # unzip the tool
+                import zipfile
 
-            # Copy a network object to a local file
-            try:
-                # dwonload our zipped tool
-                fileDownloaded, response = urllib.request.urlretrieve(
-                    url, fileName, self.Handle_Progress
-                )
-                if response and fileDownloaded:
-                    # unzip the tool
-                    import zipfile
-
-                    with zipfile.ZipFile(fileName, "r") as zip_ref:
-                        result = zip_ref.extractall()
-                        # print(result)
-                        # rename newly downloaded file
-                        box = QMessageBox(self)
-                        msgYes = """<p align='center'>
-                                        Download completed!<br>
-                                        Update now?
-                                    </p>
-                                    """
-                        ret = box.question(
-                            self, "Updating", msgYes, box.No | box.Yes, box.Yes
+                with zipfile.ZipFile(fileName, "r") as zip_ref:
+                    result = zip_ref.extractall()
+                    if sys.platform == "win32":
+                        # updating the tool
+                        scriptPath = self.getScriptsPath("win")
+                        subprocess.Popen(["bash", scriptPath])
+                        p = subprocess.Popen(
+                            ["powershell.exe", scriptPath], stdout=sys.stdout
                         )
-                        if ret == box.Yes:
-                            # updating the tool
-                            scriptPath = self.getScriptsPath("linux")
-                            print(scriptPath)
-                            # os.popen("sh " + scriptPath)
-                            subprocess.Popen(["bash", scriptPath])
-                            self.closeApplication()
-                        else:
-                            box.close()
-                else:
-                    raise Exception
-            except Exception as e:
-                msgBox = QMessageBox(self)
-                msgNo = (
-                    """<p align='center'>
-                                Problem to download: %s
-                            </p>
-                        """
-                    % e
-                )
-                # preBox.setStandardButtons(QMessageBox.Ok)
-                msgBox.setWindowTitle("Download")
-                msgBox.setText(msgNo)
-                msgBox.show()
+                        p.communicate()
+                        self.closeApplication()
+                    elif sys.platform == "linux" or sys.platform == "darwin":
+                        # updating the tool
+                        scriptPath = self.getScriptsPath("linux")
+                        subprocess.Popen(["bash", scriptPath])
+                        self.closeApplication()
+                    else:
+                        return
+
+            else:
+                raise Exception
+        except Exception as e:
+            msgBox = QMessageBox(self)
+            msgNo = (
+                """<p align='center'>
+                            Problem to download: %s
+                        </p>
+                    """
+                % e
+            )
+            # preBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.setWindowTitle("Download")
+            msgBox.setText(msgNo)
+            msgBox.show()
             # os.system(
             #     "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
             # )
-        else:
-            print("unknow sys")
 
     def showAbout(self):
 
