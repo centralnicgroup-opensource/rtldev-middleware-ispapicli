@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/hexonet/ispapicli/compare/v1.4.9...v1.4.10) (2021-04-07)
+
+
+### Performance Improvements
+
+* **auto update:** improving logic ([53000e0](https://github.com/hexonet/ispapicli/commit/53000e08bf0375e1738121fb9be7b71634ed12c2))
+
 ## [1.4.9](https://github.com/hexonet/ispapicli/compare/v1.4.8...v1.4.9) (2021-04-07)
 
 
