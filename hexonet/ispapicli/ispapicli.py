@@ -9,14 +9,10 @@ from pathlib import Path
 if sys.platform.startswith("linux"):
     if getattr(sys, "frozen", False):
         file_path = sys.executable
-        sys.path.insert(
-            0, os.path.dirname(os.path.abspath(file_path)) + "/../usr/share/ispapicli"
-        )
+        sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + "")
     else:
         file_path = __file__
-        sys.path.insert(
-            0, os.path.dirname(os.path.abspath(file_path)) + "/../share/ispapicli"
-        )
+        sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + "")
 
 from modules.core import Core
 from modules.scrap import Scrap
@@ -117,4 +113,5 @@ if __name__ == "__main__":
     if argsLen == 1:  # only in debugging mode
         startGUI()
     else:
+        # clean the other versions
         main(sys.argv[1:])

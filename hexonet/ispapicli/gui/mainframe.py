@@ -12,6 +12,7 @@ import re
 import os
 import requests
 from packaging import version
+import subprocess
 
 __version__ = "1.4.6"
 
@@ -846,8 +847,52 @@ class MainFrame(QWidget):
             import urllib
 
             # Copy a network object to a local file
-            urllib.request.urlretrieve(url, fileName, self.Handle_Progress)
-            # scriptPath = self.getScriptsPath("linux")
+            try:
+                # dwonload our zipped tool
+                fileDownloaded, response = urllib.request.urlretrieve(
+                    url, fileName, self.Handle_Progress
+                )
+                if response and fileDownloaded:
+                    # unzip the tool
+                    import zipfile
+
+                    with zipfile.ZipFile(fileName, "r") as zip_ref:
+                        result = zip_ref.extractall()
+                        # print(result)
+                        # rename newly downloaded file
+                        box = QMessageBox(self)
+                        msgYes = """<p align='center'>
+                                        Download completed!<br>
+                                        Update now?
+                                    </p>
+                                    """
+                        ret = box.question(
+                            self, "Updating", msgYes, box.No | box.Yes, box.Yes
+                        )
+                        if ret == box.Yes:
+                            # updating the tool
+                            scriptPath = self.getScriptsPath("linux")
+                            print(scriptPath)
+                            # os.popen("sh " + scriptPath)
+                            subprocess.Popen(["bash", scriptPath])
+                            self.closeApplication()
+                        else:
+                            box.close()
+                else:
+                    raise Exception
+            except Exception as e:
+                msgBox = QMessageBox(self)
+                msgNo = (
+                    """<p align='center'>
+                                Problem to download: %s
+                            </p>
+                        """
+                    % e
+                )
+                # preBox.setStandardButtons(QMessageBox.Ok)
+                msgBox.setWindowTitle("Download")
+                msgBox.setText(msgNo)
+                msgBox.show()
             # os.system(
             #     "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
             # )
@@ -936,9 +981,9 @@ class MainFrame(QWidget):
         # scripts/linux-download.sh
         # check which platform
         if system == "linux":
-            path = path + "linux-download.sh "
+            path = path + "linux-download.sh"
         elif system == "windows":
-            path = path + "win-download.ps1 "
+            path = path + "win-download.ps1"
         else:
             raise Exception
         return path

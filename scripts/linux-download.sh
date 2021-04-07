@@ -1,26 +1,20 @@
 #!/bin/bash
 echo "Executing download script on linux..."
-version=$1
 file=linux-binary-latest.zip
-if wget https://github.com/hexonet/ispapicli/releases/download/"$version"/"$file";
+if pkill ispapicli;
 then
-    echo "Download finished"
-    echo "Unzipping new file"
-    if unzip -o $file;
+    if rm ispapicli;
     then
-        pkill ispapicli
-        rm ispapicli
         cp dist/ispapicli .
-        ./ispapicli &
+        sudo chmod +x ispapicli
+        sudo ./ispapicli &
         echo "Cleaning..."
         rm $file
         rm -r dist
         echo "Cleaning finished"
     else
-        echo FAIL Unzipping
+        echo FAIL
     fi
 else
-    echo FAIL Downloading
+    echo FAIL
 fi
-
-
