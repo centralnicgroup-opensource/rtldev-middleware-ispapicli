@@ -26,7 +26,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 def main(args):
-    # fake something
+    # fake somethingsss
     # create core logic object
     core_obj = Core()
     # get the python standard parser initialised
