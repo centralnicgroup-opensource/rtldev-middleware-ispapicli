@@ -13,7 +13,7 @@ import os
 import requests
 from packaging import version
 
-__version__ = "1.4.8"
+__version__ = "1.4.6"
 
 
 class MainFrame(QWidget):
@@ -759,63 +759,98 @@ class MainFrame(QWidget):
         # init tool dropdown autocomplete
         self.initialiseCommandCompleter()
 
+    def Handle_Progress(self, blocknum, blocksize, totalsize):
+
+        ## calculate the progress
+        readed_data = blocknum * blocksize
+
+        if totalsize > 0:
+            download_percentage = readed_data * 100 / totalsize
+            self.progressBar.setValue(download_percentage)
+            QApplication.processEvents()
+
     def checkForUpdate(self):
-        preBox = QMessageBox(self)
-        msgNo = """<p align='center'>
-                        Checking for update...
-                    </p>
-                """
-        # preBox.setStandardButtons(QMessageBox.Ok)
-        preBox.setWindowTitle("Updating")
-        preBox.setText(msgNo)
-        preBox.show()
-        currentVersion = __version__
-        url = "https://github.com/hexonet/ispapicli/releases/latest"
-        r = requests.get(url)
-        if r.ok:
-            preBox.close()
-            box = QMessageBox(self)
-            # check if there is a new version available
-            # increase the current version by 1 as it was not added in the semantic versioning
-            # the bin generated before modifying the version files
-            latestVersion = r.url.split("/")[-1]
-            latestVersion = version.parse(latestVersion[1:])
-            currentVersion = currentVersion.split(".")
-            currentVersion[2] = str(int(currentVersion[2]) + 1)
-            currentVersion = ".".join(currentVersion)
-            currentVersion = version.parse(currentVersion)
-            if currentVersion == latestVersion:
-                msgNo = """<p align='center'>
-                        You have the latest version installed.
+        try:
+            preBox = QMessageBox(self)
+            msgNo = """<p align='center'>
+                            Checking for update...
                         </p>
-                        """
-                box.setStandardButtons(QMessageBox.Ok)
-                box.setWindowTitle("Updating")
-                box.setText(msgNo)
-                box.show()
-            elif latestVersion > currentVersion:
-                msgYes = """<p align='center'>
-                    New version available, update now?
-                </p>
-                """
-                ret = box.question(self, "Updating", msgYes, box.No | box.Yes, box.Yes)
-                if ret == box.Yes:
-                    # updating the tool
-                    self.updateTool(latestVersion)
+                    """
+            # preBox.setStandardButtons(QMessageBox.Ok)
+            preBox.setWindowTitle("Checking...")
+            preBox.setText(msgNo)
+            preBox.show()
+            QApplication.processEvents()
+            currentVersion = __version__
+            url = "https://github.com/hexonet/ispapicli/releases/latest"
+            r = requests.get(url)
+            if r.ok:
+                preBox.close()
+                box = QMessageBox(self)
+                # check if there is a new version available
+                # increase the current version by 1 as it was not added in the semantic versioning
+                # the bin generated before modifying the version files
+                latestVersion = r.url.split("/")[-1]
+                latestVersion = version.parse(latestVersion[1:])
+                currentVersion = currentVersion.split(".")
+                currentVersion[2] = str(int(currentVersion[2]) + 1)
+                currentVersion = ".".join(currentVersion)
+                currentVersion = version.parse(currentVersion)
+                if currentVersion == latestVersion:
+                    msgNo = """<p align='center'>
+                            You have the latest version installed.
+                            </p>
+                            """
+                    box.setStandardButtons(QMessageBox.Ok)
+                    box.setWindowTitle("Updating")
+                    box.setText(msgNo)
+                    box.show()
+                elif latestVersion > currentVersion:
+                    msgYes = """<p align='center'>
+                        New version available, update now?
+                    </p>
+                    """
+                    ret = box.question(
+                        self, "Updating", msgYes, box.No | box.Yes, box.Yes
+                    )
+                    if ret == box.Yes:
+                        # updating the tool
+                        self.updateTool(latestVersion)
+                    else:
+                        box.close()
                 else:
-                    box.close()
+                    return
             else:
-                return
+                raise Exception
+        except Exception:
+            preBox = QMessageBox(self)
+            msgNo = """<p align='center'>
+                            Please check your internet connection.
+                        </p>
+                    """
+            # preBox.setStandardButtons(QMessageBox.Ok)
+            preBox.setWindowTitle("No Internet")
+            preBox.setText(msgNo)
+            preBox.show()
 
     def updateTool(self, latestVersion):
         if sys.platform == "win32":
             print("win")
             print(latestVersion, currentVersion)
         elif sys.platform == "linux" or sys.platform == "darwin":
-            scriptPath = self.getScriptsPath("linux")
-            os.system(
-                "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
+            fileName = "linux-binary-latest.zip"
+            url = "https://github.com/hexonet/ispapicli/releases/download/v%s/%s" % (
+                latestVersion,
+                fileName,
             )
+            import urllib
+
+            # Copy a network object to a local file
+            urllib.request.urlretrieve(url, fileName, self.Handle_Progress)
+            # scriptPath = self.getScriptsPath("linux")
+            # os.system(
+            #     "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
+            # )
         else:
             print("unknow sys")
 
