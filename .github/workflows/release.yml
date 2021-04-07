@@ -7,32 +7,10 @@ on:
     types:
       - completed
 jobs:
-  test:
-    name: Test Job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.workflow_run.head_ref }} # checkout the commit that triggered the run of the workflow on the main branch.
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip -V
-          pip install --upgrade -e .
-      - name: Validate & Coverage Report
-        run: |
-          "./scripts/black.sh"
-          "./scripts/coverage.sh"
-        # TODO add more lines here to be executed in the test stage e.g. pyinstaller etc.
   generate-linux-bin:
     name: Generate Linux bin
     if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.name == 'Receive Push'
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -59,7 +37,6 @@ jobs:
     name: Generate MacOS bin
     if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.name == 'Receive Push'
     runs-on: macos-latest
-    needs: test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -86,7 +63,6 @@ jobs:
     name: Generate Win bin
     if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.name == 'Receive Push'
     runs-on: windows-latest
-    needs: test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -113,7 +89,6 @@ jobs:
     name: Release Job
     runs-on: ubuntu-latest
     needs:
-      - test
       - generate-linux-bin
       - generate-macos-bin
       - generate-win-bin
