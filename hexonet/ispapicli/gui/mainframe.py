@@ -14,7 +14,7 @@ import requests
 from packaging import version
 import subprocess
 
-__version__ = "1.4.9"
+__version__ = "1.4.10"
 
 
 class MainFrame(QWidget):
