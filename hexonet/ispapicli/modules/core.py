@@ -13,7 +13,7 @@ from tabulate import tabulate
 from textwrap import TextWrapper
 from .db import DB
 
-__version__ = "1.4.8"
+__version__ = "1.4.9"
 
 
 class Core:
