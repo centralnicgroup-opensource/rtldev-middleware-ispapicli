@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          ref: ${{ github.event.workflow_run.head_sha }} # checkout the commit that triggered the run of the workflow on the main branch.
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -38,6 +39,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          ref: ${{ github.event.workflow_run.head_sha }} # checkout the commit that triggered the run of the workflow on the main branch.
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -65,6 +67,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          ref: ${{ github.event.workflow_run.head_sha }} # checkout the commit that triggered the run of the workflow on the main branch.
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -92,6 +95,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          ref: ${{ github.event.workflow_run.head_sha }} # checkout the commit that triggered the run of the workflow on the main branch.
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -125,6 +129,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          ref: ${{ github.event.workflow_run.head_sha }} # checkout the commit that triggered the run of the workflow on the main branch.
       - name: Install dependencies
         run: |
           pip install --upgrade pip testresources setuptools wheel
