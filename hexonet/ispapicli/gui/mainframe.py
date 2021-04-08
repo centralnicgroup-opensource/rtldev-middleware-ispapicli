@@ -15,7 +15,7 @@ from packaging import version
 import subprocess
 import shutil
 
-__version__ = "1.4.8"
+__version__ = "1.4.11"
 
 
 class MainFrame(QWidget):

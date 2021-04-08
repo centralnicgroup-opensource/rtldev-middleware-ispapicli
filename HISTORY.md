@@ -1,3 +1,17 @@
+## [1.4.11](https://github.com/hexonet/ispapicli/compare/v1.4.10...v1.4.11) (2021-04-08)
+
+
+### Bug Fixes
+
+* **bin fix:** fixed windows bin generation ([f233432](https://github.com/hexonet/ispapicli/commit/f23343253e02f9af2c154edae3840a786fad0632))
+* **win bin:** fixed win binary ([67bd79d](https://github.com/hexonet/ispapicli/commit/67bd79dfe37ad1a01638a511c012134efb42a179))
+
+
+### Performance Improvements
+
+* **bin:** improving bin generation ([68977dd](https://github.com/hexonet/ispapicli/commit/68977dda79568128a5614c2557af6f353ba416bd))
+* **semantic release:** fixed semantic release ([c2c147c](https://github.com/hexonet/ispapicli/commit/c2c147cee92533a1282e9b2ff096590faee0b777))
+
 ## [1.4.10](https://github.com/hexonet/ispapicli/compare/v1.4.9...v1.4.10) (2021-04-07)
 
 
