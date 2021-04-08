@@ -99,7 +99,6 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-          ref: ${{ github.event.workflow_run.head_sha }} # checkout the commit that triggered the run of the workflow on the main branch.
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }}

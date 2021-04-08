@@ -13,8 +13,9 @@ import os
 import requests
 from packaging import version
 import subprocess
+import shutil
 
-__version__ = "1.4.10"
+__version__ = "1.4.8"
 
 
 class MainFrame(QWidget):
@@ -837,9 +838,9 @@ class MainFrame(QWidget):
     def updateTool(self, latestVersion):
         fileName = ""
         if sys.platform == "win32":
-            fileName = "win-binary-latest.zip"
+            fileName = "win-binary-%s.zip" % str(latestVersion)
         elif sys.platform == "linux" or sys.platform == "darwin":
-            fileName = "linux-binary-latest.zip"
+            fileName = "linux-binary-%s.zip" % str(latestVersion)
         else:
             return
 
@@ -848,6 +849,7 @@ class MainFrame(QWidget):
             latestVersion,
             fileName,
         )
+        print(url)
         import urllib
 
         # Copy a network object to a local file
@@ -861,24 +863,26 @@ class MainFrame(QWidget):
                 import zipfile
 
                 with zipfile.ZipFile(fileName, "r") as zip_ref:
-                    result = zip_ref.extractall()
+                    result = zip_ref.extractall("tmp")
+                    newToolName = "ispapicli-%s" % str(latestVersion)
+                    # rename the newly donwloaded tool
+                    os.rename(r"tmp/ispapicli", newToolName)
+                    # clean the directoy
+                    os.remove(fileDownloaded)
+                    os.rmdir("tmp")
+                    # start the new tool
                     if sys.platform == "win32":
                         # updating the tool
-                        scriptPath = self.getScriptsPath("win")
-                        subprocess.Popen(["bash", scriptPath])
-                        p = subprocess.Popen(
-                            ["powershell.exe", scriptPath], stdout=sys.stdout
-                        )
-                        p.communicate()
+                        os.system("" + newToolName)
                         self.closeApplication()
                     elif sys.platform == "linux" or sys.platform == "darwin":
                         # updating the tool
-                        scriptPath = self.getScriptsPath("linux")
-                        subprocess.Popen(["bash", scriptPath])
+                        os.system(
+                            "./" + newToolName
+                        )  # TODO clean the old version by sending an argument
                         self.closeApplication()
                     else:
                         return
-
             else:
                 raise Exception
         except Exception as e:
