@@ -876,7 +876,9 @@ class MainFrame(QWidget):
                         # start the new tool
                         os.system("" + newToolName)
                         self.closeApplication()
-                    elif (sys.platform == "linux" or sys.platform == "darwin") and result is None:
+                    elif (
+                        sys.platform == "linux" or sys.platform == "darwin"
+                    ) and result is None:
                         newToolName = "ispapicli-%s" % str(latestVersion)
                         # rename the newly donwloaded tool
                         os.rename(r"tmp/ispapicli", newToolName)
