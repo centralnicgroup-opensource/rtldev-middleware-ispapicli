@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/hexonet/ispapicli/compare/v1.4.11...v1.4.12) (2021-04-08)
+
+
+### Performance Improvements
+
+* **auto update:** generate bin ([cdb06c7](https://github.com/hexonet/ispapicli/commit/cdb06c743f66f35119498623fc112dde471a2425))
+
 ## [1.4.11](https://github.com/hexonet/ispapicli/compare/v1.4.10...v1.4.11) (2021-04-08)
 
 
