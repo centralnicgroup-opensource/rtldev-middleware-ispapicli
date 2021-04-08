@@ -15,7 +15,7 @@ from packaging import version
 import subprocess
 import shutil
 
-__version__ = "1.4.12"
+__version__ = "1.4.10"
 
 
 class MainFrame(QWidget):
@@ -865,16 +865,18 @@ class MainFrame(QWidget):
                 with zipfile.ZipFile(fileName, "r") as zip_ref:
                     result = zip_ref.extractall("tmp")
                     # start the new tool
-                    if sys.platform == "win32":
+                    if sys.platform == "win32" and result is None:
                         # updating the tool
                         newToolName = "ispapicli-%s" % str(latestVersion) + ".exe"
-                        os.system("" + newToolName)
                         # rename the newly donwloaded tool
                         os.rename(r"tmp/ispapicli.exe", newToolName)
                         # clean the directoy
                         os.remove(fileDownloaded)
                         os.rmdir("tmp")
-                    elif sys.platform == "linux" or sys.platform == "darwin":
+                        # start the new tool
+                        os.system("" + newToolName)
+                        self.closeApplication()
+                    elif (sys.platform == "linux" or sys.platform == "darwin") and result is None:
                         newToolName = "ispapicli-%s" % str(latestVersion)
                         # rename the newly donwloaded tool
                         os.rename(r"tmp/ispapicli", newToolName)
