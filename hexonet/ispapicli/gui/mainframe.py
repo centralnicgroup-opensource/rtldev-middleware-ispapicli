@@ -864,25 +864,52 @@ class MainFrame(QWidget):
 
                 with zipfile.ZipFile(fileName, "r") as zip_ref:
                     result = zip_ref.extractall("tmp")
-                    newToolName = "ispapicli-%s" % str(latestVersion)
-                    # rename the newly donwloaded tool
-                    os.rename(r"tmp/ispapicli", newToolName)
-                    # clean the directoy
-                    os.remove(fileDownloaded)
-                    os.rmdir("tmp")
                     # start the new tool
                     if sys.platform == "win32":
                         # updating the tool
+                        newToolName = "ispapicli-%s" % str(latestVersion) + ".exe"
                         os.system("" + newToolName)
-                        self.closeApplication()
+                        # rename the newly donwloaded tool
+                        os.rename(r"tmp/ispapicli.exe", newToolName)
+                        # clean the directoy
+                        os.remove(fileDownloaded)
+                        os.rmdir("tmp")
                     elif sys.platform == "linux" or sys.platform == "darwin":
+                        newToolName = "ispapicli-%s" % str(latestVersion)
+                        # rename the newly donwloaded tool
+                        os.rename(r"tmp/ispapicli", newToolName)
+                        # clean the directoy
+                        os.remove(fileDownloaded)
+                        os.rmdir("tmp")
                         # updating the tool
-                        os.system(
-                            "./" + newToolName
-                        )  # TODO clean the old version by sending an argument
+                        os.system("sudo chmod +x " + newToolName)
+                        os.system("./" + newToolName + " &")
                         self.closeApplication()
+                        # TODO clean the old version by sending an argument
+                        # process = subprocess.Popen(
+                        #    ["sudo chmod +x " + newToolName, "./" + newToolName]
+                        # )
                     else:
                         return
+
+                    # upon success
+                    # finalBox = QMessageBox(self)
+                    # msgYes = """<p align='center'>
+                    #     Update finished, close now?
+                    # </p>
+                    # """
+                    # ret = finalBox.question(
+                    #     self,
+                    #     "Updating",
+                    #     msgYes,
+                    #     finalBox.No | finalBox.Yes,
+                    #     finalBox.Yes,
+                    # )
+                    # if ret == finalBox.Yes:
+                    #     # updating the tool
+                    #     self.closeApplication()
+                    # else:
+                    #     finalBox.close()
             else:
                 raise Exception
         except Exception as e:
