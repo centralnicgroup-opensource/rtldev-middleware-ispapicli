@@ -2,14 +2,13 @@ name: Release
 on:
   workflow_run:
     workflows: 
-    - Receive Pull_request 
     - Receive Push
     types:
       - completed
 jobs:
   generate-linux-bin:
     name: Generate Linux bin
-    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.name == 'Receive Push' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +34,7 @@ jobs:
           retention-days: 1
   generate-macos-bin:
     name: Generate MacOS bin
-    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.name == 'Receive Push' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -61,7 +60,7 @@ jobs:
           retention-days: 1
   generate-win-bin:
     name: Generate Win bin
-    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.name == 'Receive Push' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
     runs-on: windows-latest
     steps:
       - name: Checkout
