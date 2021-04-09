@@ -12,8 +12,10 @@ import re
 import os
 import requests
 from packaging import version
+import subprocess
+import shutil
 
-__version__ = "1.4.6"
+__version__ = "1.4.10"
 
 
 class MainFrame(QWidget):
@@ -834,25 +836,102 @@ class MainFrame(QWidget):
             preBox.show()
 
     def updateTool(self, latestVersion):
+        fileName = ""
         if sys.platform == "win32":
-            print("win")
-            print(latestVersion, currentVersion)
+            fileName = "win-binary-%s.zip" % str(latestVersion)
         elif sys.platform == "linux" or sys.platform == "darwin":
-            fileName = "linux-binary-latest.zip"
-            url = "https://github.com/hexonet/ispapicli/releases/download/v%s/%s" % (
-                latestVersion,
-                fileName,
-            )
-            import urllib
+            fileName = "linux-binary-%s.zip" % str(latestVersion)
+        else:
+            return
 
-            # Copy a network object to a local file
-            urllib.request.urlretrieve(url, fileName, self.Handle_Progress)
-            # scriptPath = self.getScriptsPath("linux")
+        # init download
+        url = "https://github.com/hexonet/ispapicli/releases/download/v%s/%s" % (
+            latestVersion,
+            fileName,
+        )
+        print(url)
+        import urllib
+
+        # Copy a network object to a local file
+        try:
+            # dwonload our zipped tool
+            fileDownloaded, response = urllib.request.urlretrieve(
+                url, fileName, self.Handle_Progress
+            )
+            if response and fileDownloaded:
+                # unzip the tool
+                import zipfile
+
+                with zipfile.ZipFile(fileName, "r") as zip_ref:
+                    result = zip_ref.extractall("tmp")
+                    # start the new tool
+                    if sys.platform == "win32" and result is None:
+                        # updating the tool
+                        newToolName = "ispapicli-%s" % str(latestVersion) + ".exe"
+                        # rename the newly donwloaded tool
+                        os.rename(r"tmp/ispapicli.exe", newToolName)
+                        # clean the directoy
+                        os.remove(fileDownloaded)
+                        os.rmdir("tmp")
+                        # start the new tool
+                        os.system("" + newToolName)
+                        self.closeApplication()
+                    elif (
+                        sys.platform == "linux" or sys.platform == "darwin"
+                    ) and result is None:
+                        newToolName = "ispapicli-%s" % str(latestVersion)
+                        # rename the newly donwloaded tool
+                        os.rename(r"tmp/ispapicli", newToolName)
+                        # clean the directoy
+                        os.remove(fileDownloaded)
+                        os.rmdir("tmp")
+                        # updating the tool
+                        os.system("sudo chmod +x " + newToolName)
+                        os.system("./" + newToolName + " &")
+                        self.closeApplication()
+                        # TODO clean the old version by sending an argument
+                        # process = subprocess.Popen(
+                        #    ["sudo chmod +x " + newToolName, "./" + newToolName]
+                        # )
+                    else:
+                        return
+
+                    # upon success
+                    # finalBox = QMessageBox(self)
+                    # msgYes = """<p align='center'>
+                    #     Update finished, close now?
+                    # </p>
+                    # """
+                    # ret = finalBox.question(
+                    #     self,
+                    #     "Updating",
+                    #     msgYes,
+                    #     finalBox.No | finalBox.Yes,
+                    #     finalBox.Yes,
+                    # )
+                    # if ret == finalBox.Yes:
+                    #     # updating the tool
+                    #     self.closeApplication()
+                    # else:
+                    #     finalBox.close()
+            else:
+                raise Exception
+        except Exception as e:
+            msgBox = QMessageBox(self)
+            msgNo = (
+                """<p align='center'>
+                            Problem to download: %s
+                        </p>
+                    """
+                % e
+            )
+            # preBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.setWindowTitle("Download")
+            msgBox.setText(msgNo)
+            msgBox.show()
             # os.system(
             #     "gnome-terminal -- bash -c './" + scriptPath + latestVersion + ";bash'"
             # )
-        else:
-            print("unknow sys")
 
     def showAbout(self):
 
@@ -936,9 +1015,9 @@ class MainFrame(QWidget):
         # scripts/linux-download.sh
         # check which platform
         if system == "linux":
-            path = path + "linux-download.sh "
+            path = path + "linux-download.sh"
         elif system == "windows":
-            path = path + "win-download.ps1 "
+            path = path + "win-download.ps1"
         else:
             raise Exception
         return path

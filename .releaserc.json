@@ -35,15 +35,15 @@
         "assets": [
           {
             "label": "Linux executable (zip)",
-            "path": "artifacts/linux-binary/linux-binary-latest.zip"
+            "path": "artifacts/linux-binary/linux-binary-*.zip"
           },
           {
             "label": "MacOS executable (zip)",
-            "path": "artifacts/macos-binary/macos-binary-latest.zip"
+            "path": "artifacts/macos-binary/macos-binary-*.zip"
           },
           {
             "label": "Win executable (zip)",
-            "path": "artifacts/win-binary/win-binary-latest.zip"
+            "path": "artifacts/win-binary/win-binary-*.zip"
           }
         ]
       }

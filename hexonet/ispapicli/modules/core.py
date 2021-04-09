@@ -13,11 +13,13 @@ from tabulate import tabulate
 from textwrap import TextWrapper
 from .db import DB
 
-__version__ = "1.4.8"
+__version__ = "1.4.12"
 
 
 class Core:
     def __init__(self):
+        # check if older versions exist
+        self.__initToolVersions()
         # create API client
         self.cl = AC()
         # Send statistics
@@ -498,3 +500,23 @@ class Core:
 
     def getCurrentVersion(self):
         return __version__
+
+    def __initToolVersions(self):
+        currentVersion = __version__.split(".")
+        currentVersion[2] = str(int(currentVersion[2]) + 1)
+        currentVersion = ".".join(currentVersion)
+        currentToolVersion = "ispapicli-" + currentVersion
+        print(os.listdir())
+        files = os.listdir()
+        ispapicliVersions = []
+        for file in files:
+            if file.startswith("ispapicli"):
+                ispapicliVersions.append(file)
+        print(ispapicliVersions, len(ispapicliVersions))
+        if len(ispapicliVersions) <= 1:
+            return
+        else:
+            for ver in ispapicliVersions:
+                if currentToolVersion != ver:
+                    os.remove(ver)
+                    print(currentToolVersion, ver, "removed")
