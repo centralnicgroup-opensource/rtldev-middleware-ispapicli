@@ -59,7 +59,7 @@ setup(
         "twine==3.4.1",
         "tinydb==4.4.0",
         "GitPython==3.1.15",
-        "black==21.4b1",
+        "black==21.4b2",
     ],
     setup_requires=["pytest-runner"],
     tests_require=["pytest", "pytest-cov"],
