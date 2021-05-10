@@ -1,3 +1,10 @@
+## [1.4.14](https://github.com/hexonet/ispapicli/compare/v1.4.13...v1.4.14) (2021-05-10)
+
+
+### Bug Fixes
+
+* **bin:** python version changed to 3.6 ([d3099ec](https://github.com/hexonet/ispapicli/commit/d3099ec31c54e460dc5795d0982c3ff9d4b7dfb3))
+
 ## [1.4.13](https://github.com/hexonet/ispapicli/compare/v1.4.12...v1.4.13) (2021-05-10)
 
 
