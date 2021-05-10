@@ -22,7 +22,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 def main(args):
-
+    # test bin generation
     # create core logic object
     core_obj = Core()
     # get the python standard parser initialised
