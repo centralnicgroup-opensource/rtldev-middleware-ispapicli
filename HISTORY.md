@@ -1,3 +1,10 @@
+## [1.4.13](https://github.com/hexonet/ispapicli/compare/v1.4.12...v1.4.13) (2021-05-10)
+
+
+### Bug Fixes
+
+* **bin:** generating binaries ([c699253](https://github.com/hexonet/ispapicli/commit/c699253384deb2ccf28b05b26b3797763e848b9f))
+
 ## [1.4.12](https://github.com/hexonet/ispapicli/compare/v1.4.11...v1.4.12) (2021-04-08)
 
 
