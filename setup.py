@@ -58,7 +58,7 @@ setup(
         "urllib3==1.26.4",
         "twine==3.4.1",
         "tinydb==4.4.0",
-        "GitPython==3.1.15",
+        "GitPython==3.1.16",
         "black==21.5b1",
     ],
     setup_requires=["pytest-runner"],
