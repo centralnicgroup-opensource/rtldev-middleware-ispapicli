@@ -11,6 +11,7 @@ jobs:
   test:
     name: Test Job
     runs-on: ubuntu-latest
+    if: github.actor != "dependabot[bot]" # ignore pushed brnaches by dependabot
     steps:
       - name: Checkout
         uses: actions/checkout@v2
