@@ -59,7 +59,7 @@ setup(
         "twine==3.4.1",
         "tinydb==4.4.0",
         "GitPython==3.1.18",
-        "black==21.6b0",
+        "black",
     ],
     setup_requires=["pytest-runner"],
     tests_require=["pytest", "pytest-cov"],
@@ -75,4 +75,5 @@ setup(
     packages=find_packages(),
     python_requires=">=3.7",
     package_data={"": ["*.json", "*.png"]},
+    dependency_links=["git+git://github.com/psf/black.git@stable#egg=black"],
 )
