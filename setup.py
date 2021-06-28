@@ -57,7 +57,7 @@ setup(
         "tabulate==0.8.9",
         "urllib3==1.26.5",
         "twine==3.4.1",
-        "tinydb==4.4.0",
+        "tinydb==4.5.0",
         "GitPython==3.1.18",
         "black",
     ],
