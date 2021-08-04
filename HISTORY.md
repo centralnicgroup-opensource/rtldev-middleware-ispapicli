@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/hexonet/ispapicli/compare/v1.4.14...v1.5.0) (2021-08-04)
+
+
+### Features
+
+* **generatebin:** trigger release process ([189111f](https://github.com/hexonet/ispapicli/commit/189111f01a417c4d38f704e95a19cd56fa46abf7))
+
 ## [1.4.14](https://github.com/hexonet/ispapicli/compare/v1.4.13...v1.4.14) (2021-05-10)
 
 
