@@ -22,6 +22,7 @@ from PyQt5.QtWidgets import QApplication
 
 
 def main(args):
+    # this comment used to trigger a new release
     # create core logic object
     core_obj = Core()
     # get the python standard parser initialised
