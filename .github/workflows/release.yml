@@ -31,7 +31,8 @@ jobs:
           npm prune && npm i
       - name: Release - version update only
         run: |
-          npx semantic-release --plugins @semantic-release/commit-analyzer
+          echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh {nextRelease.version}" }]]}' > '.releaserc.json'
+          npx semantic-release
       - name: Run Pyinstaller
         run: |
           "./scripts/linux-pyinstaller.sh"
