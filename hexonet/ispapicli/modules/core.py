@@ -503,6 +503,8 @@ class Core:
 
     def __initToolVersions(self):
         currentVersion = __version__.split(".")
+        print(currentVersion)
+        return
         currentVersion[2] = str(int(currentVersion[2]) + 1)
         currentVersion = ".".join(currentVersion)
         currentToolVersion = "ispapicli-" + currentVersion
