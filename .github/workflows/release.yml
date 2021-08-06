@@ -33,7 +33,7 @@ jobs:
         run: |
           echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
           cat .releaserc.json
-          npx semantic-release --dry-run
+          npx semantic-release
       - name: Run Pyinstaller
         run: |
           "./scripts/linux-pyinstaller.sh"
