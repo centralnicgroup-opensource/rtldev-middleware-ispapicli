@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/hexonet/ispapicli/compare/v1.11.0...v1.12.0) (2021-08-06)
+
+
+### Features
+
+* **toolupdate:** semantic release fix ([f71f95e](https://github.com/hexonet/ispapicli/commit/f71f95eb99143562a4ddbe1cfb33b733ef90bc7d))
+
 # [1.11.0](https://github.com/hexonet/ispapicli/compare/v1.10.0...v1.11.0) (2021-08-06)
 
 
