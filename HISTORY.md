@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/hexonet/ispapicli/compare/v1.8.0...v1.9.0) (2021-08-06)
+
+
+### Features
+
+* **toolupdate:** semantic release tool update ([b8b3c2d](https://github.com/hexonet/ispapicli/commit/b8b3c2decad58cfbd47e826449fe1387c8b3da41))
+
 # [1.8.0](https://github.com/hexonet/ispapicli/compare/v1.7.0...v1.8.0) (2021-08-06)
 
 
