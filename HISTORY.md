@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/hexonet/ispapicli/compare/v1.9.0...v1.10.0) (2021-08-06)
+
+
+### Features
+
+* **updatetool:** testing version ([a3962af](https://github.com/hexonet/ispapicli/commit/a3962afed9d40b9bd12c578255860068ce6c629a))
+
 # [1.9.0](https://github.com/hexonet/ispapicli/compare/v1.8.0...v1.9.0) (2021-08-06)
 
 
