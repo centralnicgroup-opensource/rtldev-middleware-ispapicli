@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/hexonet/ispapicli/compare/v1.7.0...v1.8.0) (2021-08-06)
+
+
+### Features
+
+* **toolupdate:** fixing version comparsion ([6212fc8](https://github.com/hexonet/ispapicli/commit/6212fc85f900e19bbc2f5b94b8056393ceb5ffad))
+
 # [1.5.0](https://github.com/hexonet/ispapicli/compare/v1.4.14...v1.5.0) (2021-08-04)
 
 
