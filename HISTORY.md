@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/hexonet/ispapicli/compare/v1.14.0...v1.15.0) (2021-08-06)
+
+
+### Features
+
+* **toolupdate:** semantic release verifyReleaseCmd ([2e97e68](https://github.com/hexonet/ispapicli/commit/2e97e68ef9577ee24d0a6590913c9990716bc2ab))
+
 # [1.14.0](https://github.com/hexonet/ispapicli/compare/v1.13.0...v1.14.0) (2021-08-06)
 
 
