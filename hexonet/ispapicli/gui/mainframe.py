@@ -789,15 +789,8 @@ class MainFrame(QWidget):
             if r.ok:
                 preBox.close()
                 box = QMessageBox(self)
-                # check if there is a new version available
-                # increase the current version by 1 as it was not added in the semantic versioning
-                # the bin generated before modifying the version files
                 latestVersion = r.url.split("/")[-1]
-                latestVersion = version.parse(latestVersion[1:])
-                currentVersion = currentVersion.split(".")
-                currentVersion[2] = str(int(currentVersion[2]) + 1)
-                currentVersion = ".".join(currentVersion)
-                currentVersion = version.parse(currentVersion)
+                latestVersion = version.parse(latestVersion[1:])  # remove the prefix v
                 if currentVersion == latestVersion:
                     msgNo = """<p align='center'>
                             You have the latest version installed.
@@ -838,9 +831,11 @@ class MainFrame(QWidget):
     def updateTool(self, latestVersion):
         fileName = ""
         if sys.platform == "win32":
-            fileName = "win-binary-%s.zip" % str(latestVersion)
-        elif sys.platform == "linux" or sys.platform == "darwin":
-            fileName = "linux-binary-%s.zip" % str(latestVersion)
+            fileName = "win-binary-latest.zip"  # fileName = "win-binary-%s.zip" % str(latestVersion)
+        elif sys.platform == "darwin":
+            fileName = "macos-binary-latest.zip"
+        elif sys.platform == "linux":
+            fileName = "linux-binary-latest.zip"
         else:
             return
 
@@ -895,25 +890,6 @@ class MainFrame(QWidget):
                         # )
                     else:
                         return
-
-                    # upon success
-                    # finalBox = QMessageBox(self)
-                    # msgYes = """<p align='center'>
-                    #     Update finished, close now?
-                    # </p>
-                    # """
-                    # ret = finalBox.question(
-                    #     self,
-                    #     "Updating",
-                    #     msgYes,
-                    #     finalBox.No | finalBox.Yes,
-                    #     finalBox.Yes,
-                    # )
-                    # if ret == finalBox.Yes:
-                    #     # updating the tool
-                    #     self.closeApplication()
-                    # else:
-                    #     finalBox.close()
             else:
                 raise Exception
         except Exception as e:

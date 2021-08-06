@@ -502,10 +502,7 @@ class Core:
         return __version__
 
     def __initToolVersions(self):
-        currentVersion = __version__.split(".")
-        currentVersion[2] = str(int(currentVersion[2]) + 1)
-        currentVersion = ".".join(currentVersion)
-        currentToolVersion = "ispapicli-" + currentVersion
+        currentToolVersion = "ispapicli-" + __version__
         print(os.listdir())
         files = os.listdir()
         ispapicliVersions = []

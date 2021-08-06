@@ -19,14 +19,14 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }}
-      - name: Install dependencies
+      - name: Install python dependencies
         run: |
           pip install --upgrade pip
           pip -V
           pip install --upgrade -e .
       - name: Setup NodeJS LTS
         uses: actions/setup-node@v2
-      - name: Install dependencies
+      - name: Install NodeJS dependencies
         run: |
           npm prune && npm i
       - name: Release - version update only
@@ -43,65 +43,87 @@ jobs:
           name: linux-binary
           path: linux-binary-latest.zip
           retention-days: 1
-  # generate-macos-bin:
-  #   name: Generate MacOS bin
-  #   if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
-  #   runs-on: macos-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Checkout python
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: ${{ secrets.PYTHON_MIN_VERSION }}
-  #     - name: Install dependencies
-  #       run: |
-  #         pip install --upgrade pip
-  #         pip -V
-  #         pip install --upgrade -e .
-  #     - name: Run Pyinstaller
-  #       run: |
-  #         "./scripts/macos-pyinstaller.sh"
-  #       # upload macos-binary 
-  #     - name: Upload macos-binary
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: macos-binary
-  #         path: macos-binary-latest.zip
-  #         retention-days: 1
-  # generate-win-bin:
-  #   name: Generate Win bin
-  #   if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
-  #   runs-on: windows-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Checkout python
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: ${{ secrets.PYTHON_MIN_VERSION }}
-  #     - name: Install dependencies
-  #       run: |
-  #         pip install --upgrade pip
-  #         pip -V
-  #         pip install --upgrade -e .
-  #     - name: Run Pyinstaller
-  #       run: |
-  #         & "./scripts/win-pyinstaller.ps1"
-  #       # upload win-binary
-  #     - name: Upload win-binary
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: win-binary
-  #         path: win-binary-latest.zip
-  #         retention-days: 1
+  generate-macos-bin:
+    name: Generate MacOS bin
+    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
+      - name: Checkout python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Setup NodeJS LTS
+        uses: actions/setup-node@v2
+      - name: Install NodeJS dependencies
+        run: |
+          npm prune && npm i
+      - name: Release - version update only
+        run: |
+          echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
+          npx semantic-release
+      - name: Run Pyinstaller
+        run: |
+          "./scripts/macos-pyinstaller.sh"
+        # upload macos-binary 
+      - name: Upload macos-binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-binary
+          path: macos-binary-latest.zip
+          retention-days: 1
+  generate-win-bin:
+    name: Generate Win bin
+    if: github.event.workflow_run.head_branch == 'master' && github.event.workflow_run.conclusion == 'success'
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
+      - name: Checkout python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+      - name: Install python dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Setup NodeJS LTS
+        uses: actions/setup-node@v2
+      - name: Install NodeJS dependencies
+        run: |
+          npm prune && npm i
+      - name: Release - version update only
+        run: |
+          echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
+          npx semantic-release
+      - name: Run Pyinstaller
+        run: |
+          & "./scripts/win-pyinstaller.ps1"
+        # upload win-binary
+      - name: Upload win-binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: win-binary
+          path: win-binary-latest.zip
+          retention-days: 1
   release:
     name: Release Job
     runs-on: ubuntu-latest
     needs:
       - generate-linux-bin
-      # - generate-macos-bin
-      # - generate-win-bin
+      - generate-macos-bin
+      - generate-win-bin
     steps:
       - name: Checkout
         uses: actions/checkout@v2
