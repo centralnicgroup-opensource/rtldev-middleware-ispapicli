@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/hexonet/ispapicli/compare/v1.13.0...v1.14.0) (2021-08-06)
+
+
+### Features
+
+* **toolupdate:** stop commit analizer ([48116d6](https://github.com/hexonet/ispapicli/commit/48116d697f029fd5f593291dda9f0e12108289b8))
+
 # [1.12.0](https://github.com/hexonet/ispapicli/compare/v1.11.0...v1.12.0) (2021-08-06)
 
 
