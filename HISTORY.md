@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/hexonet/ispapicli/compare/v1.15.0...v1.16.0) (2021-08-06)
+
+
+### Features
+
+* **toolupdate:** updated + semantic release fixes ([d5168a3](https://github.com/hexonet/ispapicli/commit/d5168a3c993af31a7cde548b5784efb5951e1ae2))
+
+
+### Performance Improvements
+
+* **ci:** fixing macos sed script ([0066189](https://github.com/hexonet/ispapicli/commit/006618987fcd53a375e0ff18c029e7e1d6498633))
+
 # [1.15.0](https://github.com/hexonet/ispapicli/compare/v1.14.0...v1.15.0) (2021-08-06)
 
 
