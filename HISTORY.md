@@ -1,3 +1,11 @@
+# [1.17.0](https://github.com/hexonet/ispapicli/compare/v1.16.0...v1.17.0) (2021-08-06)
+
+
+### Features
+
+* **ci:** testing win settings ([15c3609](https://github.com/hexonet/ispapicli/commit/15c36095af634f15c116790c5e2dd825202140e7))
+* **ci:** tool update works now on all OSs ([7cd7766](https://github.com/hexonet/ispapicli/commit/7cd7766e1737ac3f64a1932dd68889feb8bf8ba2))
+
 # [1.16.0](https://github.com/hexonet/ispapicli/compare/v1.15.0...v1.16.0) (2021-08-06)
 
 
