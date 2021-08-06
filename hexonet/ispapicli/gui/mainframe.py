@@ -772,52 +772,47 @@ class MainFrame(QWidget):
             QApplication.processEvents()
 
     def checkForUpdate(self):
-        try:
-            preBox = QMessageBox(self)
-            msgNo = """<p align='center'>
-                            Checking for update...
-                        </p>
-                    """
-            # preBox.setStandardButtons(QMessageBox.Ok)
-            preBox.setWindowTitle("Checking...")
-            preBox.setText(msgNo)
-            preBox.show()
-            QApplication.processEvents()
-            currentVersion = __version__
-            url = "https://github.com/hexonet/ispapicli/releases/latest"
-            r = requests.get(url)
-            if r.ok:
-                preBox.close()
-                box = QMessageBox(self)
-                latestVersion = r.url.split("/")[-1]
-                latestVersion = version.parse(latestVersion[1:])  # remove the prefix v
-                if currentVersion == latestVersion:
-                    msgNo = """<p align='center'>
-                            You have the latest version installed.
-                            </p>
-                            """
-                    box.setStandardButtons(QMessageBox.Ok)
-                    box.setWindowTitle("Updating")
-                    box.setText(msgNo)
-                    box.show()
-                elif latestVersion > currentVersion:
-                    msgYes = """<p align='center'>
-                        New version available, update now?
+        preBox = QMessageBox(self)
+        msgNo = """<p align='center'>
+                        Checking for update...
                     </p>
-                    """
-                    ret = box.question(
-                        self, "Updating", msgYes, box.No | box.Yes, box.Yes
-                    )
-                    if ret == box.Yes:
-                        # updating the tool
-                        self.updateTool(latestVersion)
-                    else:
-                        box.close()
+                """
+        # preBox.setStandardButtons(QMessageBox.Ok)
+        preBox.setWindowTitle("Checking...")
+        preBox.setText(msgNo)
+        preBox.show()
+        QApplication.processEvents()
+        currentVersion = version.parse(__version__)
+        url = "https://github.com/hexonet/ispapicli/releases/latest"
+        r = requests.get(url)
+        if r.ok:
+            preBox.close()
+            box = QMessageBox(self)
+            latestVersion = r.url.split("/")[-1]
+            latestVersion = version.parse(latestVersion[1:])  # remove the prefix v
+            if currentVersion == latestVersion:
+                msgNo = """<p align='center'>
+                        You have the latest version installed.
+                        </p>
+                        """
+                box.setStandardButtons(QMessageBox.Ok)
+                box.setWindowTitle("Updating")
+                box.setText(msgNo)
+                box.show()
+            elif latestVersion > currentVersion:
+                msgYes = """<p align='center'>
+                    New version available, update now?
+                </p>
+                """
+                ret = box.question(self, "Updating", msgYes, box.No | box.Yes, box.Yes)
+                if ret == box.Yes:
+                    # updating the tool
+                    self.updateTool(latestVersion)
                 else:
-                    return
+                    box.close()
             else:
-                raise Exception
-        except Exception:
+                return
+        else:
             preBox = QMessageBox(self)
             msgNo = """<p align='center'>
                             Please check your internet connection.

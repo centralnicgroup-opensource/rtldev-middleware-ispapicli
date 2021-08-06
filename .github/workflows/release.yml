@@ -31,7 +31,7 @@ jobs:
           npm prune && npm i
       - name: Release - version update only
         run: |
-          echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
+          echo '{"dryRun": true, "plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
           npx semantic-release
       - name: Run Pyinstaller
         run: |
@@ -68,7 +68,7 @@ jobs:
           npm prune && npm i
       - name: Release - version update only
         run: |
-          echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
+          echo '{"dryRun": true, "plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
           npx semantic-release
       - name: Run Pyinstaller
         run: |
@@ -105,7 +105,7 @@ jobs:
           npm prune && npm i
       - name: Release - version update only
         run: |
-          echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
+          echo '{"dryRun": true, "plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "prepareCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
           npx semantic-release
       - name: Run Pyinstaller
         run: |
