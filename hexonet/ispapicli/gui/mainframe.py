@@ -491,6 +491,7 @@ class MainFrame(QWidget):
         tab1 = QWidget()
         self.commandText = QTextEdit()
         self.commandText.setPlaceholderText("Extracted command will be shown here")
+        self.commandText.setAcceptRichText(False)
         tab1hbox = QHBoxLayout()
         tab1hbox.setContentsMargins(5, 5, 5, 5)
         tab1hbox.addWidget(self.commandText)
