@@ -8,5 +8,5 @@
     :license: MIT and GPLv3, see LICENSE for more details.
 """
 
-__version__ = "1.17.0"
+__version__ = "1.17.1"
 name = "hexonet.ispapicli"

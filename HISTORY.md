@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/hexonet/ispapicli/compare/v1.17.0...v1.17.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **commandtext:** removed formatting form copy&paste text ([5a41d8f](https://github.com/hexonet/ispapicli/commit/5a41d8fec3d83cf6464d7678761d5a7fccc091b5))
+
 # [1.17.0](https://github.com/hexonet/ispapicli/compare/v1.16.0...v1.17.0) (2021-08-06)
 
 
