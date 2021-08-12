@@ -254,6 +254,7 @@ class MainFrame(QWidget):
                 batch_param = self.batchParams.currentText()
                 batch_params_list = self.batchParamsList.toPlainText()
                 if batch_param != "Select" and batch_params_list != "":
+                    self.plainResponse.setText("")
                     lines = batch_params_list.split("\n")
                     for line in lines:
                         if line != "":
@@ -261,7 +262,7 @@ class MainFrame(QWidget):
                             # request call
                             self.response = core_obj.request(cmd)
                             # set reult values to gui
-                            self.populateResults(self.response)
+                            self.populateResults(self.response, "iterative")
                 else:
                     # request call
                     self.response = core_obj.request(cmd)

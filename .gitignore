@@ -38,7 +38,7 @@ __pycache__/
 .Python
 build/
 db/
-hexonet/ispapicli/db/
+hexonet/ispapicli/db/*
 develop-eggs/
 dist/
 downloads/
