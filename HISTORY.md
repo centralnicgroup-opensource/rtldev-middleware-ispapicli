@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/hexonet/ispapicli/compare/v1.17.1...v1.17.2) (2021-08-12)
+
+
+### Bug Fixes
+
+* **batch:** show all responses in plain text ([044ee76](https://github.com/hexonet/ispapicli/commit/044ee7660baa177c69e1a932990e42bb93feb07b))
+
 ## [1.17.1](https://github.com/hexonet/ispapicli/compare/v1.17.0...v1.17.1) (2021-08-12)
 
 
