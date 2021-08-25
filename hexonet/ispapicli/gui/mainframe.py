@@ -253,7 +253,12 @@ class MainFrame(QWidget):
                 # check for batches
                 batch_param = self.batchParams.currentText()
                 batch_params_list = self.batchParamsList.toPlainText()
-                if batch_param != "Select" and batch_params_list != "":
+                active_tab = self.leftTabWidget.currentIndex()
+                if (
+                    batch_param != "Select"
+                    and batch_params_list != ""
+                    and active_tab == 1
+                ):
                     self.plainResponse.setText("")
                     lines = batch_params_list.split("\n")
                     for line in lines:
@@ -486,8 +491,8 @@ class MainFrame(QWidget):
 
     def createLeftGroupBox(self):
         self.leftGroupBox = QGroupBox("Command")
-        leftTabWidget = QTabWidget()
-        leftTabWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Ignored)
+        self.leftTabWidget = QTabWidget()
+        self.leftTabWidget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Ignored)
 
         tab1 = QWidget()
         self.commandText = QTextEdit()
@@ -523,11 +528,11 @@ class MainFrame(QWidget):
         tableLayout.addWidget(self.batchParamsList, 3, 0)
         tab2.setLayout(tableLayout)
 
-        leftTabWidget.addTab(tab1, "Extracted Command")
-        leftTabWidget.addTab(tab2, "Batch")
+        self.leftTabWidget.addTab(tab1, "Extracted Command")
+        self.leftTabWidget.addTab(tab2, "Batch")
 
         layout = QGridLayout()
-        layout.addWidget(leftTabWidget, 0, 0, 1, 1)
+        layout.addWidget(self.leftTabWidget, 0, 0, 1, 1)
 
         self.leftGroupBox.setLayout(layout)
 
