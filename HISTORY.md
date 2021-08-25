@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/hexonet/ispapicli/compare/v1.17.2...v1.17.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **command:** fixed command exe vs batch based on active tab ([586c583](https://github.com/hexonet/ispapicli/commit/586c583f440d66751b947969410ea3c5c3c90713))
+
 ## [1.17.2](https://github.com/hexonet/ispapicli/compare/v1.17.1...v1.17.2) (2021-08-12)
 
 
