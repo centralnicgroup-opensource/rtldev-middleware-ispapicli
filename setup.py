@@ -50,7 +50,7 @@ setup(
         "hexonet.apiconnector==3.8.2",
         "idna>=2.5,<4",
         "numpy==1.21.2",
-        "Pillow==8.3.1",
+        "Pillow==8.3.2",
         "PyQt5==5.15.4",
         "PyQt5-sip==12.9.0",
         "soupsieve==2.2.1",
