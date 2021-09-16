@@ -63,18 +63,21 @@ class LoginWindow(QDialog):
         self.rightGroupBox.setLayout(layout)
 
     def login(self):
-        myMovie = QMovie("icons/loading.gif")
-        myMovie.setScaledSize(QSize(18, 18))
-        self.loginMsg.setMovie(myMovie)
-        myMovie.start()
-
+        # disable login button
+        self.loginBtn.setEnabled(False)
+        self.loginBtn.setText("Please wait...")
+        QApplication.processEvents()
+        # check login
         coreLogic = Core()
         args = {}
         args["userid"] = self.userIDTxt.text()
         args["password"] = self.passTxt.text()
         args["entity"] = self.sysChoice.currentText()
-
         result, msg = coreLogic.login(args)
+        # enable button
+        self.loginBtn.setEnabled(True)
+        self.loginBtn.setText("Login")
+        QApplication.processEvents()
         if result == True:
             # update the subuser
             coreLogic.getSubUsers()
