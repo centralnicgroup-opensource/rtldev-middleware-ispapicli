@@ -163,16 +163,13 @@ def test_getCommandData(scrap_obj, command_example, command_params):
     assert (result == command_example) is True
 
 
-def test_cloneRepo(scrap_obj):
-    result = scrap_obj._Scrap__cloneRepo()
-    assert result is True
-
-
 def test_getCommandsParams(scrap_obj, raw_params_data, command_params):
     result = scrap_obj._Scrap__getCommandsParams(raw_params_data)
     assert (result == command_params) is True
 
 
 def test_scrapCommands(scrap_obj):
-    result = scrap_obj.scrapCommands()
-    assert result is True
+    testItem = "API/DOMAIN/ADDDOMAIN.md"
+    rawItems = scrap_obj.scrapCommands()
+    test = testItem in rawItems
+    assert test is True

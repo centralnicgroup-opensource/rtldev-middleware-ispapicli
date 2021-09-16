@@ -12,8 +12,6 @@ import re
 import os
 import requests
 from packaging import version
-import subprocess
-import shutil
 
 __version__ = "1.17.3"
 
@@ -87,6 +85,9 @@ class MainFrame(QWidget):
 
         # set app icon
         self.setWindowIcon(QIcon(self.getIcon("logo-bgw.jpg")))
+
+        # init loading gif
+        # self.loading_screen = LoadingScreen()
 
     def checkLogin(self):
         result = self.coreLogic.checkSession()
@@ -755,18 +756,12 @@ class MainFrame(QWidget):
         box.show()
 
     def showUpdating(self):
-        box = QMessageBox(self)
-        msg = """
-        <p>Updating is done!</p>
-        """
-        box.setStandardButtons(QMessageBox.Ok)
-        box.setIcon(QMessageBox.Information)
-        box.setWindowTitle("Updating...")
-        box.setText(msg)
-        box.show()
-        self.scrap.scrapCommands()
+
+        rawFiles = self.scrap.scrapCommands()
+        status = self.scrap.readRawFiles(rawFiles)
         # init tool dropdown autocomplete
-        self.initialiseCommandCompleter()
+        if status:
+            self.initialiseCommandCompleter()
 
     def Handle_Progress(self, blocknum, blocksize, totalsize):
 

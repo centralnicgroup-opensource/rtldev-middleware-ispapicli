@@ -1,52 +1,19 @@
-import sys
-from typing import Text
-from bs4 import BeautifulSoup
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QProgressDialog
 from .db import DB
-from git import Repo
-import os
-from pathlib import Path
 import re
-import shutil
+import requests
 
 
 class Scrap:
-    def __init__(self, URL=""):
+
+    USER = "hexonet"
+    REPO = "hexonet-api-documentation"
+
+    def __init__(self):
         # init db
         self.dbObj = DB()
-        # init repo dir
-        self.__initAppDirectories()
-        self.__initCloneAPIDocsDir()
-
-    def __initAppDirectories(self):
-        """
-        Init app directories
-
-        Returns:
-        --------
-        True
-        """
-        if getattr(sys, "frozen", False):
-            self.absolute_dirpath = os.path.dirname(sys.executable)
-            self.repo_path = os.path.join(self.absolute_dirpath, "APIDocsRepo")
-        elif __file__:
-            self.absolute_dirpath = os.path.dirname(__file__)
-            self.repo_path = os.path.join(self.absolute_dirpath, "../APIDocsRepo/")
-        return True
-
-    def __initCloneAPIDocsDir(self):
-        """
-        Init cloning repo
-
-        Returns:
-        --------
-        True
-        """
-        if os.path.exists(self.repo_path):
-            # remove old repo
-            shutil.rmtree(self.repo_path)
-        if not os.path.exists(self.repo_path):
-            os.makedirs(self.repo_path)
-        return True
 
     def __saveCommandToDB(self, commandName, data):
         """
@@ -80,23 +47,6 @@ class Scrap:
         except Exception as e:
             raise e
 
-    def __cloneRepo(self):
-        """
-        Clone remote Docs repo
-
-        Returns:
-        --------
-        True || False
-        """
-        if self.__initCloneAPIDocsDir():
-            repo = Repo.clone_from(
-                "https://github.com/hexonet/hexonet-api-documentation.git",
-                self.repo_path,
-                branch="master",
-            )
-            return True
-        return False
-
     def __getCommandsParams(self, raw):
         """
         Parse parameters from raw md data
@@ -129,59 +79,105 @@ class Scrap:
                 return params
         return params
 
-    # scrap commands
+    def __getMDfiles(self, tree):
+        MDfiles = []
+        for file in tree:
+            path = file["path"]
+            if path.endswith(".md"):
+                MDfiles.append(path)
+        return MDfiles
+
     def scrapCommands(self):
         """
         Executes the scrap process
 
         Returns:
         --------
+        List || False
+        """
+
+        url = "https://api.github.com/repos/{}/{}/git/trees/master?recursive=1".format(
+            self.USER, self.REPO
+        )
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            res = response.json()
+            MDfiles = self.__getMDfiles(res["tree"])
+            # add commands
+            return MDfiles
+        else:
+            return False
+
+    def readRawFiles(self, rawfiles):
+        """
+        Read and save raw files
+
+        Returns:
+        --------
         True || False
         """
-        # clone repo
-        if self.__cloneRepo():
-            try:
-                # init database | delete old database
-                # self.dbObj.db.drop_table("commands")
+        # prepare command sections
+        commandRegex = r"^#\s\w+$"
+        secionRegex = r"^#{2}\s\w+$"
+        counter = 1
+
+        self.dialog = QProgressDialog("...", "Cancel", counter, len(rawfiles) + 1)
+        self.dialog.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.dialog.setWindowTitle("Please wait...")
+        self.dialog.setMinimumWidth(300)
+        self.dialog.setAutoClose(True)
+        self.dialog.show()
+        for file in rawfiles:
+            # update the progress
+            counter += 1
+            self.dialog.setValue(counter)
+            QApplication.processEvents()
+            if self.dialog.wasCanceled():
+                break
+            # get file content
+            url = "https://raw.githubusercontent.com/{}/{}/master/{}".format(
+                self.USER, self.REPO, file
+            )
+            response = requests.get(url)
+            if response.status_code == 200:
+                res = response.content
+                result = res.decode("utf-8")
+                result = result.splitlines()
+                # command details
                 commandName = ""
                 description = ""
                 availability = ""
                 parameters = []
-                # get all commands urls, ending with .md
-                mainDir = os.path.join(self.repo_path, "API")
-                result = list(Path(mainDir).glob("**/*.md"))
-                # section regex
-                secionRegex = r"^#{2}\s\w+$"
-                for dir in result:
-                    # Load the file into file_content
-                    file_content = []
-                    for line in open(dir).readlines():
-                        file_content.append(line.strip(" \t\n\r"))
-                    # parse the content
-                    for i in range(len(file_content)):
-                        # first line is the command name
-                        if i == 0:
-                            commandName = (file_content[i]).split(" ")[1]
+                # get command data
+                for i in range(len(result)):
+                    if result[i] != "":
+                        # check command name
+                        commandValue = re.findall(commandRegex, result[i])
+                        if len(commandValue) == 1:
+                            commandName = result[i][1:]
+                            self.dialog.setLabelText(
+                                "<p align='left'> Updating: " + commandName + "</p>"
+                            )
+                            QApplication.processEvents()
+                            continue
                         # checkSection
-                        section = re.findall(secionRegex, file_content[i])
+                        section = re.findall(secionRegex, result[i])
                         if len(section) == 1:
                             sectionName = (section[0].split(" "))[1]
                             if sectionName == "DESCRIPTION":
-                                description = file_content[i + 1]
+                                description = result[i + 1]
                             if sectionName == "AVAILABILITY":
-                                availability = file_content[i + 1]
+                                availability = result[i + 1]
                             if sectionName == "COMMAND":
-                                parameters = self.__getCommandsParams(file_content[i:])
-                                break
-                    data = self.__getCommandData(
-                        commandName, description, availability, parameters
-                    )
-                    self.__saveCommandToDB(commandName, data)
-
-                print("\nCommands count: " + str(len(result)))
-                print("Command finished.")
-                return True
-            except Exception as e:
-                print("scraping failed due to: " + e)
-        else:
-            return False  # failed cloning the repo
+                                parameters = self.__getCommandsParams(result[i:])
+                                break  # end the loop here, other data is not relevant
+                data = self.__getCommandData(
+                    commandName, description, availability, parameters
+                )
+                self.__saveCommandToDB(commandName, data)
+            else:
+                return False
+        print("\nCommands count: " + str(counter))
+        print("Command finished.")
+        return True
