@@ -44,7 +44,7 @@ setup(
     url="https://github.com/hexonet/ispapicli/",
     install_requires=[
         "altgraph==0.17.2",
-        "beautifulsoup4==4.9.3",
+        "beautifulsoup4==4.10.0",
         "certifi==2021.5.30",
         "chardet==4.0.0",
         "hexonet.apiconnector==3.8.2",
