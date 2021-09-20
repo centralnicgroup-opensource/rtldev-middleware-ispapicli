@@ -43,7 +43,7 @@ setup(
     maintainer_email="rjamara@hexonet.net",
     url="https://github.com/hexonet/ispapicli/",
     install_requires=[
-        "altgraph==0.17",
+        "altgraph==0.17.2",
         "beautifulsoup4==4.9.3",
         "certifi==2021.5.30",
         "chardet==4.0.0",
