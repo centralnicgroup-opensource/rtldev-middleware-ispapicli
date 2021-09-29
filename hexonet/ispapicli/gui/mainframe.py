@@ -287,7 +287,7 @@ class MainFrame(QWidget):
             # self.progressBarSpeed(5)
             # 2
             # check user session, in case of sesssion is expired
-            self.checkLogin()
+            # self.checkLogin()
         except Exception as e:
             self.plainResponse.setText("Command failed due to: " + str(e))
 
@@ -576,7 +576,7 @@ class MainFrame(QWidget):
         """
         Start login window
         """
-        loginGui = LoginWindow(self)
+        loginGui = LoginWindow(self, self.coreLogic)
         loginGui.startGui()
 
     def menuBarActions(self, q):

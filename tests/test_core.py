@@ -21,7 +21,7 @@ def test_initParser(core_obj):
 def test_parseArgs(core_obj):
     parser = core_obj.initParser()
     # example of login args
-    login_args = "-u=test.user -p=test.passw0rd -e=ote"
+    login_args = "--gui"
     # split args in an array
     splitted_args = login_args.split()
     # get main commands such as "-c checkdomain"
@@ -55,7 +55,7 @@ def test_checkSession(core_obj):
     recorded in login session file.
     """
     result = core_obj.checkSession()
-    assert (result in ("valid", "init", "expired")) is True
+    assert (result in ("valid", "init")) is True
 
 
 # 6 logout
@@ -65,7 +65,7 @@ def test_logout(core_obj):
     thus here will check the return type only.
     """
     result = core_obj.logout()
-    assert isinstance(result, str) is True
+    assert result == "Successfully logged out!"
 
 
 # 7 request
@@ -92,14 +92,6 @@ def test_getCommandHelp(core_obj):
     reponse_failure = core_obj.getCommandHelp(cmd_failure)
     assert txt_failure == reponse_failure
     assert isinstance(response_success, str) is True
-
-
-# 10 __saveLocalSession
-def test_saveLocalSession(core_obj):
-    loginSession = "examplesessionid"
-    entity = "ote"
-    result = core_obj._Core__saveLocalSession(loginSession, entity)
-    assert result is True
 
 
 # 11 parseParameters
