@@ -69,17 +69,14 @@ class LoginWindow(QDialog):
         self.loginBtn.setEnabled(False)
         self.loginBtn.setText("Please wait...")
         QApplication.processEvents()
-        # check login
-        coreLogic = Core()
+
         args = {}
         args["userid"] = self.userIDTxt.text()
         args["password"] = self.passTxt.text()
         args["entity"] = self.sysChoice.currentText()
-        result, msg = coreLogic.login(args)
-        # enable button
-        self.loginBtn.setEnabled(True)
-        self.loginBtn.setText("Login")
-        QApplication.processEvents()
+
+        result, msg = self.coreLogic.login(args)
+
         if result == True:
             # update the subuser
             self.coreLogic.getSubUsers()
@@ -95,7 +92,9 @@ class LoginWindow(QDialog):
             return True
 
         else:
-            self.loginMsg.setMovie(None)
+            self.loginBtn.setEnabled(True)
+            self.loginBtn.setText("Login")
+            QApplication.processEvents()
             self.loginMsg.setText(msg)
             self.loginMsg.setStyleSheet("color:red")
             return False
