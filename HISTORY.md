@@ -1,3 +1,12 @@
+# [1.18.0](https://github.com/hexonet/ispapicli/compare/v1.17.3...v1.18.0) (2021-10-04)
+
+
+### Features
+
+* **gitpython lib:** removing dependency ([6fe5408](https://github.com/hexonet/ispapicli/commit/6fe540811797d33e3b3ffac1527098f7c0a75cd6))
+* **login:** removing session mangement ([1d58724](https://github.com/hexonet/ispapicli/commit/1d58724175227f2235f0594454b370a703a958c0))
+* **removed submodule:** remove docs submodules from git ([5b2427b](https://github.com/hexonet/ispapicli/commit/5b2427b4a14bf7df665764936b06e19a3f96e189))
+
 ## [1.17.3](https://github.com/hexonet/ispapicli/compare/v1.17.2...v1.17.3) (2021-08-25)
 
 
