@@ -24,8 +24,10 @@ import sys
 
 
 class LoginWindow(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent, coreLogic):
         super(LoginWindow, self).__init__(parent)
+
+        self.coreLogic = coreLogic
 
         self.originalPalette = QApplication.palette()
         self.createRightGroupBox()
@@ -80,7 +82,7 @@ class LoginWindow(QDialog):
         QApplication.processEvents()
         if result == True:
             # update the subuser
-            coreLogic.getSubUsers()
+            self.coreLogic.getSubUsers()
             # update parent window = login and session message
             self.parent().checkLogin()
             self.parent().initialiseSubuserCompleter()
@@ -90,16 +92,18 @@ class LoginWindow(QDialog):
             alert.exec_()
             # close login gui
             self.closingThread = threading.Thread(target=self.__closeGui).start()
+            return True
 
         else:
             self.loginMsg.setMovie(None)
             self.loginMsg.setText(msg)
             self.loginMsg.setStyleSheet("color:red")
+            return False
 
     def __closeGui(self):
         # disable login button
         self.loginBtn.setDisabled(True)
-        for i in range(2, -1, -1):
+        for i in range(2, 0, -1):
             self.loginMsg.setText("Closing the window in " + str(i) + "s")
             time.sleep(1)
         else:

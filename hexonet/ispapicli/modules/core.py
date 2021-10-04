@@ -26,6 +26,11 @@ class Core:
         self.cl.setUserAgent("ISPAPICLI", __version__)
         # init db
         self.dbObj = DB()
+        # init login
+        self.userName = ""
+        self.password = ""
+        self.entity = ""
+        self.logged = False
 
     def initParser(self, args=None):
         """
@@ -155,47 +160,40 @@ class Core:
         # case update commands triggered
         if args["update"]:
             return "update", ""
-
-        # case login
-        # check if login credentials provided
-        if None not in (args["userid"], args["password"], args["entity"]):
-            result, msg = self.login(args)
-            return "msg", msg
-
-        # otherwise it is a command requested
-        # if logged in, and there is a session, then execute a command
-        session_status = self.checkSession(args)
-        if session_status == "valid":
+        # case GUI call
+        if self.logged:
             if args["command"] is not None:
                 cmd_struct = {}
                 cmd_struct["command"] = args["command"]
                 return "cmd", cmd_struct
-            if args["COMMAND"] is not None:
+            elif args["COMMAND"] is not None:
                 cmd_struct = {}
                 cmd_struct["command"] = args["COMMAND"]
                 return "cmd", cmd_struct
             # case user trying to log in while his session is valid
-            elif None not in (args["userid"], args["password"], args["entity"]):
-                msg = "You are already logged in, your session is valid."
-                return "msg", msg
             else:
                 msg = "Command is not recognized!"
                 return "cmd_unknown", msg
+        # case CLI call
+        if None not in (args["userid"], args["password"], args["entity"]):
+            result, msg = self.login(args)
+            if self.logged:
+                if args["command"] is not None:
+                    cmd_struct = {}
+                    cmd_struct["command"] = args["command"]
+                    return "cmd", cmd_struct
+                elif args["COMMAND"] is not None:
+                    cmd_struct = {}
+                    cmd_struct["command"] = args["COMMAND"]
+                    return "cmd", cmd_struct
+                # case user trying to log in while his session is valid
+                else:
+                    msg = "Command is not recognized!"
+                    return "cmd_unknown", msg
         # initial running
-        elif session_status == "init":
-            msg = "Login first, you can run the command: -u = <your user id> -p = <your password> -e = {ote,live}"
-            return "msg", msg
-        # case sessin expired
-        elif session_status == "expired":
-            msg = """
-                Session expired. Please login again.
-                Use the command: -u = <your user id> -p = <your password> -e = {ote,live}
-                """
-            return "msg", msg
-        # case unknown command requested
         else:
-            msg = "No command found!"
-            return "cmd_unknown", msg
+            msg = "Add login args to your request: -u = <your user id> -p = <your password> -e = {ote,live}"
+            return "msg", msg
 
     def login(self, args, session_status=""):
         """
@@ -216,11 +214,12 @@ class Core:
         self.cl.setCredentials(user, password)
         r = self.cl.login()
         if r.isSuccess():
-            # save login session
-            loginSession = self.cl.getSession()
-            # save session
-            self.__saveLocalSession(loginSession, entity)
-            msg = "Login success. Your session valid for one hour max of idle time"
+            # save login credentials locally
+            self.userName = user
+            self.password = password
+            self.entity = entity
+            self.logged = True
+            msg = "Login success."
             return True, msg
         else:
             desc = r.getDescription()
@@ -234,32 +233,12 @@ class Core:
 
         Returns
         -------
-        String: 'valid' | 'init' | 'expired'
+        String: 'valid' | 'init'
         """
         # check if there is a session already exist
-        try:
-            # query for login data
-            data = self.dbObj.getLoginInfo()
-            if not data:
-                raise Exception
-            # get login data
-            entity = data[0]["entity"]
-            t_old = data[0]["ts"]
-            session = data[0]["session"]
-            time_format = "%Y-%m-%d %H:%M:%S"
-            t_now = datetime.now().strftime(time_format)
-            t_now_object = datetime.strptime(t_now, time_format)
-            t_old_object = datetime.strptime(t_old, time_format)
-            t_new = t_now_object - timedelta(hours=1)
-            if t_new < t_old_object:
-                result = self.cl.setSession(session)
-                if entity == "ote":
-                    self.cl.useOTESystem()
-                return "valid"
-            else:
-                return "expired"
-            # Do something with the session file
-        except Exception:
+        if self.logged:
+            return "valid"
+        else:
             return "init"
 
     def logout(self):
@@ -270,38 +249,11 @@ class Core:
         --------
         String: msg
         """
-        try:
-            msg = ""
-            # query for login data
-            data = self.dbObj.getLoginInfo()
-            if not data:
-                raise Exception
-            # get login data
-            entity = data[0]["entity"]
-            session = data[0]["session"]
-            if entity == "ote":
-                self.cl.useOTESystem()
-            # delete remote session
-            self.cl.setSession(str(session))
-            r = self.cl.logout()
-            if r.isSuccess():
-                flag = True
-            else:
-                flag = False
-
-            # delete local session
-            self.dbObj.deleteLoginInfo()
-
-            # return message
-            if flag:
-                msg = "Successfully logged out!"
-                return msg
-            else:
-                msg = "Local session deleted but couldn't delete remote session!"
-                return msg
-
-        except Exception as e:
-            return "Couldn't delete remote session due to: " + str(e)
+        self.logged = False
+        self.userName = ""
+        self.password = ""
+        msg = "Successfully logged out!"
+        return msg
 
     def request(self, commands):
         """
@@ -311,6 +263,7 @@ class Core:
         -------
         Response: response
         """
+        # self.cl = self.cl.setCredentials(self.userName, self.password)
         response = self.cl.request(commands)
         return response
 
@@ -376,29 +329,6 @@ class Core:
                 continue
         else:
             return f"Command '{command_name}' not found!"
-
-    def __saveLocalSession(self, loginSession, entity):
-        """
-        Saves users session in local file.
-
-        Returns:
-        --------
-        Bool: True | False
-        """
-        try:
-            time_format = "%Y-%m-%d %H:%M:%S"
-            ts = datetime.now().strftime(time_format)
-            data = {}
-            data["session"] = loginSession
-            data["ts"] = ts
-            data["entity"] = entity
-            # insert login
-            if self.dbObj.setLoginInfo(data):
-                return True
-            else:
-                raise Exception
-        except Exception:
-            return False
 
     def parseParameters(self, parameters):
         """
@@ -503,13 +433,11 @@ class Core:
 
     def __initToolVersions(self):
         currentToolVersion = "ispapicli-" + __version__
-        print(os.listdir())
         files = os.listdir()
         ispapicliVersions = []
         for file in files:
             if file.startswith("ispapicli"):
                 ispapicliVersions.append(file)
-        print(ispapicliVersions, len(ispapicliVersions))
         if len(ispapicliVersions) <= 1:
             return
         else:
