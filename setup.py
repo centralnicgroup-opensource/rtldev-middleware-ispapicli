@@ -45,7 +45,7 @@ setup(
     install_requires=[
         "altgraph==0.17.2",
         "beautifulsoup4==4.10.0",
-        "certifi==2021.5.30",
+        "certifi==2021.10.8",
         "chardet==4.0.0",
         "hexonet.apiconnector==3.8.2",
         "idna>=2.5,<4",
