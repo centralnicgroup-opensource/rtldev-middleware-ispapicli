@@ -51,7 +51,7 @@ setup(
         "idna>=2.5,<4",
         "numpy==1.21.2",
         "Pillow==8.4.0",
-        "PyQt5==5.15.4",
+        "PyQt5==5.15.5",
         "PyQt5-sip==12.9.0",
         "soupsieve==2.2.1",
         "tabulate==0.8.9",
