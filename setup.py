@@ -49,7 +49,7 @@ setup(
         "chardet==4.0.0",
         "hexonet.apiconnector==3.8.2",
         "idna>=2.5,<4",
-        "numpy==1.21.2",
+        "numpy==1.21.3",
         "Pillow==8.4.0",
         "PyQt5==5.15.5",
         "PyQt5-sip==12.9.0",
