@@ -53,7 +53,7 @@ setup(
         "Pillow==8.4.0",
         "PyQt5==5.15.6",
         "PyQt5-sip==12.9.0",
-        "soupsieve==2.3",
+        "soupsieve==2.3.1",
         "tabulate==0.8.9",
         "urllib3==1.26.7",
         "twine==3.6.0",
