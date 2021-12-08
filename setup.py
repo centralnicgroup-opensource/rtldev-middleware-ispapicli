@@ -56,7 +56,7 @@ setup(
         "soupsieve==2.3.1",
         "tabulate==0.8.9",
         "urllib3==1.26.7",
-        "twine==3.7.0",
+        "twine==3.7.1",
         "tinydb==4.5.2",
         "GitPython==3.1.20",
         "black",
