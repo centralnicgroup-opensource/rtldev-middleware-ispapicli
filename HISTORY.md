@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/hexonet/ispapicli/compare/v1.18.0...v1.18.1) (2022-01-03)
+
+
+### Bug Fixes
+
+* **dep-cleanup:** removal of deprecated dependencies ([aa54844](https://github.com/hexonet/ispapicli/commit/aa54844e5143176ffc2679c1cf93313676b027f9))
+
 # [1.18.0](https://github.com/hexonet/ispapicli/compare/v1.17.3...v1.18.0) (2021-10-04)
 
 
