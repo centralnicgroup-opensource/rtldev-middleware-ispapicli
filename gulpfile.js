@@ -1,15 +1,13 @@
-const { src, series, dest } = require("gulp");
-const prettier = require("gulp-prettier");
+const { src, series } = require("gulp");
 const through2 = require("through2");
 const MDLint = require("markdownlint");
 
-const fix_files = ["**/*.md", "!HISTORY.md", "!node_modules/**/*.md", "!dist/**/*.md"];
-// use prettier to format only
-function formatWithPrettier() {
-  return src(fix_files)
-    .pipe(prettier())
-    .pipe(dest((file) => file.base));
-}
+const fix_files = [
+  "**/*.md",
+  "!HISTORY.md",
+  "!node_modules/**/*.md",
+  "!dist/**/*.md",
+];
 
 // lint markdown files
 function markDownLinter() {

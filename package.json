@@ -7,10 +7,10 @@
     "name": "Rashad Jamara",
     "email": "rjamara@hexonet.net"
   },
-  "license": "MIT, GPLv3",
+  "license": "GPLv3",
   "engines": {
-    "node": ">=12.0.0",
-    "npm": ">=6.13.4"
+    "node": ">=14.17.0",
+    "npm": ">=6.14.13"
   },
   "homepage": "https://github.com/hexonet/ispapicli",
   "repository": "https://github.com/hexonet/ispapicli.git",
@@ -46,13 +46,12 @@
     "client"
   ],
   "devDependencies": {
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/exec": "^5.0.0",
-    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "gulp": "^4.0.2",
-    "gulp-prettier": "^3.0.0",
-    "markdownlint": "^0.23.1",
-    "semantic-release": "^17.3.7",
+    "markdownlint": "^0.25.0",
+    "semantic-release": "^18.0.1",
     "through2": "^4.0.2"
   },
   "scripts": {
