@@ -48,7 +48,7 @@ setup(
         "PyQt5-sip==12.9.0",
         "tabulate==0.8.9",
         "twine==3.7.1",
-        "tinydb==4.5.2",
+        "tinydb==4.6.0",
         "black",
     ],
     setup_requires=["pytest-runner"],
