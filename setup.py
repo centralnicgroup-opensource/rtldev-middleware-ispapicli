@@ -45,7 +45,7 @@ setup(
     install_requires=[
         "hexonet.apiconnector==3.8.2",
         "PyQt5==5.15.6",
-        "PyQt5-sip==12.9.0",
+        "PyQt5-sip==12.9.1",
         "tabulate==0.8.9",
         "twine==3.7.1",
         "tinydb==4.5.2",
