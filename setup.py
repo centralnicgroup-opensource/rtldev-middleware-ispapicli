@@ -43,7 +43,7 @@ setup(
     maintainer_email="rjamara@hexonet.net",
     url="https://github.com/hexonet/ispapicli/",
     install_requires=[
-        "hexonet.apiconnector==3.8.2",
+        "hexonet.apiconnector==3.8.3",
         "PyQt5==5.15.6",
         "PyQt5-sip==12.9.1",
         "tabulate==0.8.9",
