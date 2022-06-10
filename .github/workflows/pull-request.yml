@@ -19,7 +19,7 @@ jobs:
       name: pr-reviews
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax

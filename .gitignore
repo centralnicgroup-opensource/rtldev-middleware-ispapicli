@@ -138,7 +138,6 @@ venv.bak/
 
 # node_modules
 node_modules
-package-lock.json
 
 hexonet/ispapicli/config
 hexonet/ispapicli/ispapi.spec

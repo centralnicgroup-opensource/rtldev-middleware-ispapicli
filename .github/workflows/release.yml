@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
       - name: Checkout python
@@ -25,10 +25,12 @@ jobs:
           pip -V
           pip install --upgrade -e .
       - name: Setup NodeJS LTS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          check-latest: true
       - name: Install NodeJS dependencies
-        run: |
-          npm prune && npm i
+        run: npm ci
       - name: Release - version update only
         run: |
           echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "verifyReleaseCmd": "./updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
@@ -50,7 +52,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
       - name: Checkout python
@@ -63,10 +65,12 @@ jobs:
           pip -V
           pip install --upgrade -e .
       - name: Setup NodeJS LTS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          check-latest: true
       - name: Install NodeJS dependencies
-        run: |
-          npm prune && npm i
+        run: npm ci
       - name: Release - version update only
         run: |
           echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "verifyReleaseCmd": "./updateVersionMacOS.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
@@ -88,7 +92,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
       - name: Checkout python
@@ -101,10 +105,9 @@ jobs:
           pip -V
           pip install --upgrade -e .
       - name: Setup NodeJS LTS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
       - name: Install NodeJS dependencies
-        run: |
-          npm prune && npm i
+        run: npm ci
       - name: Release - version update only
         run: |
           echo '{"plugins": ["@semantic-release/commit-analyzer", ["@semantic-release/exec", { "verifyReleaseCmd": "Bash updateVersion.sh ${nextRelease.version}" }]]}' > '.releaserc.json'
@@ -129,7 +132,7 @@ jobs:
       - generate-win-bin
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
           persist-credentials: false
@@ -142,10 +145,13 @@ jobs:
           pip -V
           pip install --upgrade -e .
       - name: Setup NodeJS LTS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          check-latest: true
       - name: Install dependencies
         run: |
-          npm prune && npm i
+          npm ci
           gulp validate
       # download all our binary files
       - name: Download Artifacts
