@@ -20,7 +20,7 @@
       {
         "assets": [
           "HISTORY.md",
-          "package.json",
+          "package?(-lock).json",
           "hexonet/ispapicli/__init__.py",
           "hexonet/ispapicli/ispapicli.py",
           "hexonet/ispapicli/modules/core.py",
