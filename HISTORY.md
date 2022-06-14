@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/hexonet/ispapicli/compare/v1.18.2...v1.18.3) (2022-06-14)
+
+
+### Bug Fixes
+
+* **semantic-release:** include package-lock.json in version commit ([4fb9523](https://github.com/hexonet/ispapicli/commit/4fb95234d55da08392a594e76968491166443355))
+
 ## [1.18.2](https://github.com/hexonet/ispapicli/compare/v1.18.1...v1.18.2) (2022-01-07)
 
 
