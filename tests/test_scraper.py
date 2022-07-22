@@ -1,6 +1,6 @@
 import pytest
 import argparse
-from hexonet.ispapicli.modules.scrap import Scrap
+from hexonet.ispapicli.core.scrap import Scrap
 
 
 @pytest.fixture

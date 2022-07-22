@@ -14,13 +14,9 @@ from PyQt5.QtWidgets import (
     QFormLayout,
     QDesktopWidget,
 )
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QIcon, QMovie
-from modules.core import Core
+from PyQt5.QtCore import Qt
 import time
 import threading
-import logging
-import sys
 
 
 class LoginWindow(QDialog):

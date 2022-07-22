@@ -2,9 +2,9 @@
 
 import os
 import sys
-from modules.core import Core
-from modules.scrap import Scrap
-from gui.mainframe import MainFrame
+from hexonet.ispapicli.gui.mainframe import MainFrame
+from hexonet.ispapicli.core.core import Core
+from hexonet.ispapicli.core.scrap import Scrap
 import textwrap
 from PyQt5.QtWidgets import QApplication
 
@@ -15,6 +15,7 @@ if sys.platform.startswith("linux"):
     else:
         file_path = __file__
         sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + "")
+
 
 def main(args):
     # this comment used to trigger a new release

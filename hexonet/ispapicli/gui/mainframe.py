@@ -2,9 +2,9 @@ from typing import Text
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from modules.core import Core
-from modules.scrap import Scrap
-from gui.login import LoginWindow
+from hexonet.ispapicli.core.core import Core
+from hexonet.ispapicli.core.scrap import Scrap
+from hexonet.ispapicli.gui.login import LoginWindow
 import textwrap
 import sys
 from io import StringIO
@@ -765,7 +765,7 @@ class MainFrame(QWidget):
 
     def Handle_Progress(self, blocknum, blocksize, totalsize):
 
-        ## calculate the progress
+        # calculate the progress
         readed_data = blocknum * blocksize
 
         if totalsize > 0:
