@@ -1,0 +1,40 @@
+# This workflow handle Push
+name: Linting & Coverage
+on:
+  push:
+    branches:
+      - dependabot/**
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+  workflow_call:
+
+jobs:
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+      - name: Super Linter Code Base
+        uses: github/super-linter@v4
+        env:
+          FILTER_REGEX_INCLUDE: "/hexonet/*|/scripts/*|updateVersion*.sh|setup.py"
+          DEFAULT_BRANCH: master
+          VALIDATE_PYTHON_BLACK: true
+          VALIDATE_BASH: true
+          VALIDATE_ALL_CODEBASE: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip -V
+          pip install --upgrade -e .
+      - name: Coverage Report
+        run: "./scripts/coverage.sh"
