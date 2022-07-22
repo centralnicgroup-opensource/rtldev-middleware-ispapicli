@@ -17,8 +17,10 @@
   "bugs": "https://github.com/hexonet/ispapicli/issues",
   "maintainers": [
     {
-      "name": "Kai Schwarz",
-      "email": "kschwarz@hexonet.net"
+      "name": "Kai Schwarz"
+    },
+    {
+      "name": "Asif Nawaz"
     }
   ],
   "keywords": [
