@@ -2,9 +2,11 @@
 
 import os
 import sys
-import argparse
-from hexonet.apiconnector.response import Response
-from pathlib import Path
+from modules.core import Core
+from modules.scrap import Scrap
+from gui.mainframe import MainFrame
+import textwrap
+from PyQt5.QtWidgets import QApplication
 
 if sys.platform.startswith("linux"):
     if getattr(sys, "frozen", False):
@@ -13,13 +15,6 @@ if sys.platform.startswith("linux"):
     else:
         file_path = __file__
         sys.path.insert(0, os.path.dirname(os.path.abspath(file_path)) + "")
-
-from modules.core import Core
-from modules.scrap import Scrap
-from gui.mainframe import MainFrame
-import textwrap
-from PyQt5.QtWidgets import QApplication
-
 
 def main(args):
     # this comment used to trigger a new release
