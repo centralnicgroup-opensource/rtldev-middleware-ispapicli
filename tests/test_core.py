@@ -1,7 +1,7 @@
 import pytest
 import argparse
 from hexonet.apiconnector.response import Response
-from hexonet.ispapicli.modules.core import Core
+from hexonet.ispapicli.core.core import Core
 
 
 @pytest.fixture
