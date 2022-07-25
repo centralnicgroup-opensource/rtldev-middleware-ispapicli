@@ -6,5 +6,6 @@ Applying patches, adding helpful comments
 And thus generally made it that much better
 see [GitHub's list of contributors](https://github.com/hexonet/python-sdk/contributors).
 
-- [Rashad Jamara](//github.com/rashad-j) - Main Developer
-- [Kai Schwarz](//github.com/papakai) - Chief Development Officer
+- [Asif Nawaz](//github.com/asifnawaz-cnic) - Developer
+- [Kai Schwarz](//github.com/kaischwarz-cnic) - Lead Developer
+- [Rashad Jamara](//github.com/rashad-j) - Former Developer
