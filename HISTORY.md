@@ -1,3 +1,12 @@
+## [1.18.4](https://github.com/hexonet/ispapicli/compare/v1.18.3...v1.18.4) (2022-07-25)
+
+
+### Bug Fixes
+
+* **dep-bump:** upgrade deps and release new version ([69c859f](https://github.com/hexonet/ispapicli/commit/69c859f6c06ac295e30f839ff09cf26dffd145d7))
+* **modules:** modules to core and namespace added ([0b465d6](https://github.com/hexonet/ispapicli/commit/0b465d65162a633075cb42625bafaaf919c24e49))
+* **package.json:** trigger new release ([249e895](https://github.com/hexonet/ispapicli/commit/249e895336c5d5419f94392e1caefa17019f4f9c))
+
 ## [1.18.3](https://github.com/hexonet/ispapicli/compare/v1.18.2...v1.18.3) (2022-06-14)
 
 
