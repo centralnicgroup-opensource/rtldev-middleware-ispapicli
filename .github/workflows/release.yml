@@ -24,7 +24,7 @@ jobs:
       - name: Checkout python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install python dependencies
         run: |
           pip install --upgrade pip
@@ -65,7 +65,7 @@ jobs:
       - name: Checkout python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -106,7 +106,7 @@ jobs:
       - name: Checkout python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install python dependencies
         run: |
           pip install --upgrade pip
@@ -150,7 +150,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip testresources setuptools wheel
@@ -166,7 +166,6 @@ jobs:
         run: |
           npm ci
           gulp validate
-      # download all our binary files
       - name: Download Artifacts
         uses: actions/download-artifact@v3
         with:
