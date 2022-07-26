@@ -12,9 +12,6 @@ on:
 
   workflow_call:
 
-env:
-  PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
-
 jobs:
   test:
     name: Test Job
@@ -24,12 +21,16 @@ jobs:
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_MIN_VERSION }}
+          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip -V
           pip install --upgrade -e .
+      - name: Python version
+        run: |
+          echo "Python version: "
+          echo ${{ secrets.PYTHON_MIN_VERSION }} | sed 's/./&‎/g'
       - name: Super Linter Code Base
         uses: github/super-linter@v4
         env:
