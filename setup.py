@@ -41,7 +41,7 @@ setup(
     author_email="rjamara@hexonet.net",
     maintainer="Rashad Jamara",
     maintainer_email="rjamara@hexonet.net",
-    url="https://github.com/hexonet/ispapicli/",
+    url="https://github.com/centralnicgroup-opensource/rtldev-middleware-ispapicli/",
     install_requires=[
         "hexonet.apiconnector>=3,<5",
         "PyQt5>=5,<6",

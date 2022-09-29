@@ -142,3 +142,4 @@ node_modules
 hexonet/ispapicli/config
 hexonet/ispapicli/ispapi.spec
 hexonet/ispapicli/ispapicli.spec
+hexonet/ispapicli/db/db.json

@@ -785,7 +785,7 @@ class MainFrame(QWidget):
         preBox.show()
         QApplication.processEvents()
         currentVersion = version.parse(__version__)
-        url = "https://github.com/hexonet/ispapicli/releases/latest"
+        url = "https://github.com/centralnicgroup-opensource/rtldev-middleware-ispapicli/releases/latest"
         r = requests.get(url)
         if r.ok:
             preBox.close()
@@ -837,7 +837,7 @@ class MainFrame(QWidget):
             return
 
         # init download
-        url = "https://github.com/hexonet/ispapicli/releases/download/v%s/%s" % (
+        url = "https://github.com/centralnicgroup-opensource/rtldev-middleware-ispapicli/releases/download/v%s/%s" % (
             latestVersion,
             fileName,
         )
