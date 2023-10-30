@@ -1,20 +1,14 @@
-# This workflow handle Push
 name: Linting & Coverage
 on:
-  push:
-    branches:
-      - dependabot/**
-
+  workflow_call:
   pull_request:
     types:
       - opened
       - synchronize
 
-  workflow_call:
-
 jobs:
   test:
-    name: Test Job
+    name: 🧪 Linting & Testing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
