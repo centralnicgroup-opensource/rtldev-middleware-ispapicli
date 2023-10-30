@@ -6,7 +6,6 @@ import requests
 
 
 class Scrap:
-
     USER = "hexonet"
     REPO = "hexonet-api-documentation"
 

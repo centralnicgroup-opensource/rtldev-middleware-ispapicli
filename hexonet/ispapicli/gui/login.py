@@ -108,7 +108,6 @@ class LoginWindow(QDialog):
                 pass
 
     def startGui(self):
-
         geo = QDesktopWidget().availableGeometry()
         screenWidth = geo.width()
         screenHeight = geo.height()

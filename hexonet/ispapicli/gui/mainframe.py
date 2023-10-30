@@ -17,7 +17,6 @@ __version__ = "1.18.4"
 
 
 class MainFrame(QWidget):
-
     BATCH_COMMANDLINE_ID = 300
     BATCH_PARAMETER_ID = 400
     BATCH_LIST_ID = 500
@@ -756,7 +755,6 @@ class MainFrame(QWidget):
         box.show()
 
     def showUpdating(self):
-
         rawFiles = self.scrap.scrapCommands()
         status = self.scrap.readRawFiles(rawFiles)
         # init tool dropdown autocomplete
@@ -764,7 +762,6 @@ class MainFrame(QWidget):
             self.initialiseCommandCompleter()
 
     def Handle_Progress(self, blocknum, blocksize, totalsize):
-
         # calculate the progress
         readed_data = blocknum * blocksize
 
@@ -837,9 +834,12 @@ class MainFrame(QWidget):
             return
 
         # init download
-        url = "https://github.com/centralnicgroup-opensource/rtldev-middleware-ispapicli/releases/download/v%s/%s" % (
-            latestVersion,
-            fileName,
+        url = (
+            "https://github.com/centralnicgroup-opensource/rtldev-middleware-ispapicli/releases/download/v%s/%s"
+            % (
+                latestVersion,
+                fileName,
+            )
         )
         print(url)
         import urllib
@@ -907,7 +907,6 @@ class MainFrame(QWidget):
             # )
 
     def showAbout(self):
-
         box = QMessageBox(self)
         msg = """<p align='center'>
         <b style='font-size:20px'>ISPAPI Tool</b>. <br><br><br>
@@ -932,7 +931,6 @@ class MainFrame(QWidget):
         box.show()
 
     def eventFilter(self, source, event):
-
         # this function to handle autocomplete for command line
         if event.type() == QEvent.KeyRelease and source is self.cmdTxt:
             if event.key() == Qt.Key_Space:

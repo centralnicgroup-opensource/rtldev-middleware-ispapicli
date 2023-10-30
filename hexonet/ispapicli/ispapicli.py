@@ -102,7 +102,6 @@ def errorFunction(message):
 
 
 if __name__ == "__main__":
-
     argsLen = len(sys.argv)
     # if gui triggred
     # if argsLen == 0: # after finishing debugging mode
