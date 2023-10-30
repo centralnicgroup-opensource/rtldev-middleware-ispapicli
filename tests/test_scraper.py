@@ -2,7 +2,6 @@ import pytest
 import argparse
 from hexonet.ispapicli.core.scrap import Scrap
 
-
 @pytest.fixture
 def scrap_obj():
     """Returns a Scrap instance"""
