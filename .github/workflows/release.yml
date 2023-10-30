@@ -5,12 +5,13 @@ on:
       - master
 
 env:
-  PYTHON_MIN_VERSION: ${{ secrets.PYTHON_MIN_VERSION }}
+  PYTHON_MIN_VERSION: ${{ vars.RTLDEV_MW_CI_PYTHON_VERSION }}
 
 jobs:
   build:
     name: Build
     uses: ./.github/workflows/test.yml
+    secrets: inherit
 
   generate-linux-bin:
     name: Generate Linux bin
@@ -25,7 +26,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           check-latest: true
-          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          python-version: ${{ vars.RTLDEV_MW_CI_PYTHON_VERSION }}
       - name: Install python dependencies
         run: |
           pip install --upgrade pip
@@ -34,9 +35,9 @@ jobs:
       - name: Setup NodeJS LTS
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: '${{ vars.RTLDEV_MW_CI_NODE_VERSION }}'
           check-latest: true
-          cache: "npm"
+          cache: npm
       - name: Install NodeJS dependencies
         run: npm ci
       - name: Release - version update only
@@ -67,7 +68,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           check-latest: true
-          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          python-version: ${{ var.RTLDEV_MW_CI_PYTHON_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip
@@ -76,9 +77,9 @@ jobs:
       - name: Setup NodeJS LTS
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: '${{ vars.RTLDEV_MW_CI_NODE_VERSION }}'
           check-latest: true
-          cache: "npm"
+          cache: npm
       - name: Install NodeJS dependencies
         run: npm ci
       - name: Release - version update only
@@ -109,7 +110,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           check-latest: true
-          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          python-version: ${{ vars.RTLDEV_MW_CI_PYTHON_VERSION }}
       - name: Install python dependencies
         run: |
           pip install --upgrade pip
@@ -118,9 +119,9 @@ jobs:
       - name: Setup NodeJS LTS
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: '${{ vars.RTLDEV_MW_CI_NODE_VERSION }}'
           check-latest: true
-          cache: "npm"
+          cache: npm
       - name: Install NodeJS dependencies
         run: npm ci
       - name: Release - version update only
@@ -155,7 +156,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           check-latest: true
-          python-version: ${{ secrets.PYTHON_MIN_VERSION }}
+          python-version: ${{ vars.RTLDEV_MW_CI_PYTHON_VERSION }}
       - name: Install dependencies
         run: |
           pip install --upgrade pip testresources setuptools wheel
@@ -164,9 +165,9 @@ jobs:
       - name: Setup NodeJS LTS
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: '${{ vars.RTLDEV_MW_CI_NODE_VERSION }}'
           check-latest: true
-          cache: "npm"
+          cache: npm
       - name: Install dependencies
         run: |
           npm ci
