@@ -6,7 +6,7 @@ import requests
 
 
 class Scrap:
-    USER = "hexonet"
+    USER = "centralnicgroup-public"
     REPO = "hexonet-api-documentation"
 
     def __init__(self):
