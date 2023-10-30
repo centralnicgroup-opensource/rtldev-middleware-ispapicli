@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
       - name: Checkout python
@@ -60,7 +60,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
       - name: Checkout python
@@ -102,7 +102,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
       - name: Checkout python
@@ -147,7 +147,7 @@ jobs:
       - generate-win-bin
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Number of commits to fetch. 0 indicates all history for all branches and tags.
           persist-credentials: false
