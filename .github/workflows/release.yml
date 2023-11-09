@@ -12,11 +12,16 @@ jobs:
     name: Build
     uses: ./.github/workflows/test.yml
     secrets: inherit
+    permissions:
+      contents: read
 
   generate-linux-bin:
+    permissions:
+      contents: write
+      deployments: write
     name: Generate Linux bin
     needs: build
-    runs-on: ubuntu-18.04
+    runs-on: ${{ vars.RTLDEV_MW_CI_OS }}
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -48,7 +53,6 @@ jobs:
       - name: Run Pyinstaller
         run: |
           "./scripts/linux-pyinstaller.sh"
-        # upload linux-binary
       - name: Upload linux-binary
         uses: actions/upload-artifact@v3
         with:
@@ -59,6 +63,9 @@ jobs:
     name: Generate MacOS bin
     runs-on: macos-latest
     needs: build
+    permissions:
+      contents: write
+      deployments: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -90,17 +97,20 @@ jobs:
       - name: Run Pyinstaller
         run: |
           "./scripts/macos-pyinstaller.sh"
-        # upload macos-binary
       - name: Upload macos-binary
         uses: actions/upload-artifact@v3
         with:
           name: macos-binary
           path: macos-binary-latest.zip
           retention-days: 1
+
   generate-win-bin:
     name: Generate Win bin
     runs-on: windows-latest
     needs: build
+    permissions:
+      contents: write
+      deployments: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -132,20 +142,25 @@ jobs:
       - name: Run Pyinstaller
         run: |
           & "./scripts/win-pyinstaller.ps1"
-        # upload win-binary
       - name: Upload win-binary
         uses: actions/upload-artifact@v3
         with:
           name: win-binary
           path: win-binary-latest.zip
           retention-days: 1
+
   release:
     name: Release Job
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RTLDEV_MW_CI_OS }}
     needs:
       - generate-linux-bin
       - generate-macos-bin
       - generate-win-bin
+    permissions:
+      contents: write
+      issues: write
+      deployments: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -178,7 +193,7 @@ jobs:
           path: artifacts
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RTLDEV_MW_CI_TOKEN }}
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         run: npx semantic-release
