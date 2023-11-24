@@ -43,3 +43,4 @@ function markDownLinter() {
 }
 
 exports.validate = series(markDownLinter);
+exports.publishNotification = require('rtldev-middleware-gulp-release-notification-plugin');
