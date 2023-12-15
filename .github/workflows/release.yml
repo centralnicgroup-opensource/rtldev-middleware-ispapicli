@@ -54,7 +54,7 @@ jobs:
         run: |
           "./scripts/linux-pyinstaller.sh"
       - name: Upload linux-binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-binary
           path: linux-binary-latest.zip
@@ -98,7 +98,7 @@ jobs:
         run: |
           "./scripts/macos-pyinstaller.sh"
       - name: Upload macos-binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos-binary
           path: macos-binary-latest.zip
@@ -143,7 +143,7 @@ jobs:
         run: |
           & "./scripts/win-pyinstaller.ps1"
       - name: Upload win-binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: win-binary
           path: win-binary-latest.zip
