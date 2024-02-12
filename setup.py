@@ -46,7 +46,7 @@ setup(
         "PyQt5>=5,<6",
         "PyQt5-sip>=12,<13",
         "tabulate>=0,<1",
-        "twine>=4,<5",
+        "twine>=4,<6",
         "tinydb>=4,<5",
         "black",
     ],
