@@ -52,7 +52,7 @@
     "gulp": "^5.0.0",
     "markdownlint": "^0.34.0",
     "rtldev-middleware-gulp-release-notification-plugin": "github:centralnicgroup-opensource/rtldev-middleware-gulp-release-notification-plugin#semver:^2.0.8",
-    "semantic-release": "^23.0.7",
+    "semantic-release": "^23.0.8",
     "through2": "^4.0.2"
   }
 }
