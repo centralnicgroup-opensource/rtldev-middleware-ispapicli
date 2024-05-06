@@ -9,6 +9,8 @@
 
 ## About
 
+> **DEPRECATION NOTICE: As of the future merger of Brand HEXONET into CentralNic Reseller, and alternative available tooling on their end, we're flagging this library as deprecated. The intention and purpose of this tool was about company internal use. Publishing it as opensource software to the public a wrong step therefore. In case you're using this tool, please let us know.**
+
 This tool enables you to connect to our backend system API and to manage your account through GUI or Command Line Interface.
 
 ## Resources
